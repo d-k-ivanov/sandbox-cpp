@@ -1,0 +1,11 @@
+## Fractal JULIA on cuda
+>Based on book (CUDA By Example)[https://developer.nvidia.com/cuda-example]
+
+### Build
+```
+x64 Release
+```
+
+### Screenshot
+
+![Screenshot](img/gpu.png)
