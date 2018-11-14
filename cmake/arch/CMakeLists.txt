@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(CmakeGetArch)
+include(arch.cmake)
+target_architecture(arch)
+message(${arch})
