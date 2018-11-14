@@ -1,0 +1,4 @@
+Standatrd values:
+  Clang: 201402
+  MinGW: 199711
+  VC++: 199711
