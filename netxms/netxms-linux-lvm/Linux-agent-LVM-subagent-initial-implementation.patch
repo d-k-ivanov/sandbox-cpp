@@ -1,0 +1,359 @@
+From 1321ac480865e6e96e8a39a515d93602df5d3cfa Mon Sep 17 00:00:00 2001
+From: Dmitry Ivanov <d.k.ivanov@live.com>
+Date: Fri, 15 Jul 2016 04:22:19 +0300
+Subject: [PATCH] Linux agent: LVM subagent initial implementation
+
+---
+ include/nms_agent.h                        |   6 +-
+ include/nms_common.h                       |   1 +
+ src/agent/subagents/linux/Makefile.am      |   6 +-
+ src/agent/subagents/linux/linux.cpp        |  14 +-
+ src/agent/subagents/linux/linux_subagent.h |  16 +++
+ src/agent/subagents/linux/lvm.cpp          | 220 +++++++++++++++++++++++++++++
+ 6 files changed, 258 insertions(+), 5 deletions(-)
+ create mode 100644 src/agent/subagents/linux/lvm.cpp
+
+diff --git a/include/nms_agent.h b/include/nms_agent.h
+index efa48ef..7c6afa0 100644
+--- a/include/nms_agent.h
++++ b/include/nms_agent.h
+@@ -397,9 +397,13 @@
+ #define DCIDESC_SYSTEM_IO_BYTEWRITES_EX_MAX       _T("Maximum number of bytes written on device {instance} for last minute")
+ #define DCIDESC_SYSTEM_IO_OPENFILES               _T("Number of open files")
+ 
++#define DCIDESC_LVM_VG_STATUS                     _T("Status of Volume Group {instance} consistency in LVM")
++#define DCIDESC_LVM_VG_SIZE                       _T("Size of Volume Group {instance} in LVM")
++#define DCIDESC_LVM_LV_STATUS                     _T("Status of Logical Volume {instance} in LVM")
++#define DCIDESC_LVM_LV_SIZE                       _T("Size of Logical Volume {instance} in LVM")
+ 
+-#define DCIDESC_DEPRECATED                        _T("<deprecated>")
+ 
++#define DCIDESC_DEPRECATED                        _T("<deprecated>")
+ 
+ #define DCTDESC_AGENT_SESSION_AGENTS              _T("Registered session agents")
+ #define DCTDESC_AGENT_SUBAGENTS                   _T("Loaded subagents")
+diff --git a/include/nms_common.h b/include/nms_common.h
+index c1ffda1..5af75da 100644
+--- a/include/nms_common.h
++++ b/include/nms_common.h
+@@ -116,6 +116,7 @@
+ #define MAX_HELPDESK_REF_LEN     64
+ #define MAX_PASSWORD             48
+ #define GROUP_FLAG               ((UINT32)0x80000000)
++#define MAX_LVM_NAME_LEN 			128
+ 
+ #define NETXMS_MAX_CIPHERS       6
+ #define NETXMS_RSA_KEYLEN        2048
+diff --git a/src/agent/subagents/linux/Makefile.am b/src/agent/subagents/linux/Makefile.am
+index 4d83046..e4bc515 100644
+--- a/src/agent/subagents/linux/Makefile.am
++++ b/src/agent/subagents/linux/Makefile.am
+@@ -1,10 +1,10 @@
+ SUBAGENT = linux
+ 
+ pkglib_LTLIBRARIES = linux.la
+-linux_la_SOURCES = cpu.cpp disk.cpp drbd.cpp hddinfo.cpp iostat.cpp linux.cpp net.cpp packages.cpp proc.cpp system.cpp
++linux_la_SOURCES = cpu.cpp disk.cpp drbd.cpp hddinfo.cpp iostat.cpp linux.cpp net.cpp packages.cpp proc.cpp system.cpp lvm.cpp
+ linux_la_CPPFLAGS=-I@top_srcdir@/include
+-linux_la_LDFLAGS = -module -avoid-version -export-symbols ../platform-subagent.sym
+-linux_la_LIBADD = ../../libnxagent/libnxagent.la ../../../libnetxms/libnetxms.la
++linux_la_LDFLAGS = -module -avoid-version -export-symbols ../platform-subagent.sym -ldevmapper -llvm2app
++linux_la_LIBADD = ../../libnxagent/libnxagent.la ../../../libnetxms/libnetxms.la 
+ 
+ EXTRA_DIST = linux_subagent.h
+ 
+diff --git a/src/agent/subagents/linux/linux.cpp b/src/agent/subagents/linux/linux.cpp
+index 06e105f..8c4847e 100644
+--- a/src/agent/subagents/linux/linux.cpp
++++ b/src/agent/subagents/linux/linux.cpp
+@@ -462,7 +462,19 @@ static NETXMS_SUBAGENT_PARAM m_parameters[] =
+ 	{ _T("System.IO.DiskTime"),           H_IoStatsTotal, (const TCHAR *)IOSTAT_IO_TIME,
+ 		DCI_DT_FLOAT,	DCIDESC_SYSTEM_IO_DISKTIME },
+ 	{ _T("System.IO.DiskTime(*)"),        H_IoStats, (const TCHAR *)IOSTAT_IO_TIME,
+-		DCI_DT_FLOAT,	DCIDESC_SYSTEM_IO_DISKTIME_EX }
++		DCI_DT_FLOAT,	DCIDESC_SYSTEM_IO_DISKTIME_EX },
++
++	/* LVM - VG */
++	{ _T("Lvm.VG.Status(*)"),             H_LvmVgStatus,  NULL,
++		DCI_DT_STRING,	DCIDESC_LVM_VG_STATUS },
++	{ _T("Lvm.VG.Size(*)"),               H_LvmInfo,    	(TCHAR *)LVM_VG_SIZE,
++		DCI_DT_UINT64,	DCIDESC_LVM_VG_SIZE },
++
++	/* LVM - LV */
++	{ _T("Lvm.LV.Status(*)"),             H_LvmLvStatus,  NULL,
++		DCI_DT_STRING,	DCIDESC_LVM_LV_STATUS },
++   { _T("Lvm.LV.Size(*)"),               H_LvmInfo,    	(TCHAR *)LVM_LV_SIZE,
++		DCI_DT_UINT64,	DCIDESC_LVM_LV_SIZE }
+ };
+ 
+ /**
+diff --git a/src/agent/subagents/linux/linux_subagent.h b/src/agent/subagents/linux/linux_subagent.h
+index b0df819..f8eed78 100644
+--- a/src/agent/subagents/linux/linux_subagent.h
++++ b/src/agent/subagents/linux/linux_subagent.h
+@@ -37,6 +37,8 @@
+ #include <asm/types.h>
+ #include <linux/netlink.h>
+ #include <linux/rtnetlink.h>
++/* Debian-based: liblvm2-dev; RedHat-based: lvm2-devel */
++#include <lvm2app.h>
+ 
+ /**
+  * Attributes for H_ProcInfo
+@@ -175,6 +177,16 @@ enum
+ 	CPU_USAGE_GUEST,
+ };
+ 
++/**
++ * LVM info types
++ */
++enum
++{
++	LVM_LV_SIZE,
++	LVM_VG_SIZE
++};
++
++
+ #define MAKE_CPU_USAGE_PARAM(interval, source)	(const TCHAR *)((((DWORD)(interval)) << 16) | ((DWORD)(source)))
+ #define CPU_USAGE_PARAM_INTERVAL(p)					((CAST_FROM_POINTER((p), DWORD)) >> 16)
+ #define CPU_USAGE_PARAM_SOURCE(p)					((CAST_FROM_POINTER((p), DWORD)) & 0x0000FFFF)
+@@ -230,6 +242,10 @@ LONG H_ConnectedUsers(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession
+ LONG H_ActiveUserSessions(const TCHAR *, const TCHAR *, StringList *, AbstractCommSession *);
+ LONG H_SysMsgQueue(const TCHAR *param, const TCHAR *arg, TCHAR *value, AbstractCommSession *session);
+ 
++LONG H_LvmVgStatus(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
++LONG H_LvmLvStatus(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
++LONG H_LvmInfo(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
++
+ void StartCpuUsageCollector();
+ void ShutdownCpuUsageCollector();
+ 
+diff --git a/src/agent/subagents/linux/lvm.cpp b/src/agent/subagents/linux/lvm.cpp
+new file mode 100644
+index 0000000..82d9405
+--- /dev/null
++++ b/src/agent/subagents/linux/lvm.cpp
+@@ -0,0 +1,220 @@
++/* 
++** NetXMS subagent for GNU/Linux
++** Copyright (C) 2004-2016 Raden Solutions
++**
++** This program is free software; you can redistribute it and/or modify
++** it under the terms of the GNU General Public License as published by
++** the Free Software Foundation; either version 2 of the License, or
++** (at your option) any later version.
++**
++** This program is distributed in the hope that it will be useful,
++** but WITHOUT ANY WARRANTY; without even the implied warranty of
++** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++** GNU General Public License for more details.
++**
++** You should have received a copy of the GNU General Public License
++** along with this program; if not, write to the Free Software
++** Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++**
++** File        :  lvm.cpp
++** Descriprion :  Logical Volume Manager(LVM) submodule
++** Dependencies:  liblvm(ldevmapper, lvm2app)
++**
++**/
++
++#include "linux_subagent.h"
++
++/**
++ * Handler for Lvm.Vg.Status(*)
++ */
++LONG H_LvmVgStatus(const TCHAR *pszParam, const TCHAR *pArg, TCHAR *pValue, AbstractCommSession *session)
++{
++	char name[MAX_LVM_NAME_LEN];
++
++	if (!AgentGetParameterArgA(pszParam, 1, name, MAX_LVM_NAME_LEN))
++      return SYSINFO_RC_UNSUPPORTED;
++
++   LONG rc = SYSINFO_RC_UNSUPPORTED;
++
++   lvm_t libh;
++	vg_t vg;
++	struct dm_list *vgnames;
++	struct lvm_str_list *strl;
++	const char * vgname;
++
++	libh = lvm_init(NULL);
++	if (!libh) 
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmVgStatus: Unable to open lvm library instance"));
++		rc = SYSINFO_RC_ERROR;
++	}
++
++	if (lvm_scan(libh))
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmVgStatus: Unable to find any volume groups"));
++		rc = SYSINFO_RC_ERROR;
++	}
++
++	vgnames = lvm_list_vg_names(libh);
++
++	dm_list_iterate_items(strl, vgnames) 
++	{
++ 		vgname = strl->str;
++ 		vg = lvm_vg_open(libh, vgname, "r", 0);
++ 		if (!strcmp(vgname, name))
++ 		{
++ 			if (lvm_vg_is_partial(vg))
++ 			{
++ 				ret_mbstring(pValue, "partial");
++         	rc = SYSINFO_RC_SUCCESS;
++				break;
++ 			}
++ 			else
++ 			{
++ 				ret_mbstring(pValue, "full");
++         	rc = SYSINFO_RC_SUCCESS;
++				break;
++			}
++ 		}
++ 		
++ 		lvm_vg_close(vg);
++ 	}
++
++	lvm_quit(libh);
++	
++	return rc;
++}
++
++/**
++ * Handler for Lvm.Lv.Status(*)
++ */
++LONG H_LvmLvStatus(const TCHAR *pszParam, const TCHAR *pArg, TCHAR *pValue, AbstractCommSession *session)
++{
++	char name[MAX_LVM_NAME_LEN];
++
++	if (!AgentGetParameterArgA(pszParam, 1, name, MAX_LVM_NAME_LEN))
++      return SYSINFO_RC_UNSUPPORTED;
++
++   LONG rc = SYSINFO_RC_UNSUPPORTED;
++
++   lvm_t libh;
++	vg_t vg;
++	struct dm_list *vgnames;
++	struct lvm_str_list *strl;
++	const char * vgname;
++	lv_t lv;
++	const char * lvname = name;
++	
++	libh = lvm_init(NULL);
++	if (!libh) 
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmLvStatus: Unable to open lvm library instance"));
++		rc = SYSINFO_RC_ERROR;
++	}
++
++	if (lvm_scan(libh))
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmLvStatus: Unable to find any volume groups"));
++		rc = SYSINFO_RC_ERROR;
++	}
++
++	vgnames = lvm_list_vg_names(libh);
++
++	dm_list_iterate_items(strl, vgnames) 
++	{
++ 		vgname = strl->str;
++ 		vg = lvm_vg_open(libh, vgname, "r", 0);
++
++ 		if (lv = lvm_lv_from_name(vg, lvname))
++ 		{
++ 			lvm_lv_is_active(lv)?ret_mbstring(pValue, "active"):ret_mbstring(pValue, "inactive");
++ 			rc = SYSINFO_RC_SUCCESS;
++			break;
++ 		}
++ 		lvm_vg_close(vg);
++ 	}
++
++	lvm_quit(libh);
++	
++	return rc;
++}
++
++
++/**
++ * Handler for Lvm.* parameters
++ */
++LONG H_LvmInfo(const TCHAR *pszParam, const TCHAR *pArg, TCHAR *pValue, AbstractCommSession *session)
++{
++	char name[MAX_LVM_NAME_LEN];
++
++	if (!AgentGetParameterArgA(pszParam, 1, name, MAX_LVM_NAME_LEN))
++      return SYSINFO_RC_UNSUPPORTED;
++
++   LONG rc = SYSINFO_RC_UNSUPPORTED;
++
++   lvm_t libh;
++	struct dm_list *vgnames;
++	struct lvm_str_list *strl;
++	
++	vg_t vg;
++	const char * vgname;
++	
++	lv_t lv;
++	const char * lvname = name;
++
++	uint64_t size = 0;
++		
++	libh = lvm_init(NULL);
++	if (!libh) 
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmInfo: Unable to open lvm library instance"));
++		return SYSINFO_RC_ERROR;
++	}
++
++	if (lvm_scan(libh))
++	{
++		AgentWriteDebugLog(4, _T("Linux: H_LvmInfo: Unable to find any volume groups"));
++		return SYSINFO_RC_ERROR;
++	}
++
++	vgnames = lvm_list_vg_names(libh);
++
++	dm_list_iterate_items(strl, vgnames) 
++	{
++ 		vgname = strl->str;
++ 		if (!(vg = lvm_vg_open(libh, vgname, "r", 0)))
++ 		{
++			AgentWriteDebugLog(4, _T("Linux: H_LvmInfo: Unable to open volume group"));
++			return SYSINFO_RC_ERROR;
++		}
++
++ 				
++ 		switch((long)pArg)
++			{
++				case LVM_VG_SIZE:
++					if (!strcmp(vgname, name) && (size = lvm_vg_get_size(vg)))
++					{
++ 						ret_uint64(pValue, size);
++ 						rc = SYSINFO_RC_SUCCESS;
++					}
++ 					break;
++				case LVM_LV_SIZE:
++					if ((lv = lvm_lv_from_name(vg, lvname)) && (size = lvm_lv_get_size(lv)))
++ 					{
++ 						ret_uint64(pValue, size);
++ 						rc = SYSINFO_RC_SUCCESS;
++ 					}
++					break;
++				default:
++					rc = SYSINFO_RC_ERROR;
++					break;
++			}
++
++
++ 		lvm_vg_close(vg);
++ 	}
++
++	lvm_quit(libh);
++	
++	return rc;
++}
+-- 
+2.7.4
+
