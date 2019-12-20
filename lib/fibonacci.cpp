@@ -20,6 +20,24 @@
 
 namespace euler
 {
+    unsigned int fibonacciR(const unsigned int n)
+    {
+        if (n == 0) { return 0; }
+        if (n == 1) { return 1; }
+        return fibonacciR(n - 1) + fibonacciR(n - 2);
+    }
+
+    void fibonacciR_print(const int size)
+    {
+        LOG(euler::logger::log_level) << "All Fibonacci Numbers:\n";
+        for (int i = 0; i < size; i++)
+        {
+            LOG(euler::logger::log_level) << std::setw(11) << fibonacciR(i) << " ";
+            if (i % 8 == 0) { LOG(euler::logger::log_level) << "\n"; }
+        }
+        LOG(euler::logger::log_level) << "\n";
+    }
+
     void fibonacci()
     {
         std::vector<int> evens;
@@ -75,6 +93,7 @@ namespace euler
 
         set_separator_thousands('\'');
         int result = fibonacci();
+        // fibonacciR_print(30)
         reset_separator();
 
         std::system("pause");
