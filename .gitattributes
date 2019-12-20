@@ -1,3 +1,7 @@
+# Perform LF normalization
+* text eol=lf
+*.vim eol=lf
+
 *.a binary
 *.aac binary
 *.ai binary

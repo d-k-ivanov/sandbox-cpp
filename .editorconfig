@@ -2,27 +2,25 @@ root = true
 
 [**]
 charset = utf-8
+end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{*.bash,*.sh}]
-indent_size = 2
+[{*.bash,*.sh,bashrc,bash_profile,profile}]
 max_line_length = 80
 
 [*.csv]
 insert_final_newline = false
 
 [*.ftl]
-indent_size = 2
 max_line_length = 80
 
-[*.html]
-indent_size = 2
+[*.gitmodules]
+insert_final_newline = false
 
 [*.js]
-indent_size = 2
 max_line_length = 80
 
 [*.java]
@@ -34,12 +32,11 @@ indent_style = tab
 [*.md]
 trim_trailing_whitespace = false
 
-[*.ps1]
-indent_size = 2
-
 [*.py]
 max_line_length = 80
 
 [*.ts]
-indent_size = 2
 max_line_length = 80
+
+[{*.yml,*.yaml}]
+indent_size = 2
