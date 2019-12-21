@@ -38,7 +38,34 @@ namespace euler
         LOG(euler::logger::log_level) << "\n";
     }
 
-    void fibonacci()
+    void fibonacciS(const int size)
+    {
+        LOG(euler::logger::log_level) << "All Fibonacci Numbers:\n";
+        unsigned long long a = 0;
+        unsigned long long b = 1;
+
+        int count = 1;
+        while (true)
+        {
+            if (count >= size) { break; }
+
+            if (a == 0 && b == 1)
+            {
+                LOG(euler::logger::log_level) << a << '\n' << b << '\n';
+                count += 2;
+            }
+
+            const unsigned long long current = a + b;
+
+            LOG(euler::logger::log_level) << current << '\n';
+
+            a = b;
+            b = current;
+            count++;
+        }
+    }
+
+    void fibonacciS2()
     {
         std::vector<int> evens;
         LOG(euler::logger::log_level) << "All Fibonacci Numbers:\n";
@@ -92,7 +119,8 @@ namespace euler
         LOG(euler::logger::log_level) << "Maximum Unsigned Int:\t" << UINT_MAX << std::endl;
 
         set_separator_thousands('\'');
-        int result = fibonacci();
+        fibonacciS(100);
+        // fibonacciS2();
         // fibonacciR_print(30)
         reset_separator();
 
