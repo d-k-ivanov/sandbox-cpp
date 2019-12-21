@@ -1,7 +1,7 @@
 /*
  * =====================================================================
- *      Project :  project-euler
- *      File    :  2.cpp
+ *      Project :  fibinacci.cpp
+ *      File    :  fibinacci.cpp
  *      Created :  20.12.2019 1:45:54 +0100
  *      Author  :  Dmitriy Ivanov
  *
@@ -138,6 +138,4 @@ namespace euler
  *        46368     75025    121393    196418    317811    514229    832040   1346269
  *      2178309   3524578
  *
- *      Even Fibonacci Numbers:
- *            2         8        34       144       610      2584     10946     46368    196418    832040   3524578
  */

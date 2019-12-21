@@ -3,7 +3,7 @@
 
 /*
  * =====================================================================
- *      Project :  project-euler
+ *      Project :  logger.h
  *      File    :  logger.h
  *      Created :  20.12.2019 1:56:54 +0100
  *      Author  :  Dmitriy Ivanov
