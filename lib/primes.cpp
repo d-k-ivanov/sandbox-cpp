@@ -1,13 +1,9 @@
 /*
  * =====================================================================
- *      Project :  project-euler
- *      File    :  3.cpp
+ *      Project :  primes.cpp
+ *      File    :  primes.cpp
  *      Created :  20.12.2019 23:55:30 +0100
  *      Author  :  Dmitriy Ivanov
- *
- *      The Problem:
- *      The prime factors of 13195 are 5, 7, 13 and 29.
- *      What is the largest prime factor of the number 600851475143 ?
  *
  * =====================================================================
  */
