@@ -24,7 +24,8 @@ namespace euler
         if (n == 2) return true;
         if (n % 2 == 0) return false;
 
-        for (unsigned long long i = 3; i < n/2; i++)
+        // is_prime: if n can't be divided by every number m <= sqrt(n), than it's prime
+        for (unsigned long long i = 3; i <= std::sqrtl(n) + 1; i++)
         {
             if (n % i == 0)
             {
