@@ -43,12 +43,22 @@ int main(int argc, char* argv[], char* env[])
     bar.fill_bar_remainder_with("░");
 
     std::cout << "Single progress bar:" << std::endl;
+    #ifdef _WIN32
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+    #elif
+    std::cout << termcolor::bold << termcolor::yellow;
+    #endif
 
     for (size_t i = 1; i <= 100; ++i) {
         bar.update(i);
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
     std::cout << std::endl;
+    #ifdef _WIN32
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    #elif
+    std::cout << termcolor::reset;
+    #endif
 
     ProgressBar bar1, bar2, bar3;
     // std::vector<ProgressBar*> ll({ &bar1, &bar2, &bar3 });
@@ -87,6 +97,11 @@ int main(int argc, char* argv[], char* env[])
     };
 
     std::cout << "Multiple progress bars:" << std::endl;
+    #ifdef _WIN32
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+    #elif
+    std::cout << termcolor::bold << termcolor::yellow;
+    #endif
     std::thread first_job(job1);
     std::thread second_job(job2);
     std::thread third_job(job3);
@@ -95,6 +110,12 @@ int main(int argc, char* argv[], char* env[])
     second_job.join();
     third_job.join();
     std::cout << std::endl;
+
+    #ifdef _WIN32
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+    #elif
+    std::cout << termcolor::reset;
+    #endif
 
     return 0;
 
