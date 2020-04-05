@@ -7,6 +7,9 @@
  * =====================================================================
  */
 
+#pragma warning(push)
+#pragma warning(disable: 4244)
+
 #include "ProgressBar.h"
 #include "MultiProgressBar.h"
 
@@ -20,8 +23,8 @@
 int main(int argc, char* argv[], char* env[])
 {
     // To turn off messages about unused variables.
-    ((void)argc);
     ((void)argv);
+    ((void)argc);
     ((void)env );
 
     #ifdef _WIN32
@@ -43,7 +46,7 @@ int main(int argc, char* argv[], char* env[])
 
     for (size_t i = 1; i <= 100; ++i) {
         bar.update(i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
     std::cout << std::endl;
 
@@ -63,7 +66,7 @@ int main(int argc, char* argv[], char* env[])
     auto job1 = [&bars]() {
         for (size_t i = 0; i <= 100; ++i) {
             bars.update<0>(i);
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
     };
 
@@ -71,7 +74,7 @@ int main(int argc, char* argv[], char* env[])
     auto job2 = [&bars]() {
         for (size_t i = 0; i <= 100; ++i) {
             bars.update<1>(i);
-            std::this_thread::sleep_for(std::chrono::milliseconds(200));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
     };
 
@@ -79,7 +82,7 @@ int main(int argc, char* argv[], char* env[])
     auto job3 = [&bars]() {
         for (size_t i = 0; i <= 100; ++i) {
             bars.update<2>(i);
-            std::this_thread::sleep_for(std::chrono::milliseconds(60));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     };
 
@@ -96,3 +99,5 @@ int main(int argc, char* argv[], char* env[])
     return 0;
 
 }
+
+#pragma warning(pop)

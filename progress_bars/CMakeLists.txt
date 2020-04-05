@@ -38,5 +38,5 @@ include_directories(SYSTEM ${CMAKE_SOURCE_DIR}/lib)
 add_subdirectory("src")
 
 # Testing
-option(MAKE_TESTS "Set to ON to build tests" OFF)
+option(MAKE_TESTS "Set to ON to build tests" ON)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test)

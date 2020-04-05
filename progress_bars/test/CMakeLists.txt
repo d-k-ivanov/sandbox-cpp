@@ -2,8 +2,7 @@ if(MAKE_TESTS)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests)
 
     file(GLOB_RECURSE SRC
-    "main.h"
-    "main.cpp"
+        "tests.cpp"
     )
     source_group("Main" FILES ${SRC})
 

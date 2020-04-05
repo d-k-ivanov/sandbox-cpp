@@ -15,6 +15,10 @@
 #include <array>
 #include <iostream>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 template <typename Indicator, size_t count>
 class MultiProgressBar
 {
@@ -35,8 +39,23 @@ public:
 
         // Move cursor up if needed
         if (started_)
+        {
             for (size_t i = 0; i < count; ++i)
+            {
+                #ifdef _WIN32
+                auto const std_out = GetStdHandle(STD_OUTPUT_HANDLE);
+                CONSOLE_SCREEN_BUFFER_INFO screen_buffer_info;
+                GetConsoleScreenBufferInfo(std_out, &screen_buffer_info);
+                const COORD cursor_position = {
+                    screen_buffer_info.dwCursorPosition.X,
+                    screen_buffer_info.dwCursorPosition.Y - static_cast<SHORT>(i) };
+                SetConsoleCursorPosition(std_out, cursor_position);
+                #elif 
                 os << "\x1b[A";
+                #endif
+                
+            }
+        }
 
         // Write each bar
         for (auto& bar : bars_)
