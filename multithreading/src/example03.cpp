@@ -27,7 +27,7 @@ void RunB(bool& value) {
     value = false;
 }
 int main() {
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 20; i++) {
         bool value = true; //1
         std::thread tA(RunA, std::ref(value), i);
         std::thread tB(RunB, std::ref(value));
