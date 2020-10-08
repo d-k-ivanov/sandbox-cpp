@@ -1,6 +1,9 @@
 _build
 _out
 
+build
+out
+
 conan.lock
 conanbuildinfo.cmake
 conanbuildinfo.txt
