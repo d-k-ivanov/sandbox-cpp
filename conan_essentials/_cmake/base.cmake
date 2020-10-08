@@ -1,5 +1,9 @@
-macro(set_output_vars)
+macro(set_base_vars)
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+    if(NOT CMAKE_BUILD_TYPE)
+        set(CMAKE_BUILD_TYPE Release)
+    endif()
 
     set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR})
 
