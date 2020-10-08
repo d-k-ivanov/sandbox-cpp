@@ -6,5 +6,11 @@ poco/1.9.4
 cmake
 
 [options]
-boost:shared=False
-poco:shared=False
+boost:shared=True
+poco:shared=True
+
+[imports]
+# bin, *.dll -> ./bin # Copies all dll files from packages bin folder to my "bin" folder
+# lib, *.dll -> ./bin # Copies all dll files from packages lib folder to my "bin" folder
+bin, *PocoFoundation.* -> ./bin
+lib, *boost_regex.*    -> ./bin
