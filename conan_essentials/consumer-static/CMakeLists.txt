@@ -3,15 +3,14 @@ project(timer)
 
 
 # Using the "cmake" generator
-include(${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../_cmake)
+# include(base)
+# set_base_vars()
 
-include(base)
-include(compiler)
-
-set_base_vars()
+include(compiler_flags)
 
 # Print out Cmake Variables
 include(cmake_debug)
