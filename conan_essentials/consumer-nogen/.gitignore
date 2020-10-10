@@ -2,3 +2,5 @@ build
 conanbuildinfo*
 conaninfo*
 timer
+timer.exe
+timer.obj
