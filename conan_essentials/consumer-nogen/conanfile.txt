@@ -3,7 +3,7 @@ boost/1.74.0
 poco/1.10.1
 
 [generators]
-cmake
+
 
 [options]
 boost:shared=False

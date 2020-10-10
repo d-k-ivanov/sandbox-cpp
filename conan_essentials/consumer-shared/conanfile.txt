@@ -1,6 +1,6 @@
 [requires]
-boost/1.72.0
-poco/1.9.4
+boost/1.74.0
+poco/1.10.1
 
 [generators]
 cmake
