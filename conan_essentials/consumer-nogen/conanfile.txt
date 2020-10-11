@@ -4,7 +4,6 @@ poco/1.10.1
 
 [generators]
 
-
 [options]
 boost:shared=False
 poco:shared=False
