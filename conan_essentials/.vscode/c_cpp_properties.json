@@ -4,7 +4,10 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
+                "${USERPROFILE}/.conan/data/**",
+                "${USERPROFILE}/.conan/short/**",
                 "${CONAN_USER_HOME}/.conan/data/**",
+                "${CONAN_USER_HOME}/.conan/short/**",
                 "${CONAN_USER_HOME_SHORT}/**"
             ],
             "defines": [
