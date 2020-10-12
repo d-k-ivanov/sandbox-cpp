@@ -6,8 +6,8 @@
                 "${workspaceFolder}/**",
                 "${USERPROFILE}/.conan/data/**",
                 "${USERPROFILE}/.conan/short/**",
-                "${CONAN_USER_HOME}/.conan/data/**",
-                "${CONAN_USER_HOME}/.conan/short/**",
+                // "${CONAN_USER_HOME}/.conan/data/**",  # Not used any more on my PC
+                // "${CONAN_USER_HOME}/.conan/short/**", # Not used any more on my PC
                 "${CONAN_USER_HOME_SHORT}/**"
             ],
             "defines": [
