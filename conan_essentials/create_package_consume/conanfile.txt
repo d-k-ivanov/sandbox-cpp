@@ -1,0 +1,11 @@
+[requires]
+boost/1.74.0
+poco/1.10.1
+hello/0.1@d-k-ivanov/testing
+
+[generators]
+cmake
+
+[options]
+boost:shared=False
+poco:shared=False
