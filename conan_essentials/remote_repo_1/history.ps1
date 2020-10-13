@@ -20,3 +20,11 @@ conan upload "*" -r conan-divanov --all --confirm
 # Removing conan-center
 # (DON'T DO) conan remote remove conan-center
 # conan remote add conan-center https://conan.bintray.com
+
+
+Get-ChildItem ~/.conan
+Get-ChildItem ~/.conan/data
+Get-ChildItem ~/.conan/data/hello/0.1/d-k-ivanov/testing
+conan remove "hello" -f
+conan search
+Get-ChildItem ~/.conan/data
