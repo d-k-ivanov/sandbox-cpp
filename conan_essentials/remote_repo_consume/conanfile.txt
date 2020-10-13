@@ -1,0 +1,7 @@
+[requires]
+hello/0.1@d-k-ivanov/testing
+
+[generators]
+cmake
+
+[options]
