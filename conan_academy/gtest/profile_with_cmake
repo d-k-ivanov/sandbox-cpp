@@ -1,0 +1,5 @@
+include(windows-msvc-16-static-release-x64)
+
+[build_requires]
+cmake/3.16.3
+
