@@ -7,6 +7,10 @@ class HelloConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
     exports_sources = "*"
+
+    # Use requires for "always on" requirements.
+    # requires = "gtest/1.8.1"
+    # Use build_requires if you don't need this package for normal usage.
     build_requires = "gtest/1.8.1"
 
     def build(self):
