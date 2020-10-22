@@ -17,3 +17,10 @@ conan create hello d-k-ivanov/testing -pr windows-msvc-16-static-release-x64
 conan upload "hello*" -r conan-divanov --all --confirm
 
 conan search hello/0.1@d-k-ivanov/testing --revisions -r conan-divanov
+
+# Consuming revisions
+conan remove hello* -f
+conan install hello/0.1@d-k-ivanov/testing -r conan-divanov -pr windows-msvc-16-static-release-x64
+conan remove hello* -f
+conan install hello/0.1@d-k-ivanov/testing#d8480faca4a55fbf4ff18af4f0882fb0 -r conan-divanov -pr windows-msvc-16-static-release-x64
+conan install hello/0.1@d-k-ivanov/testing#73b4f02001a1edd4b762d322c10e1008 -r conan-divanov -pr windows-msvc-16-static-release-x64
