@@ -12,6 +12,8 @@ conan remove hello-pkg* -f
 # Use '_' instead of '-'
 conan config install myconfig
 conan export . d-k-ivanov/testing
+# ERROR: [HOOK - check_name.py] pre_export(): Use _ instead of -
 
+conan remove hello-pkg* -f
 rmrf src
 rm conanfile.py
