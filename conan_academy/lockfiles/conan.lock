@@ -1,0 +1,25 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "ref": "chat/0.1@d-k-ivanov/testing",
+    "options": "shared=False\nhello:shared=False",
+    "requires": [
+     "1"
+    ],
+    "path": "chat\\conanfile.py",
+    "context": "host"
+   },
+   "1": {
+    "ref": "hello/0.1@d-k-ivanov/testing#64d33dec78d5ce49569687f69c1c3b10",
+    "options": "shared=False",
+    "package_id": "a79a557254fabcb77849dd623fed97c9c5ab7651",
+    "prev": "8a4f9e7ccdee339baf76ca1fb52894f3",
+    "context": "host"
+   }
+  },
+  "revisions_enabled": true
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=Visual Studio\ncompiler.runtime=MT\ncompiler.version=16\nos=Windows\nos_build=Windows\n[options]\n[build_requires]\n[env]\n"
+}
