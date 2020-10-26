@@ -1,1 +1,1 @@
-g++ euclid.cpp
+g++ lec02/euclid.cpp

@@ -19,4 +19,5 @@
 # The IEEE Standard for Floating-Point Arithmetic (IEEE 754)
 # https://en.wikipedia.org/wiki/IEEE_754
 
-
+Use-Msys2
+g++ lec03/expressions.cpp
