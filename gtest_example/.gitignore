@@ -1,0 +1,14 @@
+_build
+_out
+
+build
+out
+
+conan.lock
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json
+
+Folder.DotSettings.user
+vc140.pdb
