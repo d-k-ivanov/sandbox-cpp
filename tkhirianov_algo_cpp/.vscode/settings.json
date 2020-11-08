@@ -39,5 +39,6 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "ciso646": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
