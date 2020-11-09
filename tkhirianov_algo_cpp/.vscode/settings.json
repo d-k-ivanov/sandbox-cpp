@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.rmd": "markdown",
         "atomic": "cpp",
         "cmath": "cpp",
         "compare": "cpp",
@@ -38,7 +39,9 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "ciso646": "cpp"
+        "ciso646": "cpp",
+        "array": "cpp",
+        "chrono": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
