@@ -14,6 +14,13 @@ struct node_t
     node_t *next;
 };
 
+struct node_list
+{
+    int data;
+    node_list *prev;
+    node_list *next;
+};
+
 void print_all_nodes(node_t *p)
 {
     std::cout << "All Nodes:" << std::endl;
@@ -22,6 +29,40 @@ void print_all_nodes(node_t *p)
     {
         std::cout << p->data << '\t';
         p = p->next;
+        if (sep % 10 == 0)
+        {
+            std::cout << '\n';
+        }
+        sep++;
+    }
+    std::cout << std::endl;
+}
+
+void print_all_nodes(node_list *p)
+{
+    std::cout << "All Nodes:" << std::endl;
+    uint32_t sep = 1;
+    while (p != nullptr)
+    {
+        std::cout << p->data << '\t';
+        p = p->next;
+        if (sep % 10 == 0)
+        {
+            std::cout << '\n';
+        }
+        sep++;
+    }
+    std::cout << std::endl;
+}
+
+void print_all_nodes_reverse(node_list *p)
+{
+    std::cout << "All Nodes (reversed):" << std::endl;
+    uint32_t sep = 1;
+    while (p != nullptr)
+    {
+        std::cout << p->data << '\t';
+        p = p->prev;
         if (sep % 10 == 0)
         {
             std::cout << '\n';
@@ -74,11 +115,65 @@ void variant2()
     print_all_nodes(p_begin);
 }
 
+void variant3()
+{
+    const int MAX_SIZE  = 100;
+    node_t *p_begin     = new node_t;
+    p_begin->data       = 0;
+    p_begin->next       = nullptr;
+
+    node_t *p = p_begin;
+    srand(time(0));
+
+    for(int i = 0; i < MAX_SIZE; i++)
+    {
+        p->data = get_randrom_int(0, 32768);
+        p->next = new node_t;
+        p = p->next;
+        p->data = 0;
+        p->next = nullptr;
+    }
+
+    print_all_nodes(p_begin);
+}
+
+void variant4()
+{
+    const int MAX_SIZE = 100;
+    node_list *p_begin = new node_list;
+    node_list *p = p_begin;
+
+    srand(time(0));
+
+    // p->data     = get_randrom_int(0, 32768);
+    p->data     = 0;
+    p->prev     = nullptr;
+    p->next     = nullptr;
+
+    for(int i = 1; i < MAX_SIZE; i++)
+    {
+        if (p->next == nullptr)
+        {
+            p->next = new node_list;
+            p->next->prev = p;
+            p = p->next;
+            // p->data = get_randrom_int(0, 32768);
+            p->data = i;
+            p->next = nullptr;
+        }
+    }
+
+    print_all_nodes(p_begin);
+    print_all_nodes_reverse(p);
+}
+
 
 int main()
 {
     // variant1();
-    variant2();
+    // variant2();
+    // variant3();
+    variant4();
 
     return 0;
 }
