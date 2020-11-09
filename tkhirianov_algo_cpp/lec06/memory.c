@@ -22,8 +22,8 @@ void print_memory_usage()
 {
     #ifdef _WIN32
     PROCESS_MEMORY_COUNTERS info;
-    GetProcessMemoryInfo( GetCurrentProcess( ), &info, sizeof(info) );
-    printf("Memory used by me: %lu MB\n", (size_t)info.WorkingSetSize/1024/1024);
+    GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info) ;
+    printf("Memory used by me: %lu MB\n", (size_t) info.WorkingSetSize/1024/1024);
     #else
     long rss = 0L;
     FILE* fp = NULL;
