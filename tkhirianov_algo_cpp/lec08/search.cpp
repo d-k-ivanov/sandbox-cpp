@@ -143,6 +143,44 @@ int binary_search(int* a, int size, int guess)
     return -1;
 }
 
+
+int get_left_bound(int* a, int size, int guess)
+{
+    // if(!is_sorted(a,size))
+    //     return -2;
+
+    int left = -1;
+    int right = size;
+    int middle;
+
+    while (right - left > 1)
+    {
+        middle = (left + right) / 2;
+        if (a[middle] < guess)
+        {
+            left = middle;
+        }
+        else
+        {
+            right = middle;
+        }
+    }
+    return left;
+}
+
+int binary_search2(int* a, int size, int guess)
+{
+    // if(!is_sorted(a,size))
+    //     return -2;
+
+    int left = get_left_bound(a, size, guess);
+    int index = left + 1;
+    if (index < size and a[index] == guess)
+        return index;
+    else
+        return -1;
+}
+
 int main()
 {
     // const int MAX_SIZE = 500000;
@@ -196,24 +234,6 @@ int main()
 
         std::cout << std::endl;
 
-        std::cout << "[INFO] Binary Search. Running..." << std::endl;
-        // begin = clock();
-        start = std::chrono::high_resolution_clock::now();
-        index = binary_search(a, MAX_SIZE, x);
-        // end = clock();
-        elapsed = std::chrono::high_resolution_clock::now() - start;
-        // time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-        time_spent = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
-        std::cout << std::endl;
-        if(index < 0)
-            std::cout << "\tResult: index = " << index << "\tvalue=N/A" << std::endl;
-        else
-            std::cout << "\tResult: index = " << index << "\tvalue=" << a[index] << std::endl;
-        std::cout << std::endl;
-        std::cout << "[INFO] Binary Search execution time: " << time_spent << std::endl;
-
-        std::cout << std::endl;
-
         std::cout << "[INFO] Linear Search. Running..." << std::endl;
         // begin = clock();
         start = std::chrono::high_resolution_clock::now();
@@ -229,6 +249,26 @@ int main()
             std::cout << "\tResult: index = " << index << "\tvalue=" << a[index] << std::endl;
         std::cout << std::endl;
         std::cout << "[INFO] Linear Search execution time: " << time_spent << std::endl;
+
+        std::cout << std::endl;
+
+        std::cout << "[INFO] Binary Search. Running..." << std::endl;
+        std::cout << "[INFO] Left : " << get_left_bound(a, MAX_SIZE, x) << std::endl;
+        // begin = clock();
+        start = std::chrono::high_resolution_clock::now();
+        // index = binary_search(a, MAX_SIZE, x);
+        index = binary_search2(a, MAX_SIZE, x);
+        // end = clock();
+        elapsed = std::chrono::high_resolution_clock::now() - start;
+        // time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        time_spent = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
+        std::cout << std::endl;
+        if(index < 0)
+            std::cout << "\tResult: index = " << index << "\tvalue=N/A" << std::endl;
+        else
+            std::cout << "\tResult: index = " << index << "\tvalue=" << a[index] << std::endl;
+        std::cout << std::endl;
+        std::cout << "[INFO] Binary Search execution time: " << time_spent << std::endl;
     }
 
     delete[] a;
