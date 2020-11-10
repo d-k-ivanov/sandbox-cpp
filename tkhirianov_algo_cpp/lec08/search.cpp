@@ -4,8 +4,10 @@
 #include <time.h>
 
 const int RANDOM_MINIMUM = 0;
-// const int RANDOM_MAXIMUM = 65535;
-const int RANDOM_MAXIMUM = INT_MAX-1;
+// const int RANDOM_MAXIMUM = 100;
+// const int RANDOM_MAXIMUM = 2000000000-1;
+const int RANDOM_MAXIMUM = 50000000-1;
+// const int RANDOM_MAXIMUM = INT_MAX-1;
 
 int get_randrom_int(int lower, int upper)
 {
@@ -17,6 +19,13 @@ void initialize_array(int* a, int size)
     srand(time(0));
     for(int i = 0; i < size; i++)
         a[i] = get_randrom_int(RANDOM_MINIMUM, RANDOM_MAXIMUM);
+}
+
+void initialize_array_worst(int* a, int size)
+{
+    srand(time(0));
+    for(int i = 0; i < size; i++)
+        a[i] = i;
 }
 
 void bubble_sort(int* a, int size)
@@ -112,9 +121,25 @@ int binary_search(int* a, int size, int guess)
     // if(!is_sorted(a,size))
     //     return -2;
 
-    for(int i = 0; i < size; i++)
-        if (a[i] == guess)
-            return i;
+    int left = -1;
+    int right = size;
+    int middle;
+
+    while (right - left > 1)
+    {
+        middle = (left + right) / 2;
+        if (a[middle] < guess)
+        {
+            left = middle;
+            continue;
+        }
+         else if (a[middle] > guess)
+        {
+            right = middle;
+            continue;
+        }
+        return middle;
+    }
     return -1;
 }
 
@@ -124,6 +149,7 @@ int main()
     // const int MAX_SIZE = INT_MAX;
     // const int MAX_SIZE = 2147483646;
     // const int MAX_SIZE = 214748364;
+    // const int MAX_SIZE = 2000000000;
     const int MAX_SIZE = 50000000;
     std::cout << "[INFO] Generating array of " << MAX_SIZE << " records..." << std::endl;
     // int a[MAX_SIZE];
@@ -132,6 +158,8 @@ int main()
     int x;
 
     initialize_array(a, MAX_SIZE);
+    // initialize_array_worst(a, MAX_SIZE);
+
     // std::cout << "[INFO] BubbleSort. Running..." << std::endl;
     // begin = clock();
     // bubble_sort(a, MAX_SIZE);
@@ -168,24 +196,6 @@ int main()
 
         std::cout << std::endl;
 
-        std::cout << "[INFO] Linear Search. Running..." << std::endl;
-        // begin = clock();
-        start = std::chrono::high_resolution_clock::now();
-        index = linear_search(a, MAX_SIZE, x);
-        // end = clock();
-        elapsed = std::chrono::high_resolution_clock::now() - start;
-        // time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-        time_spent = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
-        std::cout << std::endl;
-        if(index < 0)
-            std::cout << "\tResult: index = " << index << "\tvalue=N/A" << std::endl;
-        else
-            std::cout << "\tResult: index = " << index << "\tvalue=" << a[index] << std::endl;
-        std::cout << std::endl;
-        std::cout << "[INFO] Linear Search execution time: " << time_spent << std::endl;
-
-        std::cout << std::endl;
-
         std::cout << "[INFO] Binary Search. Running..." << std::endl;
         // begin = clock();
         start = std::chrono::high_resolution_clock::now();
@@ -202,6 +212,23 @@ int main()
         std::cout << std::endl;
         std::cout << "[INFO] Binary Search execution time: " << time_spent << std::endl;
 
+        std::cout << std::endl;
+
+        std::cout << "[INFO] Linear Search. Running..." << std::endl;
+        // begin = clock();
+        start = std::chrono::high_resolution_clock::now();
+        index = linear_search(a, MAX_SIZE, x);
+        // end = clock();
+        elapsed = std::chrono::high_resolution_clock::now() - start;
+        // time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+        time_spent = std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
+        std::cout << std::endl;
+        if(index < 0)
+            std::cout << "\tResult: index = " << index << "\tvalue=N/A" << std::endl;
+        else
+            std::cout << "\tResult: index = " << index << "\tvalue=" << a[index] << std::endl;
+        std::cout << std::endl;
+        std::cout << "[INFO] Linear Search execution time: " << time_spent << std::endl;
     }
 
     delete[] a;
