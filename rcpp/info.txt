@@ -1,0 +1,21 @@
+===============================================================================
+
+
+# You. Cannot. Compile. Rcpp. Classes. Without. R. Your main() above simply won't work. Rcpp is an R extension. – Dirk Eddelbuettel
+
+LD_LIBRARY_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/lib:$LD_LIBRARY_PATH" g++ -I/opt/microsoft/ropen/3.5.3/lib64/R/include -I/opt/microsoft/ropen/3.5.3/lib64/R/library/Rcpp/include -L/opt/microsoft/ropen/3.5.3/lib64/R/lib -lR a.cpp
+LD_LIBRARY_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/lib:$LD_LIBRARY_PATH" a.out
+
+g++ -I/opt/microsoft/ropen/3.5.3/lib64/R/include -I/opt/microsoft/ropen/3.5.3/lib64/R/library/Rcpp/include -I/opt/microsoft/ropen/3.5.3/lib64/R/library/RInside/include -lR b.cpp
+
+g++ rinsidetest.cpp -I /usr/lib64/R/library/RInside/include/ -I /usr/lib64/R/library/Rcpp/include/ -I /usr/lib64/R/include/ -L /usr/lib64/R/library/RInside/libs/ -L /usr/lib64/R/library/Rcpp/libs/ -lRInside -lRcpp
+
+===============================================================================
+
+export LD_LIBRARY_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/lib:/opt/microsoft/ropen/3.5.3/lib64/R/library/RInside/lib:/opt/microsoft/ropen/3.5.3/lib64/R/library/Rcpp/lib:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/lib:/opt/microsoft/ropen/3.5.3/lib64/R/library/RInside/lib:/opt/microsoft/ropen/3.5.3/lib64/R/library/Rcpp/lib:$LD_LIBRARY_PATH"
+export CPLUS_INCLUDE_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/include:/opt/microsoft/ropen/3.5.3/lib64/R/library/Rcpp/include:/opt/microsoft/ropen/3.5.3/lib64/R/library/RInside/include:$CPLUS_INCLUDE_PATH"
+
+g++ -lR -lRcpp a.cpp
+g++ -lR -lRInside -lRcpp b.cpp
+g++ -lR -lRInside -lRcpp c.cpp
