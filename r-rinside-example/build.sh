@@ -17,4 +17,4 @@ export CPLUS_INCLUDE_PATH="/opt/microsoft/ropen/3.5.3/lib64/R/include:$CPLUS_INC
 # R dependencies
 Rscript -e 'install.packages("Rcpp", "RInside")'
 
-g++ -lR -lRInside -o c.exe c.cpp
+g++ -lR -lRInside -o main.bin main.cpp

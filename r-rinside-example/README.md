@@ -1,14 +1,15 @@
-# Использование R в С++
+# Using R in C++
 
-## Пролог
+## Preface
 
-Для начала, я бы хотел процитировать Дирк Эддельбюттеля (активного контрибютора в Rcpp)
+First of all, I need to cite Dirk Eddelbuettel:
 
 > You. Cannot. Compile. Rcpp. Classes. Without. R. It simply won't work. Rcpp is an R extension. – Dirk Eddelbuettel
 
-Ho! Он так же является создателем пакета [RInside](https://github.com/eddelbuettel/rinside), который предоставляет бесшовную интеграцию расширений R в C++.
+But! There is a package, [RInside](https://github.com/eddelbuettel/rinside), which provides seamless integration in c++ code.
+Thanks again to Dirk Eddelbuettel.
 
-## Пример кода
+## Example code
 
 ```cpp
 // main.cpp
@@ -18,9 +19,9 @@ Ho! Он так же является создателем пакета [RInside
 #include <Rcpp.h>
 #include <RInside.h>
 
-int main(int argc, char *argv[]) {
-    using namespace std;
-    cout << "Hello, CPP World!\n";
+int main(int argc, char *argv[])
+{
+    std::cout << "Hello, CPP World!\n";
 
     RInside R(argc, argv);
     Rcpp::CharacterVector a("Hello, R World!\n");
@@ -30,15 +31,18 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-## Компиляция с GCC
+## RInside
 
-Так как мы используем Microsoft R Open 3.5.3, поэтому инструкция заточена под эту версию, но её можно легко раширить под любую версию R.
+I'm using Microsoft R Open, so I'll provide instruction for it, but it could be easily extended to any version of R.
+Just insert your version or your path to R.
 
-Нам понадобятся:
+## What do we need
 
-* Динамические библиотеки R, Rcpp и RInside для запуска приложений
-* Библиотеки R и RInside для сборки
-* Заголовки R, Rcpp и RInside
+* Dynamic R, Rcpp and RInside libraries for runtime
+* Build libraries for R and RInside
+* Headers for R, Rcpp and RInside
+
+## Compilation with GCC
 
 ```bash
 # Buildtime libs
@@ -56,7 +60,7 @@ Rscript -e 'install.packages("Rcpp", "RInside")'
 g++ -lR -lRInside -o main.bin main.cpp
 ```
 
-## Запуск
+## Output
 
 ```bash
 # Runtime libs
