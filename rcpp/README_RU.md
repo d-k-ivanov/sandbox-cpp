@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-## Simple compilation with GCC
+## Компиляция с GCC
 
 Так как мы используем Microsoft R Open 3.5.3, поэтому инструкция заточена под эту версию, но её можно легко раширить под любую версию R.
 
