@@ -56,7 +56,7 @@ Rscript -e 'install.packages("Rcpp", "RInside")'
 g++ -lR -lRInside -o main.bin main.cpp
 ```
 
-## Output
+## Запуск
 
 ```bash
 # Runtime libs
