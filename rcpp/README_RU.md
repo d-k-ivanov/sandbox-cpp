@@ -4,7 +4,7 @@
 
 Для начала, я бы хотел процитировать Дирк Эддельбюттеля (активного контрибютора в Rcpp)
 
-> You. Cannot. Compile. Rcpp. Classes. Without. R. Your main() above simply won't work. Rcpp is an R extension. – Dirk Eddelbuettel
+> You. Cannot. Compile. Rcpp. Classes. Without. R. It simply won't work. Rcpp is an R extension. – Dirk Eddelbuettel
 
 Ho! Он так же является создателем пакета [RInside](https://github.com/eddelbuettel/rinside), который предоставляет бесшовную интеграцию расширений R в C++.
 
