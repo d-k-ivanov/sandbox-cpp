@@ -1,0 +1,2 @@
+# Compileм (Linux only):
+gcc ./random.c
