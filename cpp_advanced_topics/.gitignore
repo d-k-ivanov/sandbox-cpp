@@ -2,3 +2,7 @@
 .idea
 .vs
 .vscode
+
+*.obj
+*.exe
+a.out
