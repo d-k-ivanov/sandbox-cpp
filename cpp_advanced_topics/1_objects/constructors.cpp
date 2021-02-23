@@ -1,39 +1,37 @@
 #include <cstdio>
 #include <string>
 
-using namespace std;
-
-const string unk = "unknown";
-const string clone_prefix = "clone-";
+const std::string unk = "unknown";
+const std::string clone_prefix = "clone-";
 
 // -- interface --
-class Animal
+class Person
 {
-    string _type  = "";
-    string _name  = "";
-    string _sound = "";
+    std::string _type  = "";
+    std::string _name  = "";
+    std::string _sound = "";
 public:
-    Animal();                                                               // default constructor
-    Animal(const string & type, const string & name, const string & sound); // custom constructor
-    Animal(const Animal &);                                                 // copy constructor
-    Animal & operator = (const Animal &);                                   // copy operator
-    ~Animal();                                                              // destructor
+    Person();                                                                               // default constructor
+    Person(const std::string & type, const std::string & name, const std::string & sound);  // custom constructor
+    Person(const Person &);                                                                 // copy constructor
+    Person & operator = (const Person &);                                                   // copy operator
+    ~Person();                                                                              // destructor
 
     void print() const;
 };
 
 // -- implementation --
-Animal::Animal() : _type(unk), _name(unk), _sound(unk)
+Person::Person() : _type(unk), _name(unk), _sound(unk)
 {
-    puts("default constructor");
+    std::puts("default constructor");
 }
 
-Animal::Animal(const string & type, const string & name, const string & sound) : _type(type), _name(name), _sound(sound)
+Person::Person(const std::string & type, const std::string & name, const std::string & sound) : _type(type), _name(name), _sound(sound)
 {
-    puts("constructor with arguments");
+    std::puts("constructor with arguments");
 }
 
-Animal::Animal(const Animal & rhs)
+Person::Person(const Person & rhs)
 {
     puts("copy constructor");
     _name = clone_prefix + rhs._name;
@@ -41,19 +39,19 @@ Animal::Animal(const Animal & rhs)
     _sound = rhs._sound;
 }
 
-Animal::~Animal()
+Person::~Person()
 {
-    printf("destructor: %s the %s\n", _name.c_str(), _type.c_str());
+    std::printf("destructor: %s the %s\n", _name.c_str(), _type.c_str());
 }
 
-void Animal::print () const
+void Person::print () const
 {
-    printf("%s the %s says %s\n", _name.c_str(), _type.c_str(), _sound.c_str());
+    std::printf("%s the %s says %s\n", _name.c_str(), _type.c_str(), _sound.c_str());
 }
 
-Animal & Animal::operator = (const Animal & rhs)
+Person & Person::operator = (const Person & rhs)
 {
-    puts("copy operator");
+    std::puts("copy operator");
     if(this != &rhs)
     {
         _name = clone_prefix + rhs._name;
@@ -65,13 +63,13 @@ Animal & Animal::operator = (const Animal & rhs)
 
 int main()
 {
-    Animal a;
+    Person a;
     a.print();
 
-    const Animal b("cat", "fluffy", "meow");
+    const Person b("Human", "John", "Awwww");
     b.print();
 
-    const Animal c = b;
+    const Person c = b;
     c.print();
 
     a = c;
