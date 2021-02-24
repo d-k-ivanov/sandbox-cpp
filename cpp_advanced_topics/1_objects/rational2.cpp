@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 class Rational
 {
@@ -11,6 +12,7 @@ public:
     int numerator() const { return _n; };
     int denominator() const { return _d; };
     Rational & operator = ( const Rational & );
+    operator std::string () const;
 };
 
 Rational & Rational::operator= (const Rational & rhs)
@@ -20,6 +22,14 @@ Rational & Rational::operator= (const Rational & rhs)
         _d = rhs.denominator();
     }
     return *this;
+}
+
+Rational::operator std::string () const
+{
+    if(_d == 1)
+        return std::to_string(_n);
+    else
+        return std::to_string(_n) + '/' + std::to_string(_d);
 }
 
 Rational operator+ (const Rational & lhs, const Rational & rhs)
@@ -56,7 +66,8 @@ std::ostream & operator<< (std::ostream & o, const Rational & r)
         return o << r.numerator() << '/' << r.denominator();
 }
 
-int main() {
+int main()
+{
 
     Rational a = 7;        // 7/1
     std::cout << "a is: " << a << std::endl;
@@ -83,6 +94,11 @@ int main() {
 
     std::cout << b << " + " << 14 << " = " << b + 14 << std::endl;
     std::cout << 14 << " + " << b << " = " << 14 + b << std::endl;
+
+    std::string s = "This is Rationla number: ";
+    s += b;
+    std::cout << s << std::endl;
+
 
     return 0;
 }
