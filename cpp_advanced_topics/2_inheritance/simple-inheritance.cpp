@@ -35,10 +35,12 @@ protected:
     Animal ( const std::string & n, const std::string & t, const std::string & s )
     : _name(n), _type(t), _sound(s) {}
 public:
-    void speak() const;
+    virtual void speak() const;
     const std::string & name() const { return _name; }
     const std::string & type() const { return _type; }
     const std::string & sound() const { return _sound; }
+
+    virtual ~Animal() {};
 };
 
 void Animal::speak() const
