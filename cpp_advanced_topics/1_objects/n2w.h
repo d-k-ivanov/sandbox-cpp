@@ -8,15 +8,13 @@
 #include <cmath>
 #include <new>
 
-namespace ntow {
-
-    typedef uint64_t numnum;    // yummy numbers
-
+namespace ntow
+{
     // _maxstr is max size of string
     constexpr size_t _maxstr = 1024;
 
     // _maxnum is nine hundred ninty-nine quadrillion nine hundred ninty-nine trillion nine hundred ninty-nine billion nine hundred ninty-nine million nine hundred ninty-nine thousand nine hundred ninty-nine
-    constexpr numnum _maxnum = 999999999999999999;
+    constexpr uint64_t _maxnum = 999999999999999999;
 
     static const char * errnum = "error";
 
@@ -41,8 +39,9 @@ namespace ntow {
     static const char * _hyphen = "-";
     static const char * _space = " ";
 
-    class numword {
-        numnum _num = 0;
+    class numword
+    {
+        uint64_t _num = 0;
         char * _buf = nullptr;
         size_t _buflen = 0;
         bool hyphen_flag = false;
@@ -54,14 +53,14 @@ namespace ntow {
 
     public:
         numword() : _num(0) {}
-        numword(const numnum & num) : _num(num) {}
+        numword(const uint64_t & num) : _num(num) {}
         ~numword();
-        void setnum(const numnum & num) { _num = num; }
-        numnum getnum() const { return _num; }
-        numnum operator = ( const numnum & num );
+        void setnum(const uint64_t & num) { _num = num; }
+        uint64_t getnum() const { return _num; }
+        uint64_t operator = ( const uint64_t & num );
         const char * words();
-        const char * words( const numnum & num );
-        const char * operator () ( const numnum & num ) { return words(num); };
+        const char * words( const uint64_t & num );
+        const char * operator () ( const uint64_t & num ) { return words(num); };
     };
 
 }

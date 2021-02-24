@@ -13,7 +13,7 @@ numword::~numword()
 }
 
 // assignment operator
-numnum numword::operator= (const numnum & num)
+uint64_t numword::operator= (const uint64_t & num)
 {
     setnum(num);
     return getnum();
@@ -25,7 +25,7 @@ const char * numword::words()
 }
 
 // convert to words
-const char * numword::words(const numnum & num)
+const char * numword::words(const uint64_t & num)
 {
     if(num > _maxnum)
     {
@@ -33,7 +33,7 @@ const char * numword::words(const numnum & num)
     }
 
     initbuf();
-    numnum n = num;
+    uint64_t n = num;
 
     if(n == 0)
     {
@@ -46,8 +46,8 @@ const char * numword::words(const numnum & num)
     {
         for(int i = 5; i > 0; --i)
         {
-            numnum power = (numnum) pow(1000.0, i);
-            numnum _n = ( n - ( n % power ) ) / power;
+            uint64_t power = (uint64_t) pow(1000.0, i);
+            uint64_t _n = ( n - ( n % power ) ) / power;
             if(_n)
             {
                 int index = i;
@@ -64,7 +64,7 @@ const char * numword::words(const numnum & num)
     // hundreds
     if(n >= 100 && n < 1000)
     {
-        numnum _n = ( n - ( n % 100 ) ) / 100;
+        uint64_t _n = ( n - ( n % 100 ) ) / 100;
         numword _nw(_n);
         appendspace();
         appendbuf(_nw.words());
@@ -76,7 +76,7 @@ const char * numword::words(const numnum & num)
     // tens
     if(n >= 20 && n < 100)
     {
-        numnum _n = ( n - ( n % 10 ) ) / 10;
+        uint64_t _n = ( n - ( n % 10 ) ) / 10;
         appendspace();
         appendbuf(_tens[_n]);
         n -= _n * 10;
@@ -99,8 +99,6 @@ const char * numword::words(const numnum & num)
     }
     return _buf;
 }
-
-// MARK: - private methods
 
 // reset the buffer
 void numword::clearbuf()
