@@ -85,5 +85,8 @@ int main()
     std::cout << a << " * " << b << " = " << a * b << std::endl;
     std::cout << a << " / " << b << " = " << a / b << std::endl;
 
+    std::cout << b << " + " << 14 << " = " << b + 14 << std::endl;
+    std::cout << 14 << " + " << b << " = " << 14 + b << std::endl;
+
     return 0;
 }
