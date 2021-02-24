@@ -1,8 +1,18 @@
 #include <cstdio>
 #include <string>
+#include <exception>
 
 const std::string unk = "unknown";
 const std::string clone_prefix = "clone-";
+
+class E : public std::exception {
+    const char * msg = nullptr;
+    E(){};
+public:
+    E(const char * s) throw() : msg(s) {}
+    const char * what() const throw() { return msg; }
+};
+
 
 // -- interface --
 class Person
@@ -29,6 +39,10 @@ Person::Person() : _type(unk), _name(unk), _sound(unk)
 Person::Person(const std::string & type, const std::string & name, const std::string & sound) : _type(type), _name(name), _sound(sound)
 {
     std::puts("constructor with arguments");
+
+    if(type.empty() || name.empty() || sound.empty()) {
+        throw E("Insufficient parameters");
+    }
 }
 
 Person::Person(const Person & rhs)
@@ -74,6 +88,17 @@ int main()
 
     a = c;
     a.print();
+
+    printf("\n  <-- Exception test --> \n");
+
+    try {
+        Person x("Alien", "R2D2", "");
+        x.print();
+    } catch ( std::exception & e ) {
+        printf("Person x: %s\n", e.what());
+    }
+    printf("  <--------------------> \n\n");
+
 
     return 0;
 }
