@@ -14,7 +14,7 @@ int main()
     UTest u("Strings testing");
     u.summary(summary_flag);
 
-    printf("\nTesting string -----\n");
+    printf("\n---------- Testing string ----------n");
 
     const char * _ctest = "   \tfoo   \r\n";
     size_t csz = strnlen(_ctest, maxlen);
