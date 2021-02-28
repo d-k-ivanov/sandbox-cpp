@@ -1,5 +1,3 @@
-// rational-03.cpp by Bill Weinman <http://bw.org/>
-// updated 2018-11-11
 #include <cstdio>
 #include <string>
 #include <utility>
