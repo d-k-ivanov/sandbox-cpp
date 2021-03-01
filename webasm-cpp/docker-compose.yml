@@ -1,0 +1,14 @@
+version: '3'
+services:
+  emscripten-wasm-cpp:
+    container_name: emscripten-wasm-cpp
+    image: emscripten/emsdk:2.0.14
+    restart: always
+    volumes:
+      - ./src:/src
+    networks:
+      main:
+        aliases:
+          - emscripten-wasm-cpp
+networks:
+  main:
