@@ -20,6 +20,7 @@
 
 */
 
+// emcc.py -O3 --emrun -s WASM=1 -s STANDALONE_WASM=1 -s WASM_BIGINT=1 -o 01_basics.html -v 01_basics.c
 int main()
 {
     printf("Hello, World!\n");

@@ -4,7 +4,7 @@
 
 ```sh
 docker-compose up
-emcc <input-filename.cpp> -o <output-filename.js>
+emcc <input-filename.cpp> -o <output-filename.html>
 docker-compose down
 docker-compose rm
 ```
@@ -15,7 +15,7 @@ docker-compose rm
 # Linux
 docker run --rm -v $(pwd)/src:/src -u $(id -u):$(id -g) emscripten/emsdk:2.0.14 emcc <input-filename.cpp> -o <output-filename.js>
 docker run --rm -it -v $(pwd)/src:/src -u $(id -u):$(id -g) emscripten/emsdk:2.0.14 bash
-emcc <input-filename.cpp> -o <output-filename.js>
+emcc <input-filename.cpp> -o <output-filename.html>
 
 # Windows
 docker run --rm -v "$(pwd)/src:/src" emscripten/emsdk:2.0.14 emcc <input-filename.cpp> -o <output-filename.js>
@@ -26,5 +26,5 @@ emcc <input-filename.cpp> -o <output-filename.js>
 ## Build and Run code samples
 
 ```sh
-emcc <input-filename.cpp> -o <output-filename.js>
+emcc <input-filename.cpp> -o <output-filename.html>
 ```

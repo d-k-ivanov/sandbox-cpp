@@ -5,7 +5,12 @@
 
 *.obj
 *.exe
+
 a.out
 a.out.js
 a.out.wasm
 a.out.html
+
+webasm-cpp.js
+webasm-cpp.wasm
+webasm-cpp.html
