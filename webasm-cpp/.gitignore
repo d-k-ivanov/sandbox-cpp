@@ -14,3 +14,15 @@ a.out.html
 webasm-cpp.js
 webasm-cpp.wasm
 webasm-cpp.html
+
+01_basics.js
+01_basics.wasm
+01_basics.html
+
+02_templates.js
+02_templates.wasm
+02_templates.html
+
+03_imports.js
+03_imports.wasm
+03_imports.html
