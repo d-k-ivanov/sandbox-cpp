@@ -18,6 +18,8 @@
     -s EXPORTED_FUNCTIONS='[...]'           --> list of functions signatures to export
     -s SIDE_MODULE=1                        --> create dynamic library
 
+# Debugging
+    EMCC_DEBUG=1
 */
 
 // emcc.py -O3 --emrun -s WASM=1 -s STANDALONE_WASM=1 -s WASM_BIGINT=1 -o 01_basics.html -v 01_basics.c
