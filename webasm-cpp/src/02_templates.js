@@ -34,7 +34,7 @@ else
     loadWebAssembly('02_templates.wasm')
         .then(instance => {
             var exports = instance.exports;
-            var oracle = exports._answer;
+            var oracle = exports.answer;
 
             const question = 'Answer to the Ultimate Question of Life, the Universe, and Everything: ';
             const answer = new String(oracle());
