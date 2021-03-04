@@ -1,5 +1,5 @@
-// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' -Wl,--no-entry -o 04_memory.wasm -v 04_memory.c
-// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' --no-entry -o 04_memory.wasm -v 04_memory.c
+// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' -Wl,--no-entry -g -o 04_memory.wasm -v 04_memory.c
+// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' --no-entry -g -o 04_memory.wasm -v 04_memory.c
 
 #define NUM_VALS 8
 

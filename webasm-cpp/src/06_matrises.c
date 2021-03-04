@@ -1,5 +1,5 @@
-// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_scalarMult", "_vectorMult", "_matrixMult"]' -Wl,--no-entry -o 06_matrises.wasm -v 06_matrises.c
-// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_scalarMult", "_vectorMult", "_matrixMult"]' --no-entry -o 06_matrises.wasm -v 06_matrises.c
+// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_scalarMult", "_vectorMult", "_matrixMult"]' -Wl,--no-entry -g -o 06_matrises.wasm -v 06_matrises.c
+// emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_scalarMult", "_vectorMult", "_matrixMult"]' --no-entry -g -o 06_matrises.wasm -v 06_matrises.c
 
 int i, j, k;
 float data[256];
