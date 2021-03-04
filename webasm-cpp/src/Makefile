@@ -14,6 +14,7 @@ LESSON_2=02_templates
 LESSON_3=03_imports
 LESSON_4=04_memory
 LESSON_5=05_quicksort
+LESSON_6=06_matrises
 
 $(LESSON_1).html: $(LESSON_1).c
 	$(CC) $(CFLAGS) -s STANDALONE_WASM=1 -s WASM_BIGINT=1 -o $@ -v $^
@@ -28,7 +29,10 @@ $(LESSON_4).wasm: $(LESSON_4).c
 	$(CC) $(CFLAGS) -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' --no-entry -o $@ -v $^
 
 $(LESSON_5).wasm: $(LESSON_5).c
-	$(CC) $(CFLAGS) -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getFirstOffset", "_getSecondOffset", "_dot_product"]' --no-entry -o $@ -v $^
+	$(CC) $(CFLAGS) -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_quicksort"]' --no-entry -o $@ -v $^
+
+$(LESSON_6).wasm: $(LESSON_6).c
+	$(CC) $(CFLAGS) -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_scalarMult", "_vectorMult", "_matrixMult"]' --no-entry -o $@ -v $^
 
 .PHONY: clean
 clean:
@@ -37,3 +41,4 @@ clean:
 	$(RM) $(LESSON_3).wasm
 	$(RM) $(LESSON_4).wasm
 	$(RM) $(LESSON_5).wasm
+	$(RM) $(LESSON_6).wasm

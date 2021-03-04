@@ -1,7 +1,7 @@
 // emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_quicksort"]' -Wl,--no-entry -o 05_quicksort.wasm -v 05_quicksort.c
 // emcc.py -Os -s STANDALONE_WASM -s EXPORTED_FUNCTIONS='["_getOffset", "_quicksort"]' --no-entry -o 05_quicksort.wasm -v 05_quicksort.c
 
-int input[250];
+int input[251];
 
 void quicksort(int first,int last)
 {
