@@ -5,7 +5,7 @@
  *      Project :  project-euler
  *      File    :  timer.h
  *      Created :  04.01.2020 10:45:30 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

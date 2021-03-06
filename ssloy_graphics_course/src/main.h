@@ -6,7 +6,7 @@
  *      Project :  SSLoyGraphicsCourse
  *      File    :  main.h
  *      Created :  03.02.2020 18:44:16 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

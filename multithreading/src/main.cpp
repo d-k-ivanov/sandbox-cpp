@@ -3,7 +3,7 @@
  *      Project :  multithreading
  *      File    :  main.cpp
  *      Created :  04/04/2020 18:39:02 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

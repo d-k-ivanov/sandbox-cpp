@@ -3,7 +3,7 @@
  *      Project :  progress_bars - Tests
  *      File    :  main.cpp
  *      Created :  16.02.2020 2:09:55 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

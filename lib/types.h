@@ -6,7 +6,7 @@
  *      Project :  project-euler
  *      File    :  types.h
  *      Created :  07.01.2020 1:09:32 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

@@ -3,7 +3,7 @@
  *      Project :  primes.cpp
  *      File    :  primes.cpp
  *      Created :  20.12.2019 23:55:30 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

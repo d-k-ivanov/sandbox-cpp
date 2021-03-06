@@ -6,7 +6,7 @@
  *      Project :  project-euler
  *      File    :  generators.h
  *      Created :  02.01.2020 12:19:25 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

@@ -5,7 +5,7 @@
  *      Project :  progress_bars
  *      File    :  MultiProgressBar.h
  *      Created :  11/03/2020 15:16:54 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 
@@ -50,10 +50,10 @@ public:
                     screen_buffer_info.dwCursorPosition.X,
                     screen_buffer_info.dwCursorPosition.Y - static_cast<SHORT>(i) };
                 SetConsoleCursorPosition(std_out, cursor_position);
-                #elif 
+                #elif
                 os << "\x1b[A";
                 #endif
-                
+
             }
         }
 

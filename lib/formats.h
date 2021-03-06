@@ -5,7 +5,7 @@
  *      Project :  formats.h
  *      File    :  formats.h
  *      Created :  20.12.2019 18:16:40 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

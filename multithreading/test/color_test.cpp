@@ -3,7 +3,7 @@
  *      Project :  multithreading
  *      File    :  color_test.cpp
  *      Created :  05/04/2020 17:03:54 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

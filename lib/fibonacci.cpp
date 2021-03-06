@@ -3,7 +3,7 @@
  *      Project :  fibinacci.cpp
  *      File    :  fibinacci.cpp
  *      Created :  20.12.2019 1:45:54 +0100
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 

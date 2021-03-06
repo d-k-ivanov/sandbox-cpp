@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::map<std::string, int> Users{ { "Dmitriy", 35 }, { "Ivan", 25 }, { "Alex", 38 } };
+    std::map<std::string, int> Users{ { "Dmitry", 35 }, { "Ivan", 25 }, { "Alex", 38 } };
     std::cout << "Initial user map:\n";
     for (const auto&[key, value] : Users)
         std::cout << key << ", " << value << '\n';

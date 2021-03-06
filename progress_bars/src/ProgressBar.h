@@ -5,7 +5,7 @@
  *      Project :  progress_bars
  *      File    :  ProgressBar.h
  *      Created :  16.02.2020 2:51:01 +0300
- *      Author  :  Dmitriy Ivanov
+ *      Author  :  Dmitry Ivanov
  * =====================================================================
  */
 
