@@ -1,6 +1,6 @@
+#include <chrono>
 #include <cstdio>
 #include <thread>
-#include <chrono>
 
 // a simple function that wastes CPU cycles "forever"
 void cpu_waster()
