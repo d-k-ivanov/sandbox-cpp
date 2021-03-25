@@ -8,7 +8,6 @@ void philosopher(const char* name, std::mutex &forks)
 {
     while (food_count > 0)
     {
-
         // forks.lock();
         std::scoped_lock lock(forks);
         if (food_count)
