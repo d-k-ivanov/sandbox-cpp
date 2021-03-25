@@ -15,13 +15,13 @@ void philosopher(const char* name, std::mutex &forks)
         {
             food_count--;
         }
-        // forks.unlock();
 
         if (food_count == 10)
         {
             printf("This philosopher %s has had enough!\n", name);
             break;
         }
+        // forks.unlock();
     }
 }
 
