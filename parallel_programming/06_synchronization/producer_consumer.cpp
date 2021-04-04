@@ -37,9 +37,8 @@ ProductLine data_line = ProductLine();
 void producer()
 {
     for (int i = 0; i < 1000000; i++)
-    {
         data_line.produce_data(1);
-    }
+
     data_line.produce_data(-1);
     printf("Producer is out of data!\n");
 }
