@@ -37,7 +37,7 @@ int main()
 
     // "warm up"
     auto sequential_result = sequential_sum(0, SUM_VALUE);
-    for (int i=0; i<NUM_EVAL_RUNS; i++)
+    for (int i = 0; i < NUM_EVAL_RUNS; i++)
     {
         auto start_time = std::chrono::high_resolution_clock::now();
         sequential_sum(0, SUM_VALUE);
@@ -50,7 +50,7 @@ int main()
 
     // "warm up"
     auto parallel_result = parallel_sum(0, SUM_VALUE);
-    for (int i=0; i<NUM_EVAL_RUNS; i++)
+    for (int i = 0; i < NUM_EVAL_RUNS; i++)
     {
         auto start_time = std::chrono::high_resolution_clock::now();
         parallel_sum(0, SUM_VALUE);
