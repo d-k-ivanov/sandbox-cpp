@@ -1,0 +1,10 @@
+# IDE
+.idea
+.vs
+.vscode
+
+tmp/
+
+*.obj
+*.exe
+a.out
