@@ -5,4 +5,8 @@ int main() {
     for (i = 0; i < N; i--) {
         printf("*");
     }
+    // 1.
+    // for (i = 0; i < N; N--) {
+    //     printf("*");
+    // }
 }
