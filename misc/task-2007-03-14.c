@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Task: print 20 stars (*) by CHANGING just ONE symbol in the program
 int main() {
     int i, N=20;
     for (i = 0; i < N; i--) {
@@ -7,11 +8,10 @@ int main() {
     }
     // 1.
     // for (i = 0; i < N; N--) {
-    //     printf("*");
-    // }
 
     // 2.
     // for (i = 0; i + N; i--) {
-    //     printf("*");
-    // }
+
+    // 3.
+    // for (i = 0;-i < N; i--) {
 }
