@@ -9,4 +9,9 @@ int main() {
     // for (i = 0; i < N; N--) {
     //     printf("*");
     // }
+
+    // 2.
+    // for (i = 0; i + N; i--) {
+    //     printf("*");
+    // }
 }
