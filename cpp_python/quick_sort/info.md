@@ -24,7 +24,7 @@ Visual Studio
 
 ```ps1
 # Compile
-Invoke-Expression "cl /c  /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include quick_sort.cpp"
+Invoke-Expression "cl /c /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include quick_sort.cpp"
 
 # Build Executable
 Invoke-Expression "cl /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include quick_sort.cpp"
@@ -34,14 +34,22 @@ Invoke-Expression "cl /LD /EHsc /I$(python -c 'import sys; print(sys.base_prefix
 lib quick_sort.obj # Build Static
 
 # Generate Wrapper
+# cython --cplus --embed -3 quick_sort_py.pyx -o quick_sort_py.cpp
 cython --cplus -3 quick_sort_py.pyx -o quick_sort_py.cpp
 
 # Build Cython Library
-# Invoke-Expression "cl /LD /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include quick_sort_wrapper.cpp /link /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs quick_sort.lib"
+Invoke-Expression "cl /LD /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include quick_sort_py.cpp /link /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs /out:quick_sort_py.pyd"
 
-Invoke-Expression "cl /c /nologo /Ox /W3 /GL /DNDEBUG /MD /I$(python -c 'import sys; print(sys.base_prefix)')/Include /EHsc /Tpquick_sort_py.cpp /Foquick_sort_py.obj"
-Invoke-Expression "link /nologo /INCREMENTAL:NO /LTCG /DLL /MANIFEST:EMBED,ID=2 /MANIFESTUAC:NO /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs /EXPORT:quick_sort_py.obj /OUT:quick_sort_py.cp39-win_amd64.pyd /IMPLIB:quick_sort_py.cp39-win_amd64.lib"
+# Build Cython Library: Separate Linking
+Invoke-Expression "cl /c /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include /Tpquick_sort_py.cpp /Foquick_sort_py.obj"
+Invoke-Expression "link quick_sort_py.obj /OUT:quick_sort_py.pyd /IMPLIB:quick_sort_py.lib /DLL /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs"
 
+## Attempts
+# Invoke-Expression "cl /LD /EHsc /I$(python -c 'import sys; print(sys.base_prefix)')/Include /Tpquick_sort_py.cpp /link /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs"
+# Invoke-Expression "link /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs /EXPORT:quick_sort_py.obj /OUT:quick_sort_py.cp39-win_amd64.pyd"
+# Invoke-Expression "cl /c /nologo /Ox /W3 /GL /DNDEBUG /MD /I$(python -c 'import sys; print(sys.base_prefix)')/Include /EHsc /Tpquick_sort_py.cpp /Foquick_sort_py.obj"
+# Invoke-Expression "link /nologo /INCREMENTAL:NO /LTCG /DLL /MANIFEST:EMBED,ID=2 /MANIFESTUAC:NO /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs /EXPORT:quick_sort_py.obj /OUT:quick_sort_py.cp39-win_amd64.pyd /IMPLIB:quick_sort_py.cp39-win_amd64.lib"
+# Invoke-Expression "link /nologo /INCREMENTAL:NO /LTCG /DLL /MANIFEST:EMBED,ID=2 /MANIFESTUAC:NO /LIBPATH:$(python -c 'import sys; print(sys.base_prefix)')/libs /EXPORT:quick_sort_py.obj /OUT:quick_sort_py.cp39-win_amd64.pyd /IMPLIB:quick_sort.lib"
 ```
 
 GCC
