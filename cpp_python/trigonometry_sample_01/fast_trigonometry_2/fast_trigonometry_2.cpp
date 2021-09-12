@@ -1,6 +1,8 @@
 #include <pybind11/pybind11.h>
 
+#ifdef _MSC_VER
 #include <Windows.h>
+#endif
 #include <cmath>
 
 const double e = 2.7182818284590452353602874713527;
