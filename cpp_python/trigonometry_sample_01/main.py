@@ -4,7 +4,7 @@
 from random import random
 from time import perf_counter
 
-COUNT = 500000
+COUNT = 1500000
 DATA = [(random() - 0.5) * 3 for _ in range(COUNT)]
 
 e = 2.7182818284590452353602874713527

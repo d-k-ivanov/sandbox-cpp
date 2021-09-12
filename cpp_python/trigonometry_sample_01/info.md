@@ -80,3 +80,21 @@ Includes
 python -c "from sysconfig import get_paths as gp; print(gp()['include'])"
 python -c "from sysconfig import get_paths as gp; print(gp()['stdlib'])"
 ```
+
+## Results
+
+Windows:
+
+```txt
+
+```
+
+Linux:
+
+```txt
+python main.py
+Running benchmarks with COUNT = 1500000
+[tanh(x) for x in d]            (Python implementation)  took 1.046 seconds
+[fast_tanh(x) for x in d]       (CPython C++ extension)  took 0.308 seconds
+[fast_tanh(x) for x in d]       (PyBind11 C++ extension) took 0.461 seconds
+```
