@@ -1,0 +1,13 @@
+*.dll
+*.exp
+*.lib
+*.o
+*.obj
+*.pyd
+
+**/build/
+**/dist/
+**/*.egg*/
+**/venv/
+
+trigonometry.cpp
