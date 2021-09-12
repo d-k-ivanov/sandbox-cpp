@@ -1,0 +1,10 @@
+*.dll
+*.exp
+*.lib
+*.o
+*.obj
+
+**/build/
+**/dist/
+**/*.egg*/
+**/venv/
