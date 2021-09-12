@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from setuptools import setup, Extension
 
 sfc_module = Extension('fast_trigonometry_1', sources = ['fast_trigonometry_1.cpp'])

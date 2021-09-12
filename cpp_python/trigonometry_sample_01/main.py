@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from random import random
 from time import perf_counter
 
@@ -23,7 +26,7 @@ def test(fn, name):
     start = perf_counter()
     result = fn(DATA)
     duration = perf_counter() - start
-    print('{} took {:.3f} seconds\n\n'.format(name, duration))
+    print('{} took {:.3f} seconds'.format(name, duration))
 
     for d in result:
         assert -1 <= d <= 1, " incorrect values"
@@ -31,10 +34,13 @@ def test(fn, name):
 
 if __name__ == "__main__":
     print('Running benchmarks with COUNT = {}'.format(COUNT))
-    test(lambda d: [tanh(x) for x in d], '[tanh(x) for x in d] (Python implementation)')
+    test(lambda d: [tanh(x) for x in d], '[tanh(x) for x in d]\t\t(Python implementation) ')
 
     # import ctypes
     # py_fast_trigonometry_1 = ctypes.cdll.LoadLibrary("./py_fast_trigonometry_1/py_fast_trigonometry_1.dll")
 
     import fast_trigonometry_1
-    test(lambda d: [fast_trigonometry_1.fast_tanh(x) for x in d], '[fast_tanh(x) for x in d] (CPython C++ extension)')
+    test(lambda d: [fast_trigonometry_1.fast_tanh(x) for x in d], '[fast_tanh(x) for x in d]\t(CPython C++ extension) ')
+
+    import fast_trigonometry_2
+    test(lambda d: [fast_trigonometry_2.fast_tanh(x) for x in d], '[fast_tanh(x) for x in d]\t(PyBind11 C++ extension)')
