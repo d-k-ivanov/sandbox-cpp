@@ -11,4 +11,4 @@
 **/*.egg*/
 **/venv/
 
-quick_sort_wrapper.cpp
+quick_sort_py.cpp
