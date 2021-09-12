@@ -51,12 +51,12 @@ gcc -std=c++11 $(python -m pybind11 --includes) trigonometry_1.cpp fast_trigonom
 
 ```sh
 # MSVC
-python setup.py build   --compiler=msvc
-python setup.py install --compiler=msvc
+python setup.py build  --compiler=msvc
+python setup.py install
 
 # GCC
-python setup.py build   --compiler=mingw32
-python setup.py install --compiler=mingw32
+python setup.py build --compiler=mingw32
+python setup.py install
 ```
 
 ## PyBind11

@@ -4,7 +4,7 @@
 from setuptools import setup, Extension
 import pybind11
 
-cpp_args = ['/std=c++11']
+cpp_args = ['/std:c111']
 
 sfc_module = Extension(
     'fast_trigonometry_2',
