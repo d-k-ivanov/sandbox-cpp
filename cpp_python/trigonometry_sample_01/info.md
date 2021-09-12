@@ -18,6 +18,15 @@ python -m virtualenv -p $(which python) venv
 python -m pip install -r requirements.txt
 ```
 
+## All you need to run main.py
+
+```sh
+# acticate virtual enviroment
+python fast_trigonometry_1/setup.py install
+python fast_trigonometry_2/setup.py install
+python main.py
+```
+
 ## Compile
 
 Visual Studio
@@ -86,7 +95,10 @@ python -c "from sysconfig import get_paths as gp; print(gp()['stdlib'])"
 Windows:
 
 ```txt
-
+Running benchmarks with COUNT = 1500000
+[tanh(x) for x in d]            (Python implementation)  took 1.875 seconds
+[fast_tanh(x) for x in d]       (CPython C++ extension)  took 0.288 seconds
+[fast_tanh(x) for x in d]       (PyBind11 C++ extension) took 0.679 seconds
 ```
 
 Linux:

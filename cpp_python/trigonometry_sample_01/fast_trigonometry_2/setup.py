@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, Extension
+import os
 import pybind11
 
+priject_path = os.path.dirname(os.path.realpath(__file__))
 sfc_module = Extension(
     'fast_trigonometry_2',
-    sources=['fast_trigonometry_2.cpp'],
+    sources=[priject_path + '\\fast_trigonometry_2.cpp'],
     include_dirs=[pybind11.get_include()],
     language='c++',
 )
