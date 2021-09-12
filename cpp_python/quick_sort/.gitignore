@@ -1,0 +1,14 @@
+*.dll
+*.exe
+*.exp
+*.lib
+*.o
+*.obj
+*.pyd
+
+**/build/
+**/dist/
+**/*.egg*/
+**/venv/
+
+quick_sort_wrapper.cpp
