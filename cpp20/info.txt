@@ -1,0 +1,36 @@
+# Could lines full:
+clang++ -std=c++20 -stdlib=libc++ -E hw.cpp | wc -c
+clang++ -std=c++20 -stdlib=libc++ -E hw.cpp | wc -l
+
+clang++ -std=c++20 -stdlib=libc++ -fmodules -fbuiltin-module-map -E hw_modular.cpp | wc -c
+clang++ -std=c++20 -stdlib=libc++ -fmodules -fbuiltin-module-map -E hw_modular.cpp | wc -l
+
+cl /c /EHsc /MD /experimental:module /std:c++latest /E hw.cpp | wc -c
+cl /c /EHsc /MD /experimental:module /std:c++latest /E hw_modular.cpp | wc -c
+
+cl /EHsc /MD /experimental:module /std:c++latest hw.cpp
+cl /EHsc /MD /experimental:module /std:c++latest hw_modular.cpp
+
+
+# Compiling with GCC
+g++ -std=c++20 -fmodules-ts -xc++-system-header iostream
+g++ -std=c++20 -fmodules-ts -c advanced_mathematics.cppm
+g++ -std=c++20 -fmodules-ts -c advanced_mathematics_main.cpp
+g++ -std=c++20 advanced_mathematics_main.o advanced_mathematics.o -o advanced_mathematics_main
+
+# Compiling with Clang
+FLAGS="-std=c++20 -stdlib=libc++ -fmodules -fbuiltin-module-map"
+clang++ $FLAGS -fmodules-ts -Xclang -emit-module-interface -c advanced_mathematics.cppm -o AdvancedMathematics.pcm
+clang++ $FLAGS -c advanced_mathematics.cppm
+clang++ $FLAGS -fprebuilt-module-path=. -c advanced_mathematics_main.cpp
+clang++ $FLAGS advanced_mathematics_main.o advanced_mathematics.o -o advanced_mathematics_main
+
+
+
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c advanced_mathematics.cppm /module:interface /Fo: advanced_mathematics.obj /module:output advanced_mathematics.pcm
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c advanced_mathematics_main.cpp /module:reference advanced_mathematics.pcm /Fo: advanced_mathematics_main.obj
+cl.exe math.obj main.obj
+
+cl /c /experimental:module /std:c++latest advanced_mathematics.cppm
+cl /EHsc /MD /experimental:module /std:c++latest advanced_mathematics.cppm advanced_mathematics_main.cpp
+
