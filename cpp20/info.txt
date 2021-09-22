@@ -34,3 +34,24 @@ cl.exe math.obj main.obj
 cl /c /experimental:module /std:c++latest advanced_mathematics.cppm
 cl /EHsc /MD /experimental:module /std:c++latest advanced_mathematics.cppm advanced_mathematics_main.cpp
 
+===============================================================================================================
+
+clang++ -std=c++2a -fmodules-ts --precompile math.cppm -o math.pcm                   // 1
+clang++ -std=c++2a -fmodules-ts -c math.pcm -o math.o                                // 2
+clang++ -std=c++2a -fmodules-ts -fprebuilt-module-path=. math.o main.cpp -o math     // 3
+
+
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c math.cppm /module:interface /Fo: math.obj /module:output math.pcm // 1
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c main.cpp /module:reference math.pcm /Fo: main.obj                 // 2
+cl.exe math.obj main.obj
+
+clang++ -std=c++2a -fmodules-ts --precompile math1.cppm -o math1.pcm               // 1
+clang++ -std=c++2a -fmodules-ts  -c math1.pcm -o math1.pcm.o                       // 2
+clang++ -std=c++2a -fmodules-ts -c math1.cpp -fmodule-file=math1.pcm -o math1.o    // 2
+clang++ -std=c++2a -fmodules-ts -c main1.cpp -fmodule-file=math1.pcm -o main1.o    // 3
+clang++  math1.pcm main1.o math1.o -o math                                         // 4
+
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c math1.cppm /module:interface /Fo: math1.pcm.obj /module:output math1.pcm  // 1
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c math1.cpp /module:reference math1.pcm /Fo: math1.obj                      // 2
+cl.exe /std:c++latest /experimental:module /TP /EHsc /MD /c main1.cpp /module:reference math1.pcm /Fo: main1.obj                      // 3
+cl.exe math1.obj main1.obj math1.pcm.obj
