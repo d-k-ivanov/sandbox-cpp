@@ -1,2 +1,6 @@
 .vs/
 .idea/
+
+*.exe
+*.obj
+a.out

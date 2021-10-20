@@ -20,16 +20,16 @@ index efa48ef..7c6afa0 100644
 @@ -397,9 +397,13 @@
  #define DCIDESC_SYSTEM_IO_BYTEWRITES_EX_MAX       _T("Maximum number of bytes written on device {instance} for last minute")
  #define DCIDESC_SYSTEM_IO_OPENFILES               _T("Number of open files")
- 
+
 +#define DCIDESC_LVM_VG_STATUS                     _T("Status of Volume Group {instance} consistency in LVM")
 +#define DCIDESC_LVM_VG_SIZE                       _T("Size of Volume Group {instance} in LVM")
 +#define DCIDESC_LVM_LV_STATUS                     _T("Status of Logical Volume {instance} in LVM")
 +#define DCIDESC_LVM_LV_SIZE                       _T("Size of Logical Volume {instance} in LVM")
- 
+
 -#define DCIDESC_DEPRECATED                        _T("<deprecated>")
- 
+
 +#define DCIDESC_DEPRECATED                        _T("<deprecated>")
- 
+
  #define DCTDESC_AGENT_SESSION_AGENTS              _T("Registered session agents")
  #define DCTDESC_AGENT_SUBAGENTS                   _T("Loaded subagents")
 diff --git a/include/nms_common.h b/include/nms_common.h
@@ -41,7 +41,7 @@ index c1ffda1..5af75da 100644
  #define MAX_PASSWORD             48
  #define GROUP_FLAG               ((UINT32)0x80000000)
 +#define MAX_LVM_NAME_LEN 			128
- 
+
  #define NETXMS_MAX_CIPHERS       6
  #define NETXMS_RSA_KEYLEN        2048
 diff --git a/src/agent/subagents/linux/Makefile.am b/src/agent/subagents/linux/Makefile.am
@@ -50,7 +50,7 @@ index 4d83046..e4bc515 100644
 +++ b/src/agent/subagents/linux/Makefile.am
 @@ -1,10 +1,10 @@
  SUBAGENT = linux
- 
+
  pkglib_LTLIBRARIES = linux.la
 -linux_la_SOURCES = cpu.cpp disk.cpp drbd.cpp hddinfo.cpp iostat.cpp linux.cpp net.cpp packages.cpp proc.cpp system.cpp
 +linux_la_SOURCES = cpu.cpp disk.cpp drbd.cpp hddinfo.cpp iostat.cpp linux.cpp net.cpp packages.cpp proc.cpp system.cpp lvm.cpp
@@ -58,10 +58,10 @@ index 4d83046..e4bc515 100644
 -linux_la_LDFLAGS = -module -avoid-version -export-symbols ../platform-subagent.sym
 -linux_la_LIBADD = ../../libnxagent/libnxagent.la ../../../libnetxms/libnetxms.la
 +linux_la_LDFLAGS = -module -avoid-version -export-symbols ../platform-subagent.sym -ldevmapper -llvm2app
-+linux_la_LIBADD = ../../libnxagent/libnxagent.la ../../../libnetxms/libnetxms.la 
- 
++linux_la_LIBADD = ../../libnxagent/libnxagent.la ../../../libnetxms/libnetxms.la
+
  EXTRA_DIST = linux_subagent.h
- 
+
 diff --git a/src/agent/subagents/linux/linux.cpp b/src/agent/subagents/linux/linux.cpp
 index 06e105f..8c4847e 100644
 --- a/src/agent/subagents/linux/linux.cpp
@@ -85,7 +85,7 @@ index 06e105f..8c4847e 100644
 +   { _T("Lvm.LV.Size(*)"),               H_LvmInfo,    	(TCHAR *)LVM_LV_SIZE,
 +		DCI_DT_UINT64,	DCIDESC_LVM_LV_SIZE }
  };
- 
+
  /**
 diff --git a/src/agent/subagents/linux/linux_subagent.h b/src/agent/subagents/linux/linux_subagent.h
 index b0df819..f8eed78 100644
@@ -97,13 +97,13 @@ index b0df819..f8eed78 100644
  #include <linux/rtnetlink.h>
 +/* Debian-based: liblvm2-dev; RedHat-based: lvm2-devel */
 +#include <lvm2app.h>
- 
+
  /**
   * Attributes for H_ProcInfo
 @@ -175,6 +177,16 @@ enum
  	CPU_USAGE_GUEST,
  };
- 
+
 +/**
 + * LVM info types
 + */
@@ -120,21 +120,21 @@ index b0df819..f8eed78 100644
 @@ -230,6 +242,10 @@ LONG H_ConnectedUsers(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession
  LONG H_ActiveUserSessions(const TCHAR *, const TCHAR *, StringList *, AbstractCommSession *);
  LONG H_SysMsgQueue(const TCHAR *param, const TCHAR *arg, TCHAR *value, AbstractCommSession *session);
- 
+
 +LONG H_LvmVgStatus(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
 +LONG H_LvmLvStatus(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
 +LONG H_LvmInfo(const TCHAR *, const TCHAR *, TCHAR *, AbstractCommSession *);
 +
  void StartCpuUsageCollector();
  void ShutdownCpuUsageCollector();
- 
+
 diff --git a/src/agent/subagents/linux/lvm.cpp b/src/agent/subagents/linux/lvm.cpp
 new file mode 100644
 index 0000000..82d9405
 --- /dev/null
 +++ b/src/agent/subagents/linux/lvm.cpp
 @@ -0,0 +1,220 @@
-+/* 
++/*
 +** NetXMS subagent for GNU/Linux
 +** Copyright (C) 2004-2016 Raden Solutions
 +**
@@ -179,7 +179,7 @@ index 0000000..82d9405
 +	const char * vgname;
 +
 +	libh = lvm_init(NULL);
-+	if (!libh) 
++	if (!libh)
 +	{
 +		AgentWriteDebugLog(4, _T("Linux: H_LvmVgStatus: Unable to open lvm library instance"));
 +		rc = SYSINFO_RC_ERROR;
@@ -193,7 +193,7 @@ index 0000000..82d9405
 +
 +	vgnames = lvm_list_vg_names(libh);
 +
-+	dm_list_iterate_items(strl, vgnames) 
++	dm_list_iterate_items(strl, vgnames)
 +	{
 + 		vgname = strl->str;
 + 		vg = lvm_vg_open(libh, vgname, "r", 0);
@@ -212,12 +212,12 @@ index 0000000..82d9405
 +				break;
 +			}
 + 		}
-+ 		
++
 + 		lvm_vg_close(vg);
 + 	}
 +
 +	lvm_quit(libh);
-+	
++
 +	return rc;
 +}
 +
@@ -240,9 +240,9 @@ index 0000000..82d9405
 +	const char * vgname;
 +	lv_t lv;
 +	const char * lvname = name;
-+	
++
 +	libh = lvm_init(NULL);
-+	if (!libh) 
++	if (!libh)
 +	{
 +		AgentWriteDebugLog(4, _T("Linux: H_LvmLvStatus: Unable to open lvm library instance"));
 +		rc = SYSINFO_RC_ERROR;
@@ -256,7 +256,7 @@ index 0000000..82d9405
 +
 +	vgnames = lvm_list_vg_names(libh);
 +
-+	dm_list_iterate_items(strl, vgnames) 
++	dm_list_iterate_items(strl, vgnames)
 +	{
 + 		vgname = strl->str;
 + 		vg = lvm_vg_open(libh, vgname, "r", 0);
@@ -271,7 +271,7 @@ index 0000000..82d9405
 + 	}
 +
 +	lvm_quit(libh);
-+	
++
 +	return rc;
 +}
 +
@@ -291,17 +291,17 @@ index 0000000..82d9405
 +   lvm_t libh;
 +	struct dm_list *vgnames;
 +	struct lvm_str_list *strl;
-+	
++
 +	vg_t vg;
 +	const char * vgname;
-+	
++
 +	lv_t lv;
 +	const char * lvname = name;
 +
 +	uint64_t size = 0;
-+		
++
 +	libh = lvm_init(NULL);
-+	if (!libh) 
++	if (!libh)
 +	{
 +		AgentWriteDebugLog(4, _T("Linux: H_LvmInfo: Unable to open lvm library instance"));
 +		return SYSINFO_RC_ERROR;
@@ -315,7 +315,7 @@ index 0000000..82d9405
 +
 +	vgnames = lvm_list_vg_names(libh);
 +
-+	dm_list_iterate_items(strl, vgnames) 
++	dm_list_iterate_items(strl, vgnames)
 +	{
 + 		vgname = strl->str;
 + 		if (!(vg = lvm_vg_open(libh, vgname, "r", 0)))
@@ -324,7 +324,7 @@ index 0000000..82d9405
 +			return SYSINFO_RC_ERROR;
 +		}
 +
-+ 				
++
 + 		switch((long)pArg)
 +			{
 +				case LVM_VG_SIZE:
@@ -351,9 +351,9 @@ index 0000000..82d9405
 + 	}
 +
 +	lvm_quit(libh);
-+	
++
 +	return rc;
 +}
--- 
+--
 2.7.4
 
