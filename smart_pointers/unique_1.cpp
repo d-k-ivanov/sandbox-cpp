@@ -17,7 +17,7 @@ static char dummy[] = "";
 int main()
 {
     auto_cleanup<FILE> f(
-        fopen("test.txt", "w"),
+        fopen("test.txt.obj", "w"),
         [](FILE *f)
         { fclose(f); });
 
