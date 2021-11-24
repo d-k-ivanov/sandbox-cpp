@@ -22,4 +22,5 @@ void B::f()
 int main(int argc, char *argv[])
 {
     B b;
+    b.f();
 }
