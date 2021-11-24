@@ -1,0 +1,26 @@
+Vtable for A
+A::_ZTV1A: 3 entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI1A)
+16    (int (*)(...))A::f
+
+Class A
+   size=16 align=8
+   base size=16 base align=8
+A (0x0x37ae000) 0
+    vptr=((& A::_ZTV1A) + 16)
+
+Vtable for B
+B::_ZTV1B: 3 entries
+0     (int (*)(...))0
+8     (int (*)(...))(& _ZTI1B)
+16    (int (*)(...))B::f
+
+Class B
+   size=24 align=8
+   base size=24 base align=8
+B (0x0x3552208) 0
+    vptr=((& B::_ZTV1B) + 16)
+A (0x0x37ae180) 0
+      primary-for B (0x0x3552208)
+

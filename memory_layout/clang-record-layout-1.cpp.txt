@@ -1,0 +1,14 @@
+VFTable for 'A' (2 entries).
+   0 | A RTTI
+   1 | void A::f()
+
+VFTable indices for 'A' (1 entry).
+   0 | void A::f()
+
+VFTable for 'A' in 'B' (2 entries).
+   0 | B RTTI
+   1 | void B::f()
+
+VFTable indices for 'B' (1 entry).
+   0 | void B::f()
+

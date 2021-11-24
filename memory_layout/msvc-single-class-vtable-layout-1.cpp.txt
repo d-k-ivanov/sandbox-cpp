@@ -1,0 +1,6 @@
+1.cpp
+Microsoft (R) Incremental Linker Version 14.30.30705.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:1.exe
+1.obj

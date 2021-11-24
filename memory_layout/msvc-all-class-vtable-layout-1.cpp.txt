@@ -1,0 +1,845 @@
+1.cpp
+
+class _PMD	size(12):
+	+---
+ 0	| mdisp
+ 4	| pdisp
+ 8	| vdisp
+	+---
+
+class _TypeDescriptor	size(16):
+	+---
+ 0	| pVFTable
+ 8	| spare
+16	| name
+	+---
+
+class _s__CatchableType	size(36):
+	+---
+ 0	| properties
+ 4	| pType
+12	| _PMD thisDisplacement
+24	| sizeOrOffset
+28	| copyFunction
+	+---
+
+class _s__CatchableTypeArray	size(4):
+	+---
+ 0	| nCatchableTypes
+ 4	| arrayOfCatchableTypes
+	+---
+
+class _s__ThrowInfo	size(28):
+	+---
+ 0	| attributes
+ 4	| pmfnUnwind
+12	| pForwardCompat
+20	| pCatchableTypeArray
+	+---
+
+class _s__RTTIBaseClassDescriptor	size(36):
+	+---
+ 0	| pTypeDescriptor
+ 8	| numContainedBases
+12	| _PMD where
+24	| attributes
+28	| pClassDescriptor
+	+---
+
+class _s__RTTIBaseClassArray	size(1):
+	+---
+ 0	| arrayOfBaseClassDescriptors
+	+---
+
+class _s__RTTIClassHierarchyDescriptor	size(20):
+	+---
+ 0	| signature
+ 4	| attributes
+ 8	| numBaseClasses
+12	| pBaseClassArray
+	+---
+
+class _s__RTTICompleteObjectLocator2	size(36):
+	+---
+ 0	| signature
+ 4	| offset
+ 8	| cdOffset
+12	| pTypeDescriptor
+20	| pClassDescriptor
+28	| pSelf
+	+---
+
+class __s_GUID	size(16):
+	+---
+ 0	| Data1
+ 4	| Data2
+ 6	| Data3
+ 8	| Data4
+	+---
+
+class __noop_coroutine_frame_standard	size(24):
+	+---
+ 0	| resume
+ 8	| destroy
+16	| promise
+  	| <alignment member> (size=7)
+	+---
+
+class __noop_coroutine_frame_legacy	size(16):
+	+---
+ 0	| resume
+ 8	| flag
+12	| index
+	+---
+
+class __vc_attributes::helper_attributes::default_valueAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::helper_attributes::attributeAttribute	size(8):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+ 5	| Inherited
+  	| <alignment member> (size=2)
+	+---
+
+class __vc_attributes::helper_attributes::source_annotation_attributeAttribute	size(8):
+	+---
+ 0	| ValidOn
+ 4	| AllowMultiple
+  	| <alignment member> (size=3)
+	+---
+
+class __vc_attributes::helper_attributes::v1_earlyAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::v1_nameAttribute	size(8):
+	+---
+ 0	| name
+	+---
+
+class __vc_attributes::helper_attributes::v1_alttypeAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+class __vc_attributes::helper_attributes::usageAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::helper_attributes::repeatableAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::as_stringAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::process_earlyAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::notify_atlprovAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::help_stringAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::helper_attributes::requires_valueAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::helper_attributes::multi_valueAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::event_receiverAttribute	size(8):
+	+---
+ 0	| type_e type
+ 4	| layout_dependent
+  	| <alignment member> (size=3)
+	+---
+
+class __vc_attributes::no_injected_textAttribute	size(1):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::emitidlAttribute	size(8):
+	+---
+ 0	| value
+ 4	| defaultimports
+  	| <alignment member> (size=3)
+	+---
+
+class __vc_attributes::exportAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::idl_moduleAttribute	size(56):
+	+---
+ 0	| name
+ 8	| dllname
+16	| version
+24	| uuid
+32	| helpstring
+40	| helpstringcontext
+44	| helpcontext
+48	| hidden
+49	| restricted
+  	| <alignment member> (size=6)
+	+---
+
+class __vc_attributes::idl_quoteAttribute	size(8):
+	+---
+ 0	| text
+	+---
+
+class __vc_attributes::implementsAttribute	size(16):
+	+---
+ 0	| interfaces
+ 8	| dispinterfaces
+	+---
+
+class __vc_attributes::importidlAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::includelibAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::library_blockAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::satypeAttribute	size(8):
+	+---
+ 0	| type
+	+---
+
+class __vc_attributes::propgetAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::propputAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::propputrefAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::providerAttribute	size(24):
+	+---
+ 0	| name
+ 8	| uuid
+16	| cookies
+  	| <alignment member> (size=4)
+	+---
+
+class __vc_attributes::coclassAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::controlAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::customAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::dispinterfaceAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::dualAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::lcidAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::objectAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::progidAttribute	size(8):
+	+---
+ 0	| name
+	+---
+
+class __vc_attributes::threadingAttribute	size(4):
+	+---
+ 0	| threading_e value
+	+---
+
+class __vc_attributes::uuidAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::versionAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::vi_progidAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::moduleAttribute	size(96):
+	+---
+ 0	| type_e type
+  	| <alignment member> (size=4)
+ 8	| name
+16	| version
+24	| uuid
+32	| lcid
+36	| control
+  	| <alignment member> (size=3)
+40	| helpstring
+48	| helpstringcontext
+  	| <alignment member> (size=4)
+56	| helpstringdll
+64	| helpfile
+72	| helpcontext
+76	| hidden
+77	| restricted
+  	| <alignment member> (size=2)
+80	| custom
+88	| resource_name
+	+---
+
+class __vc_attributes::aggregatableAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+class __vc_attributes::appobjectAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::async_uuidAttribute	size(8):
+	+---
+ 0	| uuid
+	+---
+
+class __vc_attributes::bindableAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::call_asAttribute	size(8):
+	+---
+ 0	| local_proc
+	+---
+
+class __vc_attributes::caseAttribute	size(4):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::cpp_quoteAttribute	size(8):
+	+---
+ 0	| string
+	+---
+
+class __vc_attributes::defaultAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::defaultbindAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::defaultcollelemAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::defaultvalueAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::defaultvtableAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::displaybindAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::entryAttribute	size(8):
+	+---
+ 0	| entry_id
+	+---
+
+class __vc_attributes::first_isAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::helpcontextAttribute	size(8):
+	+---
+ 0	| helpcontext_value
+	+---
+
+class __vc_attributes::helpfileAttribute	size(8):
+	+---
+ 0	| filename
+	+---
+
+class __vc_attributes::helpstringAttribute	size(8):
+	+---
+ 0	| help_text_string
+	+---
+
+class __vc_attributes::helpstringcontextAttribute	size(4):
+	+---
+ 0	| contextid
+	+---
+
+class __vc_attributes::helpstringdllAttribute	size(8):
+	+---
+ 0	| dllname
+	+---
+
+class __vc_attributes::hiddenAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::idAttribute	size(4):
+	+---
+ 0	| id_num
+	+---
+
+class __vc_attributes::iid_isAttribute	size(8):
+	+---
+ 0	| limited_expression
+	+---
+
+class __vc_attributes::immediatebindAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::importAttribute	size(8):
+	+---
+ 0	| idl_file
+	+---
+
+class __vc_attributes::importlibAttribute	size(8):
+	+---
+ 0	| tlb_file
+	+---
+
+class __vc_attributes::inAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::includeAttribute	size(8):
+	+---
+ 0	| include_file
+	+---
+
+class __vc_attributes::last_isAttribute	size(8):
+	+---
+ 0	| expression
+	+---
+
+class __vc_attributes::length_isAttribute	size(8):
+	+---
+ 0	| expression
+	+---
+
+class __vc_attributes::licensedAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::localAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::max_isAttribute	size(8):
+	+---
+ 0	| expression
+	+---
+
+class __vc_attributes::ms_unionAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::nonbrowsableAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::noncreatableAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::nonextensibleAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::odlAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::oleautomationAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::optionalAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::outAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::pointer_defaultAttribute	size(4):
+	+---
+ 0	| type_e type
+	+---
+
+class __vc_attributes::pragmaAttribute	size(8):
+	+---
+ 0	| token_sequence
+	+---
+
+class __vc_attributes::ptrAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::publicAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::rangeAttribute	size(8):
+	+---
+ 0	| low_val
+ 4	| high_val
+	+---
+
+class __vc_attributes::readonlyAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::refAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::requesteditAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::restrictedAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::retvalAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::size_isAttribute	size(8):
+	+---
+ 0	| expression
+	+---
+
+class __vc_attributes::stringAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::sourceAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::switch_isAttribute	size(8):
+	+---
+ 0	| limited_expression
+	+---
+
+class __vc_attributes::switch_typeAttribute	size(8):
+	+---
+ 0	| switch_type_specifier
+	+---
+
+class __vc_attributes::transmit_asAttribute	size(8):
+	+---
+ 0	| xmit_type
+	+---
+
+class __vc_attributes::uidefaultAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::uniqueAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::usesgetlasterrorAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::v1_enumAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::varargAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::wire_marshalAttribute	size(8):
+	+---
+ 0	| wire_type
+	+---
+
+class __vc_attributes::event_sourceAttribute	size(12):
+	+---
+ 0	| type_e type
+ 4	| optimize_e optimize
+ 8	| decorate
+  	| <alignment member> (size=3)
+	+---
+
+class __vc_attributes::hookAttribute	size(32):
+	+---
+ 0	| event
+ 8	| source
+16	| handler
+24	| receiver
+	+---
+
+class __vc_attributes::unhookAttribute	size(32):
+	+---
+ 0	| event
+ 8	| source
+16	| handler
+24	| receiver
+	+---
+
+class __vc_attributes::atl::synchronizeAttribute	size(1):
+	+---
+	+---
+
+class __vc_attributes::atl::soap_handlerAttribute	size(40):
+	+---
+ 0	| name
+ 8	| namespace
+16	| protocol
+24	| style
+32	| use
+	+---
+
+class __vc_attributes::atl::soap_methodAttribute	size(8):
+	+---
+ 0	| name
+	+---
+
+class __vc_attributes::atl::soap_headerAttribute	size(16):
+	+---
+ 0	| value
+ 8	| required
+ 9	| in
+10	| out
+  	| <alignment member> (size=5)
+	+---
+
+class __vc_attributes::atl::soap_namespaceAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::atl::com_interface_entryAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::atl::support_error_infoAttribute	size(8):
+	+---
+ 0	| error_interface
+	+---
+
+class __vc_attributes::atl::aggregatesAttribute	size(8):
+	+---
+ 0	| clsid
+	+---
+
+class __vc_attributes::atl::implements_categoryAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::atl::requires_categoryAttribute	size(8):
+	+---
+ 0	| value
+	+---
+
+class __vc_attributes::atl::rdxAttribute	size(24):
+	+---
+ 0	| key
+ 8	| valuename
+16	| regtype
+	+---
+
+class __vc_attributes::atl::registration_scriptAttribute	size(8):
+	+---
+ 0	| script
+	+---
+
+class __vc_attributes::atl::db_sourceAttribute	size(24):
+	+---
+ 0	| source
+ 8	| name
+16	| hresult
+	+---
+
+class __vc_attributes::atl::db_commandAttribute	size(48):
+	+---
+ 0	| command
+ 8	| name
+16	| source_name
+24	| hresult
+32	| bindings
+40	| bulk_fetch
+	+---
+
+class __vc_attributes::atl::db_tableAttribute	size(40):
+	+---
+ 0	| table
+ 8	| name
+16	| source_name
+24	| hresult
+32	| bulk_fetch
+	+---
+
+class __vc_attributes::atl::db_accessorAttribute	size(8):
+	+---
+ 0	| id
+ 4	| auto_
+  	| <alignment member> (size=3)
+	+---
+
+class __vc_attributes::atl::db_columnAttribute	size(48):
+	+---
+ 0	| ordinal
+ 8	| dbtype
+16	| precision
+24	| scale
+32	| status
+40	| length
+	+---
+
+class __vc_attributes::atl::db_paramAttribute	size(56):
+	+---
+ 0	| ordinal
+ 8	| paramtype
+16	| dbtype
+24	| precision
+32	| scale
+40	| status
+48	| length
+	+---
+
+class __vc_attributes::atl::tag_nameAttribute	size(16):
+	+---
+ 0	| name
+ 8	| parse_func
+	+---
+
+class __vc_attributes::atl::request_handlerAttribute	size(16):
+	+---
+ 0	| name
+ 8	| sdl
+	+---
+
+class __vc_attributes::atl::perfmonAttribute	size(16):
+	+---
+ 0	| name
+ 8	| register
+  	| <alignment member> (size=7)
+	+---
+
+class __vc_attributes::atl::perf_objectAttribute	size(48):
+	+---
+ 0	| name_res
+ 4	| help_res
+ 8	| namestring
+16	| helpstring
+24	| detail
+28	| no_instances
+  	| <alignment member> (size=3)
+32	| class_
+40	| maxinstnamelen
+  	| <alignment member> (size=4)
+	+---
+
+class __vc_attributes::atl::perf_counterAttribute	size(56):
+	+---
+ 0	| namestring
+ 8	| helpstring
+16	| name_res
+20	| help_res
+24	| countertype
+28	| defscale
+32	| default_counter
+  	| <alignment member> (size=3)
+36	| detail
+40	| max_counter_size
+  	| <alignment member> (size=4)
+48	| countertype_string
+	+---
+
+class A	size(16):
+	+---
+ 0	| {vfptr}
+ 8	| x
+  	| <alignment member> (size=3)
+12	| y
+	+---
+
+A::$vftable@:
+	| &A_meta
+	|  0
+ 0	| &A::f
+
+A::f this adjustor: 0
+
+class B	size(24):
+	+---
+ 0	| +--- (base class A)
+ 0	| | {vfptr}
+ 8	| | x
+  	| | <alignment member> (size=3)
+12	| | y
+	| +---
+16	| z
+	+---
+
+B::$vftable@:
+	| &B_meta
+	|  0
+ 0	| &B::f
+
+B::f this adjustor: 0
+Microsoft (R) Incremental Linker Version 14.30.30705.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:1.exe
+1.obj
