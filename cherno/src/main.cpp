@@ -31,6 +31,9 @@ int main(int argc, char* argv[], char* env[])
     SetConsoleOutputCP(CP_UTF8);
     #endif
 
+    std::cout << "Hello World!" << std::endl;
+    std::cin.get();
+
     // std::system("pause");
     return 0;
 }
