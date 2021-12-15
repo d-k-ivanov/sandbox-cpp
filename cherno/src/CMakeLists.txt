@@ -13,3 +13,10 @@ source_group("Main" FILES ${SRC})
 #     "tasks/1.cpp"
 # )
 # source_group("Tasks" FILES ${SRC_TASKS})
+
+add_executable(cherno-cpp-series ${SRC} ${SRC_LIBS} ${SRC_TASKS})
+
+if(NOT TARGET cherno-cpp-series)
+    add_custom_target(cherno-cpp-series)
+    add_dependencies(cherno-cpp-series cherno-cpp-series)
+endif()

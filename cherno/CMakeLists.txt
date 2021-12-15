@@ -46,10 +46,3 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/src)
 # Testing
 option(CHERNO_CPP_SERIES_BUILD_TESTS "Set to ON to build tests" ON)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test)
-
-add_executable(cherno-cpp-series ${SRC} ${SRC_LIBS} ${SRC_TASKS})
-
-if(NOT TARGET cherno-cpp-series)
-    add_custom_target(cherno-cpp-series)
-    add_dependencies(cherno-cpp-series cherno-cpp-series)
-endif()

@@ -13,7 +13,7 @@
 #include <iostream>
 
 #ifdef _WIN32
-#include <windows.h>
+#include <Windows.h>
 #endif
 
 int main(int argc, char* argv[], char* env[])
@@ -26,6 +26,8 @@ int main(int argc, char* argv[], char* env[])
     #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
     #endif
+
+    std::cout << "Hello World!" << std::endl;
 
     // std::system("pause");
     return 0;
