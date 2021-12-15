@@ -31,6 +31,7 @@ if(MSVC)
         /W4
         /bigobj
         /FC # Need absolute path for __FILE__ used in tests
+        /FS # To handle multiple executable in the same dir
     )
     #if(NOT WINDOWS_STORE)
     #    # Statically link the run-time library

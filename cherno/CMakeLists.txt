@@ -4,21 +4,18 @@ project(cherno-cpp-series LANGUAGES CXX VERSION 1.0.0.0)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-include(Common)
 include(Policies)
+include(Architecture)
 include(CompilerFlags)
 include(Macros)
 
 # Conan
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
     include(${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
-    conan_basic_setup()
+    conan_basic_setup(TARGETS)
 else()
     message(FATAL_ERROR "The file conanbuildinfo.cmake doesn't exist, you have to run conan install first")
 endif()
-
-# Set basic variables: output paths, install paths, lib paths, etc.
-set_base_vars()
 
 # Set PROJECT_VERSION_PATCH and PROJECT_VERSION_TWEAK to 0 if not present, needed by add_project_meta
 fix_project_version()
@@ -31,8 +28,8 @@ set(IDENTIFIER "io.github.d-k-ivanov.dev.cherno-cpp-series")
 include(Debug)
 cmake_get_cxx_compiler()
 cmake_list_all_init_variables()
-#cmake_list_all_variables()
-#cmake_get_includes()
+# cmake_list_all_variables()
+# cmake_get_includes()
 
 file(WRITE  ${OUTPUT_DIR_MAIN}/about.txt "${COPYRIGHT}\n")
 file(APPEND ${OUTPUT_DIR_MAIN}/about.txt "--------------------------------------------------------------------------------\n")
@@ -45,4 +42,9 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/src)
 
 # Testing
 option(CHERNO_CPP_SERIES_BUILD_TESTS "Set to ON to build tests" ON)
-add_subdirectory(${CMAKE_SOURCE_DIR}/test)
+if (CHERNO_CPP_SERIES_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(${CMAKE_SOURCE_DIR}/test)
+endif()
+
+

@@ -17,7 +17,7 @@
             "namespace": "system",
             "Name": "Windows",
             "vcpkg": "windows",
-            "CMakeArgs": "-DCMAKE_SYSTEM_VERSION=8.1"
+            "CMakeArgs": "-DCMAKE_SYSTEM_VERSION=10.0"
         },
         {
             "environment": "system_WindowsStore",
@@ -30,7 +30,7 @@
             "BuildCommandArgs": "/m /v:normal",
             "CMakeCommandArgs": "${system.CMakeArgs}",
             "CTestCommandArgs": "",
-            "BuildDir": "${workspaceRoot}\\_build"
+            "BuildDir": "${workspaceRoot}\\build"
         }
     ],
     "configurations": [

@@ -20,3 +20,10 @@ if(NOT TARGET cherno-cpp-series)
     add_custom_target(cherno-cpp-series)
     add_dependencies(cherno-cpp-series cherno-cpp-series)
 endif()
+
+# target_include_directories(cherno-cpp-series PRIVATE ${CONAN_INCLUDE_DIRS})
+target_link_libraries(cherno-cpp-series
+                        CONAN_PKG::fmt
+                        CONAN_PKG::spdlog
+                     )
+# target_link_libraries(cherno-cpp-series ${CONAN_LIBS})

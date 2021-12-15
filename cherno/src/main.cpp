@@ -16,8 +16,12 @@
 #include <Windows.h>
 #endif
 
+// Libraries
+#include <fmt/core.h>
+#include <spdlog/spdlog.h>
+
 int main(int argc, char* argv[], char* env[])
- {
+{
     // To turn off messages about unused variables.
     ((void)argc );
     ((void)argv );
@@ -27,8 +31,6 @@ int main(int argc, char* argv[], char* env[])
     SetConsoleOutputCP(CP_UTF8);
     #endif
 
-    std::cout << "Hello World!" << std::endl;
-
     // std::system("pause");
     return 0;
- }
+}
