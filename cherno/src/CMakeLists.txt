@@ -1,6 +1,8 @@
 file(GLOB_RECURSE SRC
     "main.h"
     "main.cpp"
+    "Log.h"
+    "Log.cpp"
 )
 source_group("Main" FILES ${SRC})
 
