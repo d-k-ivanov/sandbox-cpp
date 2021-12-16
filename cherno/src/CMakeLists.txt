@@ -29,3 +29,11 @@ target_link_libraries(cherno-cpp-series
                         CONAN_PKG::spdlog
                      )
 # target_link_libraries(cherno-cpp-series ${CONAN_LIBS})
+
+
+file(GLOB_RECURSE JUNK_SRC
+    "EndBrace.h"
+    "junk.cpp"
+)
+source_group("Junk" FILES ${JUNK_SRC})
+add_library(cherno-cpp-series-junk ${JUNK_SRC})
