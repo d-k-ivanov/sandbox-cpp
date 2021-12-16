@@ -20,6 +20,11 @@
 #include <fmt/core.h>
 #include <spdlog/spdlog.h>
 
+void Log(const char* message)
+{
+    std::cout << message << std::endl;
+}
+
 int main(int argc, char* argv[], char* env[])
 {
     // To turn off messages about unused variables.
@@ -31,7 +36,8 @@ int main(int argc, char* argv[], char* env[])
     SetConsoleOutputCP(CP_UTF8);
     #endif
 
-    std::cout << "Hello World!" << std::endl;
+    // std::cout << "Hello World!" << std::endl;
+    Log("Hello World!");
     std::cin.get();
 
     // std::system("pause");
