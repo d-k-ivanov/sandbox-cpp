@@ -6,10 +6,10 @@ file(GLOB_RECURSE SRC
 )
 source_group("Main" FILES ${SRC})
 
-# file(GLOB_RECURSE SRC_LIBS
-#     "../lib/types.h"
-# )
-# source_group("Libraries" FILES ${SRC_LIBS})
+file(GLOB_RECURSE SRC_LIBS
+    "lib/*.cpp"
+)
+source_group("Libraries" FILES ${SRC_LIBS})
 
 # file(GLOB_RECURSE SRC_TASKS
 #     "tasks/1.cpp"
@@ -38,6 +38,7 @@ file(GLOB_RECURSE JUNK_SRC
 source_group("Junk" FILES ${JUNK_SRC})
 add_library(cpp-series-one-junk ${JUNK_SRC})
 
-if(MSVC)
-    target_compile_options(cpp-series-one-junk PUBLIC /P /FaS)
-endif()
+# if(MSVC)
+#     target_compile_options(cpp-series-one-junk PUBLIC /P)
+#     target_compile_options(cpp-series-one-junk PUBLIC /FA)
+# endif()
