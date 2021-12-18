@@ -16,19 +16,19 @@ source_group("Main" FILES ${SRC})
 # )
 # source_group("Tasks" FILES ${SRC_TASKS})
 
-add_executable(cherno-cpp-series ${SRC} ${SRC_LIBS} ${SRC_TASKS})
+add_executable(cpp-series-one ${SRC} ${SRC_LIBS} ${SRC_TASKS})
 
-if(NOT TARGET cherno-cpp-series)
-    add_custom_target(cherno-cpp-series)
-    add_dependencies(cherno-cpp-series cherno-cpp-series)
+if(NOT TARGET cpp-series-one)
+    add_custom_target(cpp-series-one)
+    add_dependencies(cpp-series-one cpp-series-one)
 endif()
 
-# target_include_directories(cherno-cpp-series PRIVATE ${CONAN_INCLUDE_DIRS})
-target_link_libraries(cherno-cpp-series
+# target_include_directories(cpp-series-one PRIVATE ${CONAN_INCLUDE_DIRS})
+target_link_libraries(cpp-series-one
                         CONAN_PKG::fmt
                         CONAN_PKG::spdlog
                      )
-# target_link_libraries(cherno-cpp-series ${CONAN_LIBS})
+# target_link_libraries(cpp-series-one ${CONAN_LIBS})
 
 
 file(GLOB_RECURSE JUNK_SRC
@@ -36,4 +36,8 @@ file(GLOB_RECURSE JUNK_SRC
     "junk.cpp"
 )
 source_group("Junk" FILES ${JUNK_SRC})
-add_library(cherno-cpp-series-junk ${JUNK_SRC})
+add_library(cpp-series-one-junk ${JUNK_SRC})
+
+if(MSVC)
+    target_compile_options(cpp-series-one-junk PUBLIC /P /FaS)
+endif()

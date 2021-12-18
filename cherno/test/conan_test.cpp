@@ -1,6 +1,6 @@
 /*
  * =====================================================================
- *      Project :  cherno-cpp-series
+ *      Project :  cpp-series-one
  *      File    :  conan_test.cpp
  *      Created :  15.12.2021
  *      Author  :  Dmitry Ivanov
@@ -20,7 +20,7 @@ TEST_CASE("Conan Packages should work.")
     std::cout << s << std::endl;
 
     std::shared_ptr<spdlog::logger> logger;
-    logger = spdlog::basic_logger_mt("logger", "cherno-cpp-series-tests.log");
+    logger = spdlog::basic_logger_mt("logger", "cpp-series-one-tests.log");
 
     logger->set_level(spdlog::level::info);
     logger->info("Welcome to spdlog!");

@@ -3,7 +3,7 @@
 
 /*
  * =====================================================================
- *      Project :  cherno-cpp-series
+ *      Project :  cpp-series-one
  *      File    :  main.h
  *      Created :  15.12.2022
  *      Author  :  Dmitry Ivanov

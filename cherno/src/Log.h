@@ -2,7 +2,7 @@
 #define LOG_H
 /*
  * =====================================================================
- *      Project :  cherno-cpp-series
+ *      Project :  cpp-series-one
  *      File    :  Log.h
  *      Created :  15.12.2021
  *      Author  :  Dmitry Ivanov

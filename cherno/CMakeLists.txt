@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(cherno-cpp-series LANGUAGES CXX VERSION 1.0.0.0)
+project(cpp-series-one LANGUAGES CXX VERSION 1.0.0.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -23,7 +23,7 @@ fix_project_version()
 # Set additional project information
 set(COMPANY "Dmitry Ivanov")
 set(COPYRIGHT "Copyright (c) 2021 Dmitry Ivanov. All rights reserved.")
-set(IDENTIFIER "io.github.d-k-ivanov.dev.cherno-cpp-series")
+set(IDENTIFIER "io.github.d-k-ivanov.dev.cpp-series-one")
 
 include(Debug)
 cmake_get_cxx_compiler()
@@ -41,8 +41,8 @@ file(APPEND ${OUTPUT_DIR_MAIN}/about.txt "Identifier: ${IDENTIFIER}\n")
 add_subdirectory(${CMAKE_SOURCE_DIR}/src)
 
 # Testing
-option(CHERNO_CPP_SERIES_BUILD_TESTS "Set to ON to build tests" ON)
-if (CHERNO_CPP_SERIES_BUILD_TESTS)
+option(BUILD_TESTS "Set to ON to build tests" ON)
+if (BUILD_TESTS)
     enable_testing()
     add_subdirectory(${CMAKE_SOURCE_DIR}/test)
 endif()

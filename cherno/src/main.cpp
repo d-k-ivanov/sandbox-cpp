@@ -1,6 +1,6 @@
 /*
  * =====================================================================
- *      Project :  cherno-cpp-series
+ *      Project :  cpp-series-one
  *      File    :  main.cpp
  *      Created :  15.12.2021
  *      Author  :  Dmitry Ivanov
