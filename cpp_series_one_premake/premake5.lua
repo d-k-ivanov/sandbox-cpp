@@ -73,8 +73,8 @@ project "CPP_Series"
 
     files
     {
-        "src/**.h",
-        "src/**.cpp",
+        "CPP_Series/**.h",
+        "CPP_Series/**.cpp",
     }
 
     filter({})
