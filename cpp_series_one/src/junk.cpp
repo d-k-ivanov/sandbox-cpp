@@ -6,7 +6,6 @@ int Sum_Not_Used(int a, int b)
 }
 #endif
 
-
 int Sum(int a, int b)
 {
     return a + b;
