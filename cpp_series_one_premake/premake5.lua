@@ -78,3 +78,18 @@ project "CPP_Series"
     }
 
     filter({})
+
+project "Utils"
+    kind "None"
+    location "."
+
+    files
+    {
+        ".editorconfig",
+        ".gitignore",
+        "commit_now.ps1",
+        "gen_solution.bat",
+        "premake5.lua"
+    }
+
+    filter({})
