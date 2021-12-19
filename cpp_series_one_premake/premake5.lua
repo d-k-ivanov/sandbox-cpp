@@ -32,9 +32,13 @@ workspace "CPP_Series"
 
     flags {"MultiProcessorCompile", "ShadowedVariables", "UndefinedIdentifiers"}
 
-    targetdir "%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}"
-    debugdir "%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}"
-    objdir "!%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}/intermediate/%{prj.name}"
+    targetdir ("bin/%{prj.name}/%{cfg.buildcfg}-%{cfg.architecture}")
+    debugdir ("bin/%{prj.name}/%{cfg.buildcfg}-%{cfg.architecture}")
+    objdir ("bin-int/%{prj.name}/%{cfg.buildcfg}-%{cfg.architecture}")
+
+    -- targetdir "%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}"
+    -- debugdir "%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}"
+    -- objdir "!%{prj.location}/%{cfg.architecture}/%{cfg.buildcfg}/intermediate/%{prj.name}"
 
     filter "platforms:x86"
         architecture "x86"
@@ -89,24 +93,10 @@ workspace "CPP_Series"
 
     filter({})
 
+include "CPP_Series"
 
-project "CPP_Series"
-    kind "ConsoleApp"
-    location "CPP_Series"
-    language "C++"
-    cppdialect "C++20"
-
-    files
-    {
-        "CPP_Series/**.h",
-        "CPP_Series/**.cpp",
-    }
-
-    filter({})
-
-project "Repo"
+project "Other"
     kind "None"
-    location "."
 
     files
     {
@@ -116,5 +106,3 @@ project "Repo"
         "gen_solution.bat",
         "premake5.lua"
     }
-
-    filter({})
