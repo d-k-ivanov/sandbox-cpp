@@ -11,7 +11,8 @@ project "CPP_Series"
 
     vpaths {
         ["Headers/*"] = { "**.h", "**.hpp" },
-        ["Sources/*"] = {"**.c", "**.cpp"}
+        ["Sources/*"] = {"**.c", "**.cpp"},
+        ["Build/*"] = {"**.lua"}
     }
 
     filter ({})
