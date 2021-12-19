@@ -79,7 +79,7 @@ project "CPP_Series"
 
     filter({})
 
-project "Utils"
+project "Repo"
     kind "None"
     location "."
 
