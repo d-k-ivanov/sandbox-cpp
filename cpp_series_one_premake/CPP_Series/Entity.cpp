@@ -5,13 +5,18 @@
 
 Entity::Entity(): m_X(0.0f), m_Y(0.0f)
 {
+    std::cout << "Created Entity! " << std::endl;
 }
 
 Entity::Entity(const float x, const float y): m_X(x), m_Y(y)
 {
+    std::cout << "Created Entity! " << std::endl;
 }
 
-Entity::~Entity() = default;
+Entity::~Entity()
+{
+    std::cout << "Destroyed Entity! " << std::endl;
+};
 
 float Entity::GetX() const
 {

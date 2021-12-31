@@ -21,10 +21,13 @@ int main()
     // log.Error("Error!");
     // log.Info("Info!");
 
-    const Entity e(10.0f, 50.0f);
-    std::cout << e.GetX() << std::endl;
-    std::cout << e.GetY() << std::endl;
-    e.Print();
+    {
+        const Entity e(10.0f, 50.0f);
+        std::cout << e.GetX() << std::endl;
+        std::cout << e.GetY() << std::endl;
+        e.Print();
+        e.~Entity(); // Direct Desctructor Call is possible, but wrong
+    }
 
     // std::system("pause");
     return 0;
