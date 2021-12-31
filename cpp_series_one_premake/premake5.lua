@@ -98,6 +98,7 @@ include "CPP_Series"
 project "Other"
     kind "None"
 
+
     files
     {
         ".editorconfig",
@@ -106,3 +107,11 @@ project "Other"
         "gen_solution.bat",
         "premake5.lua"
     }
+
+    vpaths
+    {
+        ["Build/*"] = { "**.lua", "**.bat" },
+        ["Git/*"]   = { ".gitignore", "commit_now.ps1", ".editorconfig" }
+    }
+
+    filter ({})

@@ -5,14 +5,18 @@ project "CPP_Series"
 
     files
     {
-        "**.h",
         "**.cpp",
+        "**.h",
+        "**.lua",
+        "**.md",
     }
 
-    vpaths {
-        ["Headers/*"] = { "**.h", "**.hpp" },
-        ["Sources/*"] = {"**.c", "**.cpp"},
-        ["Build/*"] = {"**.lua"}
+    vpaths
+    {
+        ["Archive/*"]   = {"**.md"},
+        ["Build/*"]     = {"**.lua"},
+        ["Headers/*"]   = { "**.h", "**.hpp" },
+        ["Sources/*"]   = {"**.c", "**.cpp"},
     }
 
     filter ({})
