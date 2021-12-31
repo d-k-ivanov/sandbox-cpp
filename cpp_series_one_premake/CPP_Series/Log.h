@@ -13,12 +13,13 @@ private:
 
 public:
     Log() = default;
-    explicit Log(const int logLevel) :m_LogLevel(logLevel)
+
+    explicit Log(const int logLevel) : m_LogLevel(logLevel)
     {
     }
+
     void SetLevel(const int level);
     void Error(const char* message) const;
-    void Error(char* message) const;
     void Warn(const char* message) const;
     void Info(const char* message) const;
 };

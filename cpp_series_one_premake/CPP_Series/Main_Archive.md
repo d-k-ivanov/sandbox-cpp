@@ -56,3 +56,27 @@ int main()
     return 0;
 }
 ```
+
+```
+
+#include "Entity.h"
+
+int main()
+{
+    Entity e1, e2, e3;
+    e1.SetX(11); e2.SetX(22); e3.SetX(33);
+
+    PrintEntity1(e1);
+    log.Info("------------------------------");
+
+    PrintEntity1(e2);
+    PrintEntity2(e2);
+    PrintEntity1(e2);
+    log.Info("------------------------------");
+
+    PrintEntity3(&e3);
+
+    return 0;
+}
+
+```

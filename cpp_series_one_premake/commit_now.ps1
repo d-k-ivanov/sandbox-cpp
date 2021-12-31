@@ -1,1 +1,1 @@
-git commit -m "$(Split-Path -Path ($PSScriptRoot) -Leaf): $(now)"
+git commit -m "$(Split-Path -Path ($PSScriptRoot) -Leaf): $(now) @args"
