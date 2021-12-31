@@ -4,6 +4,7 @@
 
 void Log::SetLevel(const int level)
 {
+    std::cout <<  "Setting log level to: " << level << std::endl;
     m_LogLevel = level;
 }
 

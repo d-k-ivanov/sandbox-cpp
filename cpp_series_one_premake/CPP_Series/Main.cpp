@@ -10,7 +10,10 @@
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-    Log log;
+    auto log = Log(2);
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
     log.SetLevel(log.LogLevelWarning);
     log.Warn("Warning!");
     log.Error("Error!");
