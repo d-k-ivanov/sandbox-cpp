@@ -5,11 +5,20 @@
 class Entity
 {
 private:
-    int m_X = 0;
+    float m_X;
+    float m_Y;
 
 public:
-    [[nodiscard]] int GetX() const;
-    void SetX(int x);
+    Entity();
+    Entity(float x, float y);
+
+    ~Entity();
+
+    [[nodiscard]] float GetX() const;
+    [[nodiscard]] float GetY() const;
+    void SetX(float x);
+    void SetY(float y);
+    void Print() const;
 };
 
 void PrintEntity1(Entity& e);

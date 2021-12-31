@@ -123,3 +123,21 @@ int main()
     return 0;
 }
 ```
+
+## Entiry with Constructors
+
+
+```cpp
+#include "Entity.h"
+#include <iostream>
+
+int main()
+{
+    const Entity e(10.0f, 50.0f);
+    std::cout << e.GetX() << std::endl;
+    std::cout << e.GetY() << std::endl;
+    e.Print();
+    return 0;
+}
+
+```

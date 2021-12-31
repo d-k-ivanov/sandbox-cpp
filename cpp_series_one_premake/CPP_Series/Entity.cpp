@@ -3,14 +3,40 @@
 #include <iostream>
 
 
-int Entity::GetX() const
+Entity::Entity(): m_X(0.0f), m_Y(0.0f)
+{
+}
+
+Entity::Entity(const float x, const float y): m_X(x), m_Y(y)
+{
+}
+
+Entity::~Entity() = default;
+
+float Entity::GetX() const
 {
     return m_X;
 }
 
-void Entity::SetX(const int x)
+float Entity::GetY() const
+{
+    return m_X;
+}
+
+
+void Entity::SetX(const float x)
 {
     m_X = x;
+}
+
+void Entity::SetY(const float y)
+{
+    m_Y = y;
+}
+
+void Entity::Print() const
+{
+    std::cout << "Entity coordinates (" << this->GetX() << "," << this->GetY() << ")" << std::endl;
 }
 
 void PrintEntity1(Entity& e)
