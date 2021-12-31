@@ -1,8 +1,6 @@
 #ifndef LOG_H
 #define LOG_H
 
-#include <iostream>
-
 class Log
 {
 public:
@@ -14,28 +12,10 @@ private:
     int m_LogLevel = LogLevelInfo;
 
 public:
-    void SetLevel(const int level)
-    {
-        m_LogLevel = level;
-    }
-
-    void Error(const char* message) const
-    {
-        if (m_LogLevel >= LogLevelError)
-            std::cout << "[ERROR]: " << message << std::endl;
-    }
-
-    void Warn(const char* message) const
-    {
-        if (m_LogLevel >= LogLevelWarning)
-            std::cout << "[WARNING]: " << message << std::endl;
-    }
-
-    void Info(const char* message) const
-    {
-        if (m_LogLevel >= LogLevelInfo)
-            std::cout << "[INFO]: " << message << std::endl;
-    }
+    void SetLevel(const int level);
+    void Error(const char* message) const;
+    void Warn(const char* message) const;
+    void Info(const char* message) const;
 };
 
 #endif //LOG_H
