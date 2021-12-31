@@ -1,5 +1,7 @@
 # Main.cpp Archive
 
+
+## Base
 ```cpp
 int main()
 {
@@ -38,6 +40,8 @@ int main()
 }
 ```
 
+## Simale Logger
+
 ```cpp
 #include "Log.h"
 
@@ -57,8 +61,9 @@ int main()
 }
 ```
 
-```
+## Classes
 
+```cpp
 #include "Entity.h"
 
 int main()
@@ -78,5 +83,43 @@ int main()
 
     return 0;
 }
+```
 
+## Singleton
+
+```cpp
+#include "Singleton.h"
+
+int main()
+{
+    Singleton s = Singleton::GetInstance();
+    Singleton r = Singleton::GetInstance();
+    s.Hello();
+    r.Hello();
+    return 0;
+}
+```
+
+## Logger with Enum
+
+
+```cpp
+#include "Log.h"
+
+int main()
+{
+    Log log;
+    log.SetLevel(Log::LogLevelInfo);
+
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
+
+    log.SetLevel(Log::LogLevelWarning);
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
+
+    return 0;
+}
 ```

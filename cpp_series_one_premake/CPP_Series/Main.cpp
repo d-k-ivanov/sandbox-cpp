@@ -12,16 +12,16 @@
 int main()
 {
     Log log;
-    log.SetLevel(log.LogLevelInfo);
+    log.SetLevel(Log::LogLevelInfo);
 
-    // log.Warn("Warning!");
-    // log.Error("Error!");
-    // log.Info("Info!");
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
 
-    Singleton s = Singleton::GetInstance();
-    Singleton r = Singleton::GetInstance();
-    s.Hello();
-    r.Hello();
+    log.SetLevel(Log::LogLevelWarning);
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
 
     // std::system("pause");
     return 0;

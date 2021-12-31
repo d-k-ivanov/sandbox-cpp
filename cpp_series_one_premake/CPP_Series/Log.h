@@ -4,9 +4,12 @@
 class Log
 {
 public:
-    const int LogLevelError = 0;
-    const int LogLevelWarning = 1;
-    const int LogLevelInfo = 2;
+    enum Level
+    {
+        LogLevelError = 0,
+        LogLevelWarning,
+        LogLevelInfo
+    };
 
 private:
     int m_LogLevel = LogLevelInfo;
