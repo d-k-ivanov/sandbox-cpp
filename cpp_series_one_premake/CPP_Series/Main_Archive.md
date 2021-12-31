@@ -37,3 +37,22 @@ int main()
     return 0;
 }
 ```
+
+```cpp
+#include "Log.h"
+
+int main()
+{
+    auto log = Log(2);
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
+    log.SetLevel(log.LogLevelWarning);
+    log.Warn("Warning!");
+    log.Error("Error!");
+    log.Info("Info!");
+
+    // std::system("pause");
+    return 0;
+}
+```
