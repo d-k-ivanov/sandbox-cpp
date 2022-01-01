@@ -28,6 +28,12 @@ int main()
 
     Player player { "Player" }; //const auto player = new Player("Player");
     PrintName(&player);
+    PrintName(&player);
+    PrintName(&player);
+    PrintName(&player);
+
+    player.PrintGetNameCounter();
+
 
     // std::system("pause");
     return 0;
