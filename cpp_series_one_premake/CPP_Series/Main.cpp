@@ -2,7 +2,8 @@
 
 #include "Log.h"
 #include "Entity.h"
-#include "Singleton.h"
+#include "Person.h"
+#include "Player.h"
 
 #include <iostream>
 
@@ -21,13 +22,14 @@ int main()
     // log.Error("Error!");
     // log.Info("Info!");
 
-    {
-        const Entity e(10.0f, 50.0f);
-        std::cout << e.GetX() << std::endl;
-        std::cout << e.GetY() << std::endl;
-        e.Print();
-        e.~Entity(); // Direct Desctructor Call is possible, but wrong
-    }
+    std::cout << sizeof(Entity) << std::endl;
+    std::cout << sizeof(Player) << std::endl;
+    std::cout << sizeof(Person) << std::endl;
+
+    Player player {};
+    player.Name = "Player";
+    player.Move(5, 5);
+    player.X = 2;
 
     // std::system("pause");
     return 0;

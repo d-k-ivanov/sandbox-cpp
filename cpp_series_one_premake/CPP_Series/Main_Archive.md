@@ -126,7 +126,6 @@ int main()
 
 ## Entiry with Constructors
 
-
 ```cpp
 #include "Entity.h"
 #include <iostream>
@@ -142,5 +141,26 @@ int main()
     }
     return 0;
 }
+```
 
+## Inheritance
+
+```cpp
+#include "Entity.h"
+#include "Person.h"
+#include "Player.h"
+
+#include <iostream>
+
+int main()
+{
+    std::cout << sizeof(Entity) << std::endl;
+    std::cout << sizeof(Player) << std::endl;
+    std::cout << sizeof(Person) << std::endl;
+    Player player {};
+    player.Name = "Player";
+    player.Move(5, 5);
+    player.X = 2;
+    return 0;
+}
 ```
