@@ -7,6 +7,6 @@ class Player final : public Entity
 private:
     std::string m_Name;
 public:
-    Player(std::string name);
-    std::string GetName() override;
+    explicit Player(std::string name);
+    [[nodiscard]] std::string GetName() const override;
 };
