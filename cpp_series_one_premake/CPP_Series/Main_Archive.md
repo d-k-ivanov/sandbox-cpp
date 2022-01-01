@@ -165,7 +165,6 @@ int main()
 }
 ```
 
-
 ## Virtual, Interface and mutable
 
 ```cpp
@@ -186,6 +185,30 @@ int main()
     const Player player3{ "Player 3" };
     const Player player4{ "Player 4" };
     Player::PrintNumberOfEntities();
+
+    return 0;
+}
+```
+
+## Operators
+
+```cpp
+#include "Vec2.h"
+
+#include <iostream>
+
+int main()
+{
+    const Vec2 position(4.0f, 4.0f);
+    std::cout << "Position: " << position << std::endl;
+    const Vec2 speed(0.5f, 1.5f);
+    std::cout << "Speed: " << speed << std::endl;
+    const Vec2 powerUp(11.1f, 11.1f);
+    std::cout << "PowerUp: " << powerUp << std::endl;
+    const Vec2 result = position + speed * powerUp;
+    if (position != result) {
+        std::cout << "Position + Speed * PowerUp = " << result << std::endl;
+    }
 
     return 0;
 }
