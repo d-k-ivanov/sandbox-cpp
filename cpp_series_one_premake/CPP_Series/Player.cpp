@@ -1,10 +1,10 @@
 #include "Player.h"
 
-Player::Player(const std::string& name): m_Name(name)
+Player::Player(std::string name): m_Name(std::move(name))
 {
 }
 
 std::string Player::GetName()
 {
-    return  m_Name;
+    return m_Name;
 }

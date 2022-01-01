@@ -8,6 +8,7 @@ void Entity::Move(const float xa, const float ya)
     Y += ya;
 }
 
-void PrintName(Entity* entity) {
+void PrintName(Entity* entity)
+{
     std::cout << entity->GetName() << std::endl;
 }

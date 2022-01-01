@@ -26,8 +26,8 @@ int main()
     std::cout << sizeof(Player) << std::endl;
     std::cout << sizeof(Person) << std::endl;
 
-    const auto player =  new Player("Player");
-    PrintName(player);
+    Player player { "Player" }; //const auto player = new Player("Player");
+    PrintName(&player);
 
     // std::system("pause");
     return 0;

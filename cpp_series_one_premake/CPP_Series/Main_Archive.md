@@ -164,3 +164,18 @@ int main()
     return 0;
 }
 ```
+
+
+## Virtual and Interface
+
+```cpp
+#include "Entity.h"
+#include "Player.h"
+
+int main()
+{
+    const auto player =  new Player("Player");
+    PrintName(player);
+    return 0;
+}
+```
