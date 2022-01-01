@@ -213,3 +213,20 @@ int main()
     return 0;
 }
 ```
+
+## Scoped Ponter
+
+```cpp
+#include "EntityMock.h"
+#include "ScopedPointer.h"
+
+int main()
+{
+    {
+        ScopedPointer<EntityMock> e1 = new EntityMock();
+        [[maybe_unused]] auto e2 = new EntityMock();
+    }
+    std::system("pause");  // NOLINT(concurrency-mt-unsafe)
+    return 0;
+}
+```
