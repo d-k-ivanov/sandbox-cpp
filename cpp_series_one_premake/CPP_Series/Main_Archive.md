@@ -166,7 +166,7 @@ int main()
 ```
 
 
-## Virtual and Interface
+## Virtual, Interface and mutable
 
 ```cpp
 #include "Entity.h"
@@ -174,8 +174,13 @@ int main()
 
 int main()
 {
-    const auto player =  new Player("Player");
-    PrintName(player);
+    Player player { "Player" }; //const auto player = new Player("Player");
+    PrintName(&player);
+    PrintName(&player);
+    PrintName(&player);
+    PrintName(&player);
+
+    player.PrintGetNameCounter();
     return 0;
 }
 ```
