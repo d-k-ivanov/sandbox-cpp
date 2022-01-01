@@ -26,10 +26,8 @@ int main()
     std::cout << sizeof(Player) << std::endl;
     std::cout << sizeof(Person) << std::endl;
 
-    Player player {};
-    player.Name = "Player";
-    player.Move(5, 5);
-    player.X = 2;
+    const auto player =  new Player("Player");
+    PrintName(player);
 
     // std::system("pause");
     return 0;

@@ -2,10 +2,11 @@
 
 #include "Entity.h"
 
-class Player : public Entity
+class Player final : public Entity
 {
+private:
+    std::string m_Name;
 public:
-    const char* Name;
-
-    void PrintName() const;
+    explicit Player(const std::string& name);
+    std::string GetName() override;
 };

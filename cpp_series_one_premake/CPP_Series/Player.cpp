@@ -1,8 +1,10 @@
 #include "Player.h"
 
-#include <iostream>
-
-void Player::PrintName() const
+Player::Player(const std::string& name): m_Name(name)
 {
-    std::cout << Name << std::endl;
+}
+
+std::string Player::GetName()
+{
+    return  m_Name;
 }
