@@ -2,6 +2,7 @@
 
 
 ## Base
+
 ```cpp
 int main()
 {
@@ -101,7 +102,6 @@ int main()
 ```
 
 ## Logger with Enum
-
 
 ```cpp
 #include "Log.h"
