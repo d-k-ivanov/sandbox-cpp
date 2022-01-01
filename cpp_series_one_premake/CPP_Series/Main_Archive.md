@@ -174,13 +174,19 @@ int main()
 
 int main()
 {
-    Player player { "Player" }; //const auto player = new Player("Player");
+    const Player player { "Player 1" }; //const auto player = new Player("Player");
     PrintName(&player);
     PrintName(&player);
     PrintName(&player);
     PrintName(&player);
 
     player.PrintGetNameCounter();
+    Player::PrintNumberOfEntities();
+    const Player player2{ "Player 2" };
+    const Player player3{ "Player 3" };
+    const Player player4{ "Player 4" };
+    Player::PrintNumberOfEntities();
+
     return 0;
 }
 ```
