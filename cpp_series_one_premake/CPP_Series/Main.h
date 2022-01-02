@@ -16,4 +16,15 @@ namespace MainThreads
     void Main();
 }
 
+namespace MainUnions
+{
+    void Main();
+}
+
+namespace MainVirtualDestructors
+{
+    void Main();
+}
+
+
 #endif //MAIN_H
