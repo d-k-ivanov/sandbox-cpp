@@ -545,3 +545,39 @@ int main()
     return 0;
 }
 ```
+
+## Casts
+
+```cpp
+int main()
+{
+    struct Entity
+    {
+        int x, y;
+
+        int* GetPositions()
+        {
+            return &x;
+        }
+    };
+
+    Entity e = {5, 8};
+
+    int x0 = e.x;
+    int y0 = e.y;
+
+    const int* position = (int*)&e;
+    std::cout << position[0] << ", " << position[1] << std::endl;
+
+    const int x = *(int*)((char*)&e);
+    const int y = *(int*)((char*)&e + 4);
+    std::cout << x << ", " << y << std::endl;
+
+    int* positions = e.GetPositions();
+    positions[0] = 2;
+    positions[1] = 3;
+    std::cout << e.x << ", " << e.y << std::endl;
+
+    return 0;
+}
+```
