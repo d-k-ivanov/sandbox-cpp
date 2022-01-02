@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,6 +21,12 @@ namespace MainFinctional
     }
 
     void ForEach(const std::vector<int>& values, void (*func)(int))
+    {
+        for (const int value : values)
+            func(value);
+    }
+
+    void ForEach2(const std::vector<int>& values, const std::function<void(int)>& func)
     {
         for (const int value : values)
             func(value);
@@ -54,5 +61,33 @@ namespace MainFinctional
 
         const std::vector<int> values2 = {10, 50, 40, 20, 30};
         ForEach(values2, [](const int value) { std::cout << "Value: " << value << std::endl; });
+
+        int a = 10;
+        // []  - pass objects to the lambda
+        // [=] - everything by value: copying
+        // [&] - everything by reference
+        // [variable] - single variable
+        auto lambda = [=](const int value)
+        {
+            std::cout << "Value: " << value << ", " << a << std::endl;
+        };
+        ForEach2(values, lambda);
+
+        auto lambda2 = [=](const int value) mutable
+        {
+            a = 7; // Allowed due to mutable specifier
+            std::cout << "Value: " << value << ", " << a << std::endl;
+        };
+        ForEach2(values, lambda2);
+
+        const auto it =
+            std::ranges::find_if(values, [](const int value) { return value > 3; });
+        std::cout << *it << std::endl;
+
+        auto lambda3 = [=](const int value)
+        {
+            std::cout << "Value: " << value << ", " << a << std::endl;
+        };
+        ForEach2(values, lambda3);
     }
 }
