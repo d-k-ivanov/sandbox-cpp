@@ -515,3 +515,33 @@ int main()
     delete[] a3d;
 }
 ```
+
+## Sorting
+
+```cpp
+#include <algorithm>
+#include <functional>
+#include <vector>
+
+int main()
+{
+    std::vector<int> values = {3, 5, 1, 4, 2};
+
+    std::sort(values.begin(), values.end());
+    for (const int value : values)
+        std::cout << value << std::endl;
+    std::cout << std::endl;
+
+    std::sort(values.begin(), values.end(), std::greater<int>());
+    for (const int value : values)
+        std::cout << value << std::endl;
+    std::cout << std::endl;
+
+    std::sort(values.begin(), values.end(), [](const int a, const int b) { return a < b; });
+    for (const int value : values)
+        std::cout << value << std::endl;
+    std::cout << std::endl;
+
+    return 0;
+}
+```

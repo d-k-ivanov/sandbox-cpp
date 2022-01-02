@@ -29,26 +29,6 @@
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-    std::vector<int> values = {3, 5, 1, 4, 2};
-
-    std::sort(values.begin(), values.end());
-
-    for (const int value : values)
-        std::cout << value;
-    std::cout << std::endl;
-
-    std::sort(values.begin(), values.end(), std::greater<int>());
-
-    for (const int value : values)
-        std::cout << value;
-    std::cout << std::endl;
-
-    std::sort(values.begin(), values.end(), [](const int a, const int b) { return a < b; });
-
-    for (const int value : values)
-        std::cout << value;
-    std::cout << std::endl;
-
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
 }
