@@ -26,10 +26,11 @@
 #include <Windows.h>
 #endif
 
+
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-    MainVirtualDestructors::Main();
+    MainCppCasts::Main();
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
 }

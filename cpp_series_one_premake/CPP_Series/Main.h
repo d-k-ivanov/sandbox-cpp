@@ -26,5 +26,9 @@ namespace MainVirtualDestructors
     void Main();
 }
 
+namespace MainCppCasts
+{
+    void Main();
+}
 
 #endif //MAIN_H
