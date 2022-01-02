@@ -270,3 +270,25 @@ int main()
     return 0;
 }
 ```
+
+## My String
+
+```cpp
+#include "MyString.h"
+
+int main()
+{
+    const MyString string = "Test String";
+    const MyString second = string;
+    string[0] = 't';
+    string[5] = 's';
+    second[1] = 'E';
+    second[2] = 'S';
+    second[3] = 'T';
+
+    PrintMyString(string);
+    PrintMyString(second);
+
+    return 0;
+}
+```
