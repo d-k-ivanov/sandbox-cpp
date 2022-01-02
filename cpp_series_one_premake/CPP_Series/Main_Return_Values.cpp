@@ -1,4 +1,3 @@
-#if 0
 #include <array>
 #include <iostream>
 #include <string>
@@ -58,7 +57,7 @@ ReturnValues Function7()
     return { "One", "Two" };
 }
 
-int main()
+void MainReturnValues()
 {
     std::string outVar1, outVar2;
     Function1(&outVar1, &outVar2);
@@ -88,8 +87,4 @@ int main()
 
     const ReturnValues sources7 = Function7();
     std::cout << sources7.One << ", " << sources7.Two << std::endl;
-
-    // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
-    return 0;
 }
-#endif

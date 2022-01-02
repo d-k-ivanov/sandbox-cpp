@@ -53,13 +53,13 @@ workspace "CPP_Series"
         defines({"COMPILER_MSVC64","WIN64"})
 
     filter "configurations:RelDebug"
-        defines "NDEBUG"
+        defines {"NDEBUG", "RELEASE", "_RELEASE"}
         optimize "Debug"
         runtime "Release"
         symbols "On"
 
     filter "configurations:Release"
-        defines "NDEBUG"
+        defines {"NDEBUG", "RELEASE", "_RELEASE"}
         flags "LinkTimeOptimization"
         optimize "Full"
         runtime "Release"
