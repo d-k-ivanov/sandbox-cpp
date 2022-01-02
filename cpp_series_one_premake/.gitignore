@@ -9,4 +9,13 @@
 **.vcxproj.filters
 **.vcxproj.user
 
+# CodeLite
+.codelite/
+**.mk
+**.project
+**.workspace
+compile_flags.txt
+Makefile
+tags
+
 tmp/
