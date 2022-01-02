@@ -1,31 +1,13 @@
+#include "Timer.h"
+
 #include <chrono>
 #include <iostream>
 #include <thread>
 
+
 namespace MainThreads
 {
     static bool finished = false;
-
-    struct Timer
-    {
-        std::chrono::time_point<std::chrono::steady_clock> start, end;
-        std::chrono::duration<float> duration;
-
-        Timer() : duration()
-        {
-            start = std::chrono::high_resolution_clock::now();
-        }
-
-        ~Timer()
-        {
-            end = std::chrono::high_resolution_clock::now();
-            duration = end - start;
-
-            const float ms = duration.count() * 1000.0f;
-            std::cout << "\t----\n";
-            std::cout << "\tDuration: " << ms << "ms" << std::endl;
-        }
-    };
 
     void DoWork()
     {
