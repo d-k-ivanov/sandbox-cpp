@@ -475,3 +475,43 @@ int main()
     return 0;
 }
 ```
+
+## Multi-Dimentional Arrays
+
+```cpp
+int main()
+{
+    // 1D array
+    int* array = new int[50];
+
+    // 2D array
+    int** a2d = new int*[50];
+
+    for (int i = 0; i < 50; i++)
+        a2d[i] = new int[50];
+
+    for (int i = 0; i < 50; i++)
+        delete[] a2d[i];
+    delete[] a2d;
+
+    // 3D array
+    int*** a3d = new int**[50];
+    for (int i = 0; i < 50; i++)
+    {
+        a3d[i] = new int*[50];
+        for (int j = 0; j < 50; j++)
+        {
+            // int** ptr = a3d[i];
+            a3d[i][j] = new int[50];
+        }
+    }
+
+    for (int i = 0; i < 50; i++)
+    {
+        for (int j = 0; j < 50; j++)
+            delete[] a3d[i][j];
+        delete[] a3d[i];
+    }
+    delete[] a3d;
+}
+```
