@@ -8,13 +8,14 @@
 
 #include "Vec2.h"
 #include "Vec3.h"
+#include "Vertex.h"
 #include "MyString.h"
 
 #include "ScopedPointer.h"
 
 #include <iostream>
 #include <memory>
-
+#include <vector>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -23,26 +24,38 @@
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-#pragma warning(push)
-#pragma warning(disable : 4311)
-#pragma warning(disable : 4302)
-    int offset = (long)&((Vec3*)nullptr)->x;
-    std::cout << offset << std::endl;
+    {
+        std::vector<Vertex> vertices;
 
-    const int offset2 = (long)&((Vec3*)0)->x;
-    std::cout << offset2 << std::endl;
+        vertices.push_back({1, 2, 3});
+        vertices.push_back({4, 5, 6});
 
-    // this is the same and more simple to understand:
-    Vec3* v3 = new Vec3();
-    offset = ((long)&(v3->x)) - (long)v3;
-    std::cout << offset << std::endl;
+        for (int i = 0; i < vertices.size(); i++)
+            std::cout << vertices[i] << std::endl;
+        for (const Vertex v : vertices)
+            std::cout << v << std::endl;
 
-    offset = (long)&((Vec3*)nullptr)->y;
-    std::cout << offset << std::endl;
+        vertices.erase(vertices.begin() + 1);
 
-    offset = (long)&((Vec3*)nullptr)->z;
-    std::cout << offset << std::endl;
-#pragma warning(pop)
+        for (const Vertex& v : vertices)
+            std::cout << v << std::endl;
+
+        vertices.clear();
+    }
+    {
+        std::cout << "-------- Non Optimized -------" << std::endl;
+        std::vector<Vertex> vertices;
+        vertices.push_back(Vertex(1, 2, 3));
+        vertices.push_back(Vertex(4, 5, 6));
+        vertices.push_back(Vertex(7, 8, 9));
+
+        std::cout << "---------- Optimized ---------" << std::endl;
+        std::vector<Vertex> vertices2;
+        vertices2.reserve(3);
+        vertices2.emplace_back(1, 2, 3);
+        vertices2.emplace_back(4, 5, 6);
+        vertices2.emplace_back(7, 8, 9);
+    }
 
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
