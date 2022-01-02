@@ -24,7 +24,6 @@
 #include <Windows.h>
 #endif
 
-void MainReturnValues();
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
