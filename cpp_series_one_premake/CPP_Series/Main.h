@@ -11,4 +11,9 @@ namespace MainFinctional
     void Main();
 }
 
+namespace MainThreads
+{
+    void Main();
+}
+
 #endif //MAIN_H
