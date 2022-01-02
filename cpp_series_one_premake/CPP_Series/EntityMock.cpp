@@ -1,11 +1,17 @@
 #include "EntityMock.h"
 
-EntityMock::EntityMock()
+EntityMock::EntityMock(const char* name): m_Name(name)
 {
-    std::cout << "Created Mocked Entity!" << std::endl;
+    std::cout << this->m_Name << ": Created Mocked Entity!" << std::endl;
 }
 
 EntityMock::~EntityMock()
 {
-    std::cout << "Destructed Mocked Entity!" << std::endl;
+    std::cout << this->m_Name << ": Destructed Mocked Entity!" << std::endl;
+}
+
+void EntityMock::Print() const
+{
+    std::cout << this->m_Name << ": Print Mocked Entity Value!" << std::endl;
+
 }
