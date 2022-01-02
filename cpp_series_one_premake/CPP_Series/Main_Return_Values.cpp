@@ -1,28 +1,9 @@
-#include "Main.h"
-
-#include "Log.h"
-#include "Entity.h"
-#include "EntityMock.h"
-#include "Person.h"
-#include "Player.h"
-
-#include "Vec2.h"
-#include "Vec3.h"
-#include "Vertex.h"
-#include "MyString.h"
-
-#include "ScopedPointer.h"
-
+#if 0
 #include <array>
 #include <iostream>
-#include <memory>
 #include <string>
 #include <tuple>
 #include <vector>
-
-#ifdef _WIN32
-#include <Windows.h>
-#endif
 
 void Function1(std::string* outVar1, std::string* outVar2)
 {
@@ -34,7 +15,7 @@ void Function1(std::string* outVar1, std::string* outVar2)
 
 std::string* Function2()
 {
-    return (new std::string[2]{"Str_One", "Str_Two"});
+    return (new std::string[2]{ "Str_One", "Str_Two" });
 }
 
 std::array<std::string, 2> Function3()
@@ -74,10 +55,9 @@ struct ReturnValues
 
 ReturnValues Function7()
 {
-    return {"One", "Two"};
+    return { "One", "Two" };
 }
 
-// int main(int argc, char* argv[], char* env[])
 int main()
 {
     std::string outVar1, outVar2;
@@ -112,3 +92,4 @@ int main()
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
 }
+#endif
