@@ -7,6 +7,7 @@
 #include "Player.h"
 
 #include "Vec2.h"
+#include "Vec3.h"
 #include "MyString.h"
 
 #include "ScopedPointer.h"
@@ -22,16 +23,26 @@
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-    const MyString string = "Test String";
-    const MyString second = string;
-    string[0] = 't';
-    string[5] = 's';
-    second[1] = 'E';
-    second[2] = 'S';
-    second[3] = 'T';
+#pragma warning(push)
+#pragma warning(disable : 4311)
+#pragma warning(disable : 4302)
+    int offset = (long)&((Vec3*)nullptr)->x;
+    std::cout << offset << std::endl;
 
-    PrintMyString(string);
-    PrintMyString(second);
+    const int offset2 = (long)&((Vec3*)0)->x;
+    std::cout << offset2 << std::endl;
+
+    // this is the same and more simple to understand:
+    Vec3* v3 = new Vec3();
+    offset = ((long)&(v3->x)) - (long)v3;
+    std::cout << offset << std::endl;
+
+    offset = (long)&((Vec3*)nullptr)->y;
+    std::cout << offset << std::endl;
+
+    offset = (long)&((Vec3*)nullptr)->z;
+    std::cout << offset << std::endl;
+#pragma warning(pop)
 
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
