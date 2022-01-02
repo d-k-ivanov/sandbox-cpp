@@ -1,6 +1,7 @@
 #include "MyString.h"
 
 #include <iostream>
+#include <cstring>
 #include <stdio.h>
 
 MyString::MyString(const char* string) : m_Size(strlen(string))
