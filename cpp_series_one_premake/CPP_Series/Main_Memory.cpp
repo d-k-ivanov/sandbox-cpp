@@ -1,3 +1,4 @@
+// ReSharper disable CppParameterNamesMismatch
 #include <iostream>
 #include <memory>
 #include <string>
@@ -11,8 +12,7 @@ namespace MainMemory
     {
         uint32_t TotalAllocated = 0;
         uint32_t TotalFreed = 0;
-
-        uint32_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+        [[nodiscard]] uint32_t CurrentUsage() const { return TotalAllocated - TotalFreed; }
     };
 
     static AllocationMetrics allocationMetrics;
@@ -43,7 +43,7 @@ namespace MainMemory
             std::string string = "String";
             PrintMemoryUsage();
 
-            Object* obj = new Object; // creating on the HEAP
+            auto* obj = new Object;
             PrintMemoryUsage();
             {
                 std::unique_ptr<Object> obj1 = std::make_unique<Object>();
@@ -81,16 +81,15 @@ namespace MainMemory
 //     free(memory);
 // }
 
-// void* operator new(size_t size)
-// {
-//     MainMemory::allocationMetrics.TotalAllocated += size;
-//     return malloc(size);
-// }
+void* operator new(const size_t size)  // NOLINT(misc-new-delete-overloads)
+{
+    MainMemory::allocationMetrics.TotalAllocated += size;
+    return malloc(size);
+}
 
-// Overloading the delete operator globally
-// void operator delete(void* memory, const size_t size)
-// {
-//     MainMemory::allocationMetrics.TotalFreed += size;
-//     free(memory);
-// }
+void operator delete(void* memory, const size_t size)  // NOLINT(clang-diagnostic-implicit-exception-spec-mismatch)
+{
+    MainMemory::allocationMetrics.TotalFreed += size;
+    free(memory);
+}
 #pragma warning(pop)
