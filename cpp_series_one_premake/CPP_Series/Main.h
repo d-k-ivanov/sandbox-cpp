@@ -66,4 +66,9 @@ namespace MainStringView
 {
     void Main();
 }
+
+namespace MainMoveSemantics
+{
+    void Main();
+}
 #endif //MAIN_H
