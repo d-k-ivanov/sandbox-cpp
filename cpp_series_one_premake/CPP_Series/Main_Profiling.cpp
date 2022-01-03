@@ -111,8 +111,10 @@ namespace MainProfiling
                               time_since_epoch().count();
             long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().
                 count();
-
+            #pragma warning(push)
+            #pragma warning(disable : 4267) // ignore the possible data loss
             uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+            #pragma warning(pop)
             Instrumentor::Get().WriteProfile({m_Name, start, end, threadID});
 
             m_Stopped = true;

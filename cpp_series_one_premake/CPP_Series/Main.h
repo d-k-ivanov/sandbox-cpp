@@ -56,4 +56,9 @@ namespace MainMemory
 {
     void Main();
 }
+
+namespace MainStringView
+{
+    void Main();
+}
 #endif //MAIN_H

@@ -2,6 +2,9 @@
 #include <memory>
 #include <string>
 
+#pragma warning(push)
+#pragma warning(disable : 4189) // local variable is initialized but not referenced
+#pragma warning(disable : 4267) // conversion from 'size_t' to 'uint32_t', possible loss of data
 namespace MainMemory
 {
     struct AllocationMetrics
@@ -68,25 +71,26 @@ namespace MainMemory
 
 // void* operator new(size_t size)
 // {
-//     std::cout << "Allocating " << size << " bythes\n";
+//     printf("Allocating %zi bytes\n", size);
 //     return malloc(size);
 // }
 //
 // void operator delete(void* memory, size_t size)
 // {
-//     std::cout << "Freeing " << size << " bythes\n";
+//     printf("Freeing %zi bytes\n", size);
 //     free(memory);
 // }
 
-void* operator new(size_t size)
-{
-    MainMemory::allocationMetrics.TotalAllocated += size;
-    return malloc(size);
-}
+// void* operator new(size_t size)
+// {
+//     MainMemory::allocationMetrics.TotalAllocated += size;
+//     return malloc(size);
+// }
 
 // Overloading the delete operator globally
-void operator delete(void* memory, const size_t size)
-{
-    MainMemory::allocationMetrics.TotalFreed += size;
-    free(memory);
-}
+// void operator delete(void* memory, const size_t size)
+// {
+//     MainMemory::allocationMetrics.TotalFreed += size;
+//     free(memory);
+// }
+#pragma warning(pop)
