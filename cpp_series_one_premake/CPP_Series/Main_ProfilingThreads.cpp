@@ -130,17 +130,14 @@ namespace MainProfilingThreads
         bool m_Stopped;
     };
 
-#define PROFILING 1
-#if PROFILING
-#define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
-    // this will substitute InstrumentationTimer timer
-#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)
-    // this will substitute PROFILE_SCOPE("Function1")
-    // #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
-    // +++ ### +++ I HAVE A PROBLEM USING __FUNCSIG__ +++ ### +++
-#else
-#define PROFILE_SCOPE(name)
-#endif
+    #define PROFILING 1
+    #if PROFILING
+    #define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+    // #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)
+    #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+    #else
+    #define PROFILE_SCOPE(name)
+    #endif
 
     void Function1()
     {
@@ -151,13 +148,69 @@ namespace MainProfilingThreads
             std::cout << "Hello World #" << i << std::endl;
     }
 
-    void Function2(int value)
+    void Function2()
     {
-        // InstrumentationTimer timer("Function1");
-        // PROFILE_SCOPE("Function1");
+        // InstrumentationTimer timer("Function2");
+        // PROFILE_SCOPE("Function2");
         PROFILE_FUNCTION();
         for (int i = 0; i < 1000; i++)
-            std::cout << "Hello World #" << (i + value) << std::endl;
+            std::cout << "Hello World #" << sqrt(i) << std::endl;
+    }
+
+    void PrintFunction(const int x)
+    {
+        // InstrumentationTimer timer("Function1");
+        // PROFILE_SCOPE("PrintFunction");
+        PROFILE_FUNCTION();
+        for (int i = 0; i < 1000; i++)
+            std::cout << "Integer World #" << (x + i) << std::endl;
+    }
+
+    void PrintFunction(const float f)
+    {
+        // InstrumentationTimer timer("Function2");
+        // PROFILE_SCOPE("PrintFunction");
+        PROFILE_FUNCTION();
+        for (int i = 0; i < 1000; i++)
+            std::cout << "Float World #" << sqrt((f + i)) << std::endl;
+    }
+
+    void RunBenchMarks1()
+    {
+        // InstrumentationTimer timer("RunBenchMarks");
+        // PROFILE_SCOPE("RunBenchMarks");
+        PROFILE_FUNCTION();
+        std::cout << "Running Benchmarks...\n";
+
+        // Function1();
+        // Function2();
+        // PrintFunction(1);
+        // PrintFunction(1.1f);
+
+        std::thread a([]() { Function1(); });
+        std::thread b([]() { Function2(); });
+
+        a.join();
+        b.join();
+    }
+
+    void RunBenchMarks2()
+    {
+        // InstrumentationTimer timer("RunBenchMarks");
+        // PROFILE_SCOPE("RunBenchMarks");
+        PROFILE_FUNCTION();
+        std::cout << "Running Benchmarks...\n";
+
+        // Function1();
+        // Function2();
+        // PrintFunction(1);
+        // PrintFunction(1.1f);
+
+        std::thread a([]() { PrintFunction(1); });
+        std::thread b([]() { PrintFunction(1.1f); });
+
+        a.join();
+        b.join();
     }
 
     void RunBenchMarks()
@@ -167,19 +220,29 @@ namespace MainProfilingThreads
         PROFILE_FUNCTION();
         std::cout << "Running Benchmarks...\n";
 
-        std::thread a([]() { Function1(); });
-        std::thread b([]() { Function2(2); });
+        // Function1();
+        // Function2();
+        // PrintFunction(1);
+        // PrintFunction(1.1f);
 
-        Function2(2);
-
-        a.join();
-        b.join();
+        RunBenchMarks1();
+        RunBenchMarks2();
+        // std::thread a([]() { RunBenchMarks1(); });
+        // std::thread b([]() { RunBenchMarks2(); });
+        // a.join();
+        // b.join();
     }
 
     void Main()
     {
         Instrumentor::Get().BeginSession("Profile");
         RunBenchMarks();
+        Function1();
+        PrintFunction(1);
+        RunBenchMarks();
+        Function2();
+        RunBenchMarks();
+        PrintFunction(1.1f);
         Instrumentor::Get().EndSession();
     }
 }
