@@ -4,10 +4,11 @@
 class Singleton
 {
 private:
-    static Singleton* s_Instance;
+    // static Singleton* s_Instance;
     Singleton();
-    Singleton(const Singleton&) = delete;
+    void HelloImpl() const;
 public:
+    Singleton(const Singleton&) = delete;
     static Singleton& GetInstance();
-    void Hello() const;
+    static void Hello();
 };

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Singleton* Singleton::s_Instance = nullptr;
+// Singleton* Singleton::s_Instance = nullptr;
 
 Singleton::Singleton() = default;
 
@@ -12,9 +12,14 @@ Singleton& Singleton::GetInstance()
     return instance;
 }
 
-void Singleton::Hello() const
+void Singleton::Hello()
 {
-    std::cout << "Singleton Address: " << &this->s_Instance << std::endl; // NOLINT(readability-static-accessed-through-instance)
+    return GetInstance().HelloImpl();
+}
+
+void Singleton::HelloImpl() const
+{
+    std::cout << "Singleton Address: " << &this->GetInstance() << std::endl; // NOLINT(readability-static-accessed-through-instance)
     std::cout << "Hello World!" << std::endl;
 }
 
