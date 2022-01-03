@@ -10,14 +10,13 @@ static uint32_t s_AllocCount = 0;
 // #pragma warning(push)
 // #pragma warning(disable : 4244)
 // ReSharper disable once CppParameterNamesMismatch
-void* operator new(const size_t size)
-{
-    s_AllocCount++;
-    printf("Allocating %zi bytes\n", size);
-    // void* p = malloc(size);
-    return malloc(size);
-}
-
+// void* operator new(const size_t size)
+// {
+//     s_AllocCount++;
+//     printf("Allocating %zi bytes\n", size);
+//     // void* p = malloc(size);
+//     return malloc(size);
+// }
 // #pragma warning(pop)
 
 namespace MainStringView

@@ -1,12 +1,13 @@
-#include <algorithm>
+#include <string>
 #include <chrono>
-#include <cmath>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <cmath>
+
 #include <thread>
 
-namespace MainProfiling
+namespace MainProfilingThreads
 {
     struct ProfileResult
     {
@@ -109,6 +110,7 @@ namespace MainProfiling
 
             const long long start =
                 std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+
             const long long end =
                 std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
@@ -131,7 +133,11 @@ namespace MainProfiling
 #define PROFILING 1
 #if PROFILING
 #define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+    // this will substitute InstrumentationTimer timer
 #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)
+    // this will substitute PROFILE_SCOPE("Function1")
+    // #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+    // +++ ### +++ I HAVE A PROBLEM USING __FUNCSIG__ +++ ### +++
 #else
 #define PROFILE_SCOPE(name)
 #endif
@@ -145,13 +151,13 @@ namespace MainProfiling
             std::cout << "Hello World #" << i << std::endl;
     }
 
-    void Function2()
+    void Function2(int value)
     {
-        // InstrumentationTimer timer("Function2");
-        // PROFILE_SCOPE("Function2");
+        // InstrumentationTimer timer("Function1");
+        // PROFILE_SCOPE("Function1");
         PROFILE_FUNCTION();
         for (int i = 0; i < 1000; i++)
-            std::cout << "Hello World #" << sqrt(i) << std::endl;
+            std::cout << "Hello World #" << (i + value) << std::endl;
     }
 
     void RunBenchMarks()
@@ -161,15 +167,18 @@ namespace MainProfiling
         PROFILE_FUNCTION();
         std::cout << "Running Benchmarks...\n";
 
-        Function1();
-        Function2();
+        std::thread a([]() { Function1(); });
+        std::thread b([]() { Function2(2); });
+
+        Function2(2);
+
+        a.join();
+        b.join();
     }
 
     void Main()
     {
         Instrumentor::Get().BeginSession("Profile");
-        Function1();
-        Function2();
         RunBenchMarks();
         Instrumentor::Get().EndSession();
     }

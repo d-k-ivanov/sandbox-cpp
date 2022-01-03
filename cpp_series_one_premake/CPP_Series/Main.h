@@ -52,6 +52,11 @@ namespace MainProfiling
     void Main();
 }
 
+namespace MainProfilingThreads
+{
+    void Main();
+}
+
 namespace MainMemory
 {
     void Main();
