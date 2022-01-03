@@ -71,4 +71,9 @@ namespace MainMoveSemantics
 {
     void Main();
 }
+
+namespace MainArray
+{
+    void Main();
+}
 #endif //MAIN_H

@@ -3,7 +3,7 @@
 // int main(int argc, char* argv[], char* env[])
 int main()
 {
-    MainMoveSemantics::Main();
+    MainArray::Main();
     // std::system("pause");  // NOLINT(concurrency-mt-unsafe)
     return 0;
 }
