@@ -41,4 +41,19 @@ namespace MainStructuredBindings
     void Main();
 }
 
+namespace MainCpp17
+{
+    void Main();
+}
+
+
+namespace MainProfiling
+{
+    void Main();
+}
+
+namespace MainMemory
+{
+    void Main();
+}
 #endif //MAIN_H

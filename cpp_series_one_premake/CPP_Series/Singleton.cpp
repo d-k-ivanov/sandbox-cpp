@@ -4,6 +4,8 @@
 
 Singleton* Singleton::s_Instance = nullptr;
 
+Singleton::Singleton() = default;
+
 Singleton& Singleton::GetInstance()
 {
     static Singleton instance;

@@ -5,7 +5,8 @@ class Singleton
 {
 private:
     static Singleton* s_Instance;
-    Singleton() = default;
+    Singleton();
+    Singleton(const Singleton&) = delete;
 public:
     static Singleton& GetInstance();
     void Hello() const;
