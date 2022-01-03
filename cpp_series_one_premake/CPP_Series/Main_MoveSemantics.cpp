@@ -37,6 +37,21 @@ namespace MainMoveSemantics
             other.m_Size = 0;
         }
 
+        String& operator=(String&& other) noexcept
+        {
+            if (this == &other)
+                return *this;
+
+            printf("String Assigned!\n");
+
+            delete[] m_Data;
+
+            m_Data = other.m_Data;
+            m_Size = other.m_Size;
+            other.m_Data = nullptr;
+            other.m_Size = 0;
+        }
+
         ~String()
         {
             printf("String Destroyed!\n");
@@ -75,6 +90,26 @@ namespace MainMoveSemantics
     {
         Entity entity("NickName");
         entity.PringName();
+
+        String str1 = "Hello1";
+        String str2 = (String&&)str1;
+        str2.Print();
+
+        String str3 = "Hello3";
+        String str4 = std::move(str3);
+        str4.Print();
+
+        String str5 = "Hello5";
+        String str6 = static_cast<String&&>(str5);
+        str6.Print();
+
+        String str7 = "Hello7";
+        String str8 = static_cast<std::remove_reference_t<String>&&>(str7);
+        str8.Print();
+
+        str8 = std::move(str6);
+        str8.Print();
+
         // getchar();
     }
 }
