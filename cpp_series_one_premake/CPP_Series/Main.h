@@ -31,4 +31,14 @@ namespace MainCppCasts
     void Main();
 }
 
+namespace MainBenchmarking
+{
+    void Main();
+}
+
+namespace MainStructuredBindings
+{
+    void Main();
+}
+
 #endif //MAIN_H

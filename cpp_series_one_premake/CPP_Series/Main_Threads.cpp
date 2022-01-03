@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "TimerBasic.h"
 
 #include <chrono>
 #include <iostream>
@@ -22,7 +22,7 @@ namespace MainThreads
 
     void Function()
     {
-        Timer time;
+        TimerBasic time;
         for (int i = 0; i < 1000; i++)
             // std::cout << "Hello" << std::endl;
             // std::cout << "Hello\n";

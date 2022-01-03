@@ -1,11 +1,16 @@
 #pragma once
+
 #include <chrono>
+#include <string>
 
-struct Timer  // NOLINT(cppcoreguidelines-special-member-functions)
+class Timer // NOLINT(cppcoreguidelines-special-member-functions)
 {
-    std::chrono::time_point<std::chrono::steady_clock> start, end;
-    std::chrono::duration<float> duration;
+private:
+    std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTimePoint;
+    std::string m_TimerDescription;
 
-    Timer();
+public:
+    explicit Timer(std::string timerName);
     ~Timer();
+    void Stop() const;
 };
