@@ -221,7 +221,8 @@ void Vector<T>::ReAlloc(const size_t elements)
         m_Size = elements;
 
     for (size_t i = 0; i < m_Size; i++)
-        block[i] = std::move(m_Buffer[i]);
+        // block[i] = std::move(m_Buffer[i]);
+        new (&block[i]) T(std::move(m_Buffer[i]));
 
     for (size_t i = 0; i < m_Size; i++)
         m_Buffer[i].~T();

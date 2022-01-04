@@ -156,4 +156,29 @@ namespace MainVector
             std::cout << *it << std::endl;
         std::cout << "------------------------------------------\n";
     }
+
+    void TestIterators2()
+    {
+        Vector<std::string> vector;
+        vector.EmplaceBack("Test String 1");
+        vector.EmplaceBack("Test String 2");
+        vector.EmplaceBack("Test String 3");
+        vector.EmplaceBack("Test String 4");
+        vector.EmplaceBack("Test String 5");
+
+        std::cout << "Index-based:\n";
+        for (size_t i = 0; i < vector.Size(); i++)
+            std::cout << vector[i] << std::endl;
+        std::cout << "------------------------------------------\n";
+
+        std::cout << "Range-based:\n";
+        for (const std::string& value : vector)
+            std::cout << value << std::endl;
+        std::cout << "------------------------------------------\n";
+
+        std::cout << "Iterator-based:\n";
+        for (Vector<std::string>::Iterator it = vector.begin(); it != vector.end(); ++it)
+            std::cout << *it << std::endl;
+        std::cout << "------------------------------------------\n";
+    }
 }

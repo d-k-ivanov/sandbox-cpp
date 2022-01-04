@@ -81,6 +81,7 @@ namespace MainVector
 {
     void Main();
     void TestIterators();
+    void TestIterators2();
 }
 
 namespace MainIterators
