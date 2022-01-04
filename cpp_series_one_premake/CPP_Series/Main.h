@@ -93,4 +93,9 @@ namespace MainArena
 {
     void Main();
 }
+
+namespace MainStlAlgorithms
+{
+    void Main();
+}
 #endif //MAIN_H
