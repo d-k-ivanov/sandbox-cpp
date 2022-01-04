@@ -581,3 +581,18 @@ int main()
     return 0;
 }
 ```
+
+
+## Bitwise
+
+```cpp
+int main()
+{
+    const int a = 5;
+    printf("%i\n", a);
+    printf("%i\n", a << 1);
+    printf("%i\n", a >> 1);
+    printf("%i\n", a << 4);
+    return 0;
+}
+```

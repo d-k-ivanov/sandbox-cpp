@@ -88,4 +88,9 @@ namespace MainIterators
 {
     void Main();
 }
+
+namespace MainArena
+{
+    void Main();
+}
 #endif //MAIN_H
