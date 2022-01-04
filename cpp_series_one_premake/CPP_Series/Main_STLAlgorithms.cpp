@@ -19,6 +19,18 @@ namespace MainStlAlgorithms
         std::cout << std::endl;
     }
 
+    template <class I, class T>
+    auto Count(I f, I l, const T& val)
+    {
+        return std::reduce(f, l, 0, [val](auto a, auto b) { return a + (b == val); });
+    }
+
+    template <class I, class P>
+    auto AnyOf(I f, I l, P p)
+    {
+        return std::reduce(f, l, false, [p](auto a, auto b) { return a || p(b); });
+    }
+
     template <class ForwardIt>
     void Quicksort(ForwardIt first, ForwardIt last)
     {
@@ -35,6 +47,7 @@ namespace MainStlAlgorithms
         Quicksort(first, middle1);
         Quicksort(middle2, last);
     }
+
 
     template <typename T>
     void Remove(std::vector<T>& v, const T& item)
@@ -134,9 +147,71 @@ namespace MainStlAlgorithms
         }
     }
 
+
+    void MainReduceAccum()
+    {
+        constexpr int vectorSize = 10;
+        {
+            Timer timer("accumulate");
+            // std::vector v = {1, 2, 3, 4, 1, 2, 3, 4};
+            std::vector<int> v(vectorSize);
+            std::iota(begin(v), end(v), 2);
+            const auto x = accumulate(begin(v), end(v), 0);
+            const auto y = accumulate(begin(v), end(v), 0, std::plus<>());
+            const auto z = accumulate(begin(v), end(v), 1, std::multiplies<>());
+            std::cout << "accumulate x: " << x << std::endl;
+            std::cout << "accumulate y: " << y << std::endl;
+            std::cout << "accumulate z: " << z << std::endl;
+            BenchmarkTools::SuppressOptimization(v);
+        }
+
+        {
+            Timer timer("reduce");
+            // std::vector v = {1, 2, 3, 4, 1, 2, 3, 4};
+            std::vector<int> v(vectorSize);
+            std::iota(begin(v), end(v), 2);
+            const auto x = reduce(begin(v), end(v));
+            const auto y = reduce(begin(v), end(v), 0, std::plus<>());
+            const auto z = reduce(begin(v), end(v), 1, std::multiplies<>());
+            std::cout << "reduce x: " << x << std::endl;
+            std::cout << "reduce y: " << y << std::endl;
+            std::cout << "reduce z: " << z << std::endl;
+            BenchmarkTools::SuppressOptimization(v);
+        }
+
+        constexpr int vectorSize2 = 1000000;
+        {
+            Timer timer("count");
+            // std::vector v = {1, 2, 3, 4, 1, 2, 3, 4};
+            std::vector<int> v(vectorSize2);
+            std::iota(begin(v), end(v), 2);
+            const auto x = Count(begin(v), end(v), 999999);
+            const auto y = std::count(begin(v), end(v), 999999);
+            std::cout << "MyCount: " << x << std::endl;
+            std::cout << "std::count: " << y << std::endl;
+            BenchmarkTools::SuppressOptimization(v);
+        }
+
+        {
+            Timer timer("any of");
+            // std::vector v = {1, 2, 3, 1, 2, 3, 1, 2, 3};
+            std::vector<int> v(vectorSize2);
+            std::iota(begin(v), end(v), 2);
+            auto labmda = [](auto e) { return e == 999999; };
+            const auto x = AnyOf(begin(v), end(v), labmda);
+            const auto y = std::any_of(begin(v), end(v), labmda);
+            std::cout << "AnyOf: " << x << std::endl;
+            std::cout << "std::any_of: " << y << std::endl;
+            BenchmarkTools::SuppressOptimization(v);
+        }
+    }
+
     void Main()
     {
-        // MainPartition();
+        MainPartition();
+        std::cout << "\n------------------------------------------\n\n";
         MainGen();
+        std::cout << "\n------------------------------------------\n\n";
+        MainReduceAccum();
     }
 }
