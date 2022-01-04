@@ -5,6 +5,8 @@
 #include <vector>
 #include <random>
 
+#include "Timer.h"
+
 namespace MainStlAlgorithms
 {
     template <typename T>
@@ -32,13 +34,13 @@ namespace MainStlAlgorithms
         Quicksort(middle2, last);
     }
 
-    template<typename T>
+    template <typename T>
     void Remove(std::vector<T>& v, const T& item)
     {
         v.erase(std::remove(v.begin(), v.end(), item), v.end());
     }
 
-    void Main()
+    void MainPartition()
     {
         std::vector<int> v(40);
         std::iota(v.begin(), v.end(), 1);
@@ -69,5 +71,107 @@ namespace MainStlAlgorithms
         PrintRange(v2);
         Remove(v2, 5);
         PrintRange(v2);
+    }
+
+#pragma optimize( "", off )
+    void MainGen()
+    {
+        // https://quick-bench.com/
+        const int N = 10000;
+        // static void use_iota(benchmark::State& state)
+        {
+            // for (auto _ : state)
+            {
+                Timer timer("use_iota");
+                std::vector<int> v(N);
+                std::iota(begin(v), end(v), 1);
+                // benchmark::DoNotOptimize(v);
+            }
+        }
+
+        // BENCHMARK(use_iota);
+
+        // static void use_gen(benchmark::State& state)
+        {
+            // Code inside this loop is measured repeatedly
+            // for (auto _ : state)
+            {
+                Timer timer("use_gen");
+                std::vector<int> v(N);
+                generate(begin(v), end(v), [i = 0]() mutable
+                {
+                    ++i;
+                    return i;
+                });
+                // benchmark::DoNotOptimize(v);
+            }
+        }
+        // Register the function as a benchmark
+        // BENCHMARK(use_gen);
+
+        // static void use_gen_n(benchmark::State& state)
+        {
+            // Code inside this loop is measured repeatedly
+            // for (auto _ : state)
+            {
+                Timer timer("use_gen_n");
+                std::vector<int> v;
+                generate_n(back_inserter(v), N, [i = 0]() mutable
+                {
+                    ++i;
+                    return i;
+                });
+                // benchmark::DoNotOptimize(v);
+            }
+        }
+        // Register the function as a benchmark
+        // BENCHMARK(use_gen_n);
+
+        // static void use_gen_n_with_reserve(benchmark::State& state)
+        {
+            // Code inside this loop is measured repeatedly
+            // for (auto _ : state)
+            {
+                Timer timer("use_gen_n_with_reserve");
+                std::vector<int> v;
+                v.reserve(N);
+                generate_n(back_inserter(v), N, [i = 0]() mutable
+                {
+                    ++i;
+                    return i;
+                });
+                // benchmark::DoNotOptimize(v);
+            }
+        }
+        // Register the function as a benchmark
+        // BENCHMARK(use_gen_n_with_reserve);
+
+        // static void use_gen_n_with_reserve_with_resize(benchmark::State& state)
+        {
+            // Code inside this loop is measured repeatedly
+            // for (auto _ : state)
+            {
+                Timer timer("use_gen_n_with_reserve_with_resize");
+                std::vector<int> v;
+                v.reserve(N);
+                v.resize(N);
+                generate_n(begin(v), N, [i = 0]() mutable
+                {
+                    ++i;
+                    return i;
+                });
+                // benchmark::DoNotOptimize(v);
+            }
+        }
+
+        // Register the function as a benchmark
+        // BENCHMARK(use_gen_n_with_reserve_with_resize);
+    }
+#pragma optimize( "", on )
+
+    void Main()
+    {
+        // MainPartition();
+        MainGen();
     }
 }
