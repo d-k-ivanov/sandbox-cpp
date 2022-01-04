@@ -62,55 +62,74 @@ namespace MainVector
 
     void Main()
     {
-        // Vector<std::string> vector;
-        // vector.PushBack("Hello ");
-        // vector.PushBack("World");
-        // vector.PushBack("!");
-        // vector.PushBack("Hello ");
-        // vector.PushBack("World");
-        // vector.PushBack("!");
-        // vector.PushBack("Hello ");
-        // vector.PushBack("World");
-        // vector.PushBack("!");
-        // PrintVector(vector);
+        {
+            // Vector<std::string> vector;
+            // vector.PushBack("Hello ");
+            // vector.PushBack("World");
+            // vector.PushBack("!");
+            // vector.PushBack("Hello ");
+            // vector.PushBack("World");
+            // vector.PushBack("!");
+            // vector.PushBack("Hello ");
+            // vector.PushBack("World");
+            // vector.PushBack("!");
+            // PrintVector(vector);
+        }
+        {
+            Vector<Vector3> vector;
+            // vector.PushBack(Vector3(1.1f));
+            // vector.PushBack(Vector3(1.1f, 2.2f, 3.3f));
+            // vector.PushBack(Vector3());
 
-        Vector<Vector3> vector;
-        // vector.PushBack(Vector3(1.1f));
-        // vector.PushBack(Vector3(1.1f, 2.2f, 3.3f));
-        // vector.PushBack(Vector3());
+            vector.EmplaceBack(1.1f);
+            vector.EmplaceBack(1.1f, 2.2f, 3.3f);
+            vector.EmplaceBack();
+            // PrintVector(vector);
 
-        vector.EmplaceBack(1.1f);
-        vector.EmplaceBack(1.1f, 2.2f, 3.3f);
-        vector.EmplaceBack();
-        // PrintVector(vector);
+            vector.PopBack();
+            // PrintVector(vector);
 
-        vector.PopBack();
-        // PrintVector(vector);
+            vector.EmplaceBack(5.5f);
+            vector.EmplaceBack(10.11f, 20.22f, 30.33f);
+            vector.EmplaceBack(0.6f, 0.2f, 0.1f);
+            vector.EmplaceBack(1.1f);
+            // PrintVector(vector);
 
-        vector.EmplaceBack(5.5f);
-        vector.EmplaceBack(10.11f, 20.22f, 30.33f);
-        vector.EmplaceBack(0.6f, 0.2f, 0.1f);
-        vector.EmplaceBack(1.1f);
-        // PrintVector(vector);
+            vector.PopBack();
+            vector.PopBack();
+            // PrintVector(vector);
 
-        vector.PopBack();
-        vector.PopBack();
-        // PrintVector(vector);
+            vector.EmplaceBack(1.1f, 2.2f, 3.3f);
+            vector.EmplaceBack();
+            vector.PopBack();
+            // PrintVector(vector);
 
-        vector.EmplaceBack(1.1f, 2.2f, 3.3f);
-        vector.EmplaceBack();
-        vector.PopBack();
-        // PrintVector(vector);
+            vector.EmplaceBack(5.5f);
+            vector.EmplaceBack(10.11f, 20.22f, 30.33f);
+            vector.EmplaceBack(0.6f, 0.2f, 0.1f);
+            // PrintVector(vector);
 
-        vector.EmplaceBack(5.5f);
-        vector.EmplaceBack(10.11f, 20.22f, 30.33f);
-        vector.EmplaceBack(0.6f, 0.2f, 0.1f);
-        // PrintVector(vector);
-
-        vector.Clear();
-        vector.EmplaceBack(5.5f);
-        vector.EmplaceBack(10.11f, 20.22f, 30.33f);
-        vector.EmplaceBack(0.6f, 0.2f, 0.1f);
-        PrintVector(vector);
+            vector.Clear();
+            vector.EmplaceBack(5.5f);
+            vector.EmplaceBack(10.11f, 20.22f, 30.33f);
+            vector.EmplaceBack(0.6f, 0.2f, 0.1f);
+            PrintVector(vector);
+        }
+        {
+            Vector<int> vector2;
+            vector2.PushBack(10);
+            vector2.PushBack(20);
+            vector2.PushBack(30);
+            vector2.PopBack();
+            vector2.PopBack();
+            vector2.EmplaceBack(77);
+            PrintVector(vector2);
+            vector2.Clear();
+            vector2.EmplaceBack(1000);
+            vector2.EmplaceBack(20000);
+            vector2.EmplaceBack(300000);
+            vector2.EmplaceBack(4000000);
+            PrintVector(vector2);
+        }
     }
 }
