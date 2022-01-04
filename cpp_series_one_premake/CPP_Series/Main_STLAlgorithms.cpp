@@ -6,6 +6,8 @@
 #include <random>
 
 #include "Timer.h"
+#include "BenchmarkTools.h"
+
 
 namespace MainStlAlgorithms
 {
@@ -73,101 +75,64 @@ namespace MainStlAlgorithms
         PrintRange(v2);
     }
 
-#pragma optimize( "", off )
     void MainGen()
     {
         // https://quick-bench.com/
         const int N = 1000000;
-        // static void use_iota(benchmark::State& state)
         {
-            // for (auto _ : state)
-            {
-                Timer timer("use_iota");
-                std::vector<int> v(N);
-                std::iota(begin(v), end(v), 1);
-                // benchmark::DoNotOptimize(v);
-            }
+            Timer timer("use_iota");
+            std::vector<int> v(N);
+            std::iota(begin(v), end(v), 1);
+            BenchmarkTools::SuppressOptimization(v);
         }
 
-        // BENCHMARK(use_iota);
-
-        // static void use_gen(benchmark::State& state)
         {
-            // Code inside this loop is measured repeatedly
-            // for (auto _ : state)
+            Timer timer("use_gen");
+            std::vector<int> v(N);
+            generate(begin(v), end(v), [i = 0]() mutable
             {
-                Timer timer("use_gen");
-                std::vector<int> v(N);
-                generate(begin(v), end(v), [i = 0]() mutable
-                {
-                    ++i;
-                    return i;
-                });
-                // benchmark::DoNotOptimize(v);
-            }
-        }
-        // Register the function as a benchmark
-        // BENCHMARK(use_gen);
-
-        // static void use_gen_n(benchmark::State& state)
-        {
-            // Code inside this loop is measured repeatedly
-            // for (auto _ : state)
-            {
-                Timer timer("use_gen_n");
-                std::vector<int> v;
-                generate_n(back_inserter(v), N, [i = 0]() mutable
-                {
-                    ++i;
-                    return i;
-                });
-                // benchmark::DoNotOptimize(v);
-            }
-        }
-        // Register the function as a benchmark
-        // BENCHMARK(use_gen_n);
-
-        // static void use_gen_n_with_reserve(benchmark::State& state)
-        {
-            // Code inside this loop is measured repeatedly
-            // for (auto _ : state)
-            {
-                Timer timer("use_gen_n_with_reserve");
-                std::vector<int> v;
-                v.reserve(N);
-                generate_n(back_inserter(v), N, [i = 0]() mutable
-                {
-                    ++i;
-                    return i;
-                });
-                // benchmark::DoNotOptimize(v);
-            }
-        }
-        // Register the function as a benchmark
-        // BENCHMARK(use_gen_n_with_reserve);
-
-        // static void use_gen_n_with_reserve_with_resize(benchmark::State& state)
-        {
-            // Code inside this loop is measured repeatedly
-            // for (auto _ : state)
-            {
-                Timer timer("use_gen_n_with_reserve_with_resize");
-                std::vector<int> v;
-                v.reserve(N);
-                v.resize(N);
-                generate_n(begin(v), N, [i = 0]() mutable
-                {
-                    ++i;
-                    return i;
-                });
-                // benchmark::DoNotOptimize(v);
-            }
+                ++i;
+                return i;
+            });
+            BenchmarkTools::SuppressOptimization(v);
         }
 
-        // Register the function as a benchmark
-        // BENCHMARK(use_gen_n_with_reserve_with_resize);
+        {
+            Timer timer("use_gen_n");
+            std::vector<int> v;
+            generate_n(back_inserter(v), N, [i = 0]() mutable
+            {
+                ++i;
+                return i;
+            });
+            BenchmarkTools::SuppressOptimization(v);
+        }
+
+        {
+            Timer timer("use_gen_n_with_reserve");
+            std::vector<int> v;
+            v.reserve(N);
+            generate_n(back_inserter(v), N, [i = 0]() mutable
+            {
+                ++i;
+                return i;
+            });
+            BenchmarkTools::SuppressOptimization(v);
+        }
+
+        {
+            Timer timer("use_gen_n_with_reserve_with_resize");
+            std::vector<int> v;
+            v.reserve(N);
+            v.resize(N);
+            generate_n(begin(v), N, [i = 0]() mutable
+            {
+                ++i;
+                return i;
+            });
+            BenchmarkTools::SuppressOptimization(v);
+        }
     }
-#pragma optimize( "", on )
 
     void Main()
     {
