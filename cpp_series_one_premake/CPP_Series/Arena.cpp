@@ -7,8 +7,6 @@
 #include <memory>
 #include <xutility>
 
-
-
 void* Arena::Alloc(const std::size_t size) noexcept
 {
     if (size_remain < size)
