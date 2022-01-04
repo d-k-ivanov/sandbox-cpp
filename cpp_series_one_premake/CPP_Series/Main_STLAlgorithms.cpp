@@ -77,7 +77,7 @@ namespace MainStlAlgorithms
     void MainGen()
     {
         // https://quick-bench.com/
-        const int N = 10000;
+        const int N = 1000000;
         // static void use_iota(benchmark::State& state)
         {
             // for (auto _ : state)
