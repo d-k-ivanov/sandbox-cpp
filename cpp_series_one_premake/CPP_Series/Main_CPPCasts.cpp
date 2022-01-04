@@ -51,6 +51,12 @@ namespace MainCppCasts
     {
     };
 
+    template <class T>
+    T* AddressOf(T& v)
+    {
+        return reinterpret_cast<T*>(&const_cast<char&>(reinterpret_cast<const volatile char&>(v)));
+    }
+
     void Main()
     {
         int a = 5;
@@ -128,6 +134,21 @@ namespace MainCppCasts
             std::cout << "dynamic_cast<Player*>(actuallyPlayer): Success\n";
         else
             std::cout << "dynamic_cast<Player*>(actuallyPlayer): Not-Success\n";
+
+        std::cout << "---------------------\n";
+
+        class NonAddressable
+        {
+        public:
+            using UselessType = double;
+        private:
+            UselessType operator&() const;
+        };
+
+        NonAddressable na;
+        // nonaddressable* naptr = &na;
+        const NonAddressable* naptr = AddressOf(na);
+        std::cout << "nonaddressable: " << naptr << std::endl;
     }
 }
 #pragma warning(pop)
