@@ -18,7 +18,6 @@ namespace MainIterators
                 P(vector[i]);
             std::cout << "------------------------------------------\n";
 
-            // using  VIt
             for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); ++it)
                 P(*it);
             std::cout << "------------------------------------------\n";

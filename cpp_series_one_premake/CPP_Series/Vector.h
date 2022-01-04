@@ -1,12 +1,81 @@
 #pragma once
 #include <iostream>
 
+template<typename Vector>
+class VectorIterator
+{
+
+public:
+    using ValueType = typename Vector::ValueType;
+    using PointerType = ValueType*;
+    using ReferenceType = ValueType&;
+
+public:
+    VectorIterator(const PointerType ptr):m_Ptr(ptr)
+    {
+    }
+
+    VectorIterator& operator++()
+    {
+        m_Ptr++;
+        return *this;
+    }
+
+    VectorIterator operator++(int)
+    {
+        VectorIterator iterator = *this;
+        ++(* this);
+        return iterator;
+    }
+
+    VectorIterator& operator--()
+    {
+        m_Ptr--;
+        return *this;
+    }
+
+    VectorIterator operator--(int)
+    {
+        VectorIterator iterator = *this;
+        --(*this);
+        return iterator;
+    }
+
+    ReferenceType operator[](int index)
+    {
+        return *(m_Ptr + index);
+    }
+
+    PointerType operator->()
+    {
+        return m_Ptr;
+    }
+
+    ReferenceType operator*()
+    {
+        return *m_Ptr;
+    }
+
+    bool operator==(const VectorIterator& other) const
+    {
+        return m_Ptr == other.m_Ptr;
+    }
+
+    bool operator!=(const VectorIterator& other) const
+    {
+        return !(*this == other);
+    }
+
+private:
+    PointerType m_Ptr;
+};
+
 template <typename T>
 class Vector
 {
-    T* m_Buffer = nullptr;
-    size_t m_Size = 0;
-    size_t m_TotalCapacity = 0;
+public:
+    using ValueType = T;
+    using Iterator = VectorIterator<Vector<T>>;
 
 public:
     Vector();
@@ -25,6 +94,14 @@ public:
     const T& operator[](size_t index) const;
 
     [[nodiscard]] size_t Size() const;
+
+    Iterator begin();
+    Iterator end();
+
+private:
+    T* m_Buffer = nullptr;
+    size_t m_Size = 0;
+    size_t m_TotalCapacity = 0;
 
 private:
     void ReAlloc(size_t elements);
@@ -120,6 +197,18 @@ template <typename T>
 size_t Vector<T>::Size() const
 {
     return m_Size;
+}
+
+template <typename T>
+typename Vector<T>::Iterator Vector<T>::begin()
+{
+    return Iterator(m_Buffer);
+}
+
+template <typename T>
+typename Vector<T>::Iterator Vector<T>::end()
+{
+    return Iterator(m_Buffer + m_Size);
 }
 
 template <typename T>

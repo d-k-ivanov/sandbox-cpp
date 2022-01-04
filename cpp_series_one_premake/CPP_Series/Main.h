@@ -80,6 +80,7 @@ namespace MainArray
 namespace MainVector
 {
     void Main();
+    void TestIterators();
 }
 
 namespace MainIterators

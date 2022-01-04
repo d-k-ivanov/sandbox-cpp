@@ -2,7 +2,6 @@
 
 #include <string>
 
-
 namespace MainVector
 {
     Vector3::Vector3()
@@ -131,5 +130,30 @@ namespace MainVector
             vector2.EmplaceBack(4000000);
             PrintVector(vector2);
         }
+    }
+
+    void TestIterators()
+    {
+        Vector<int> vector;
+        vector.EmplaceBack(1);
+        vector.EmplaceBack(2);
+        vector.EmplaceBack(3);
+        vector.EmplaceBack(4);
+        vector.EmplaceBack(5);
+
+        std::cout << "Index-based:\n";
+        for (size_t i = 0; i < vector.Size(); i++)
+            std::cout << vector[i] << std::endl;
+        std::cout << "------------------------------------------\n";
+
+        std::cout << "Range-based:\n";
+        for (const int value : vector)
+            std::cout << value << std::endl;
+        std::cout << "------------------------------------------\n";
+
+        std::cout << "Iterator-based:\n";
+        for (Vector<int>::Iterator it = vector.begin(); it != vector.end(); ++it)
+            std::cout << *it << std::endl;
+        std::cout << "------------------------------------------\n";
     }
 }
