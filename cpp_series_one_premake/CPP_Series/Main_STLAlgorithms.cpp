@@ -3,6 +3,7 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
+#include <random>
 
 namespace MainStlAlgorithms
 {
@@ -31,6 +32,12 @@ namespace MainStlAlgorithms
         Quicksort(middle2, last);
     }
 
+    template<typename T>
+    void Remove(std::vector<T>& v, const T& item)
+    {
+        v.erase(std::remove(v.begin(), v.end(), item), v.end());
+    }
+
     void Main()
     {
         std::vector<int> v(40);
@@ -50,5 +57,17 @@ namespace MainStlAlgorithms
         Quicksort(v.begin(), v.end());
         PrintRange(v);
 
+
+        std::random_device randDevice;
+        std::mt19937 generator(randDevice());
+        const std::uniform_int_distribution<> distribution(1, 10);
+
+        std::vector<int> v2(40);
+        for (auto& value : v2)
+            value = distribution(generator);
+
+        PrintRange(v2);
+        Remove(v2, 5);
+        PrintRange(v2);
     }
 }
