@@ -76,4 +76,9 @@ namespace MainArray
 {
     void Main();
 }
+
+namespace MainVector
+{
+    void Main();
+}
 #endif //MAIN_H
