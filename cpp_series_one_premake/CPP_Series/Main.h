@@ -98,4 +98,9 @@ namespace MainStlAlgorithms
 {
     void Main();
 }
+
+namespace Math
+{
+    void Main();
+}
 #endif //MAIN_H
