@@ -1,3 +1,4 @@
+// ReSharper disable CppUseRangeAlgorithm
 #include <algorithm>
 #include <iostream>
 #include <numeric>
@@ -36,8 +37,15 @@ namespace MainStlAlgorithms
         std::iota(v.begin(), v.end(), 1);
         PrintRange(v);
 
+        std::cout << "\npartition: " << std::endl;
         auto isEven = [](auto e) { return e % 2 == 0; };
         std::partition(v.begin(), v.end(), isEven);
+        PrintRange(v);
+        Quicksort(v.begin(), v.end());
+        PrintRange(v);
+
+        std::cout << "\nstable_partition: " << std::endl;
+        std::stable_partition(v.begin(), v.end(), isEven);
         PrintRange(v);
         Quicksort(v.begin(), v.end());
         PrintRange(v);
