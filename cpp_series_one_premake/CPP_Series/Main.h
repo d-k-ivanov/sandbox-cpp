@@ -81,4 +81,9 @@ namespace MainVector
 {
     void Main();
 }
+
+namespace MainIterators
+{
+    void Main();
+}
 #endif //MAIN_H
