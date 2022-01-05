@@ -2,6 +2,9 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
+#include <iostream>
+#include <memory>
+#include <utility>
 
 namespace MainMoveSemantics
 {
@@ -86,7 +89,7 @@ namespace MainMoveSemantics
         }
     };
 
-    void Main()
+    void MainMove1()
     {
         Entity entity("NickName");
         entity.PringName();
@@ -109,6 +112,63 @@ namespace MainMoveSemantics
 
         str8 = std::move(str6);
         str8.Print();
+    }
+
+    struct A
+    {
+        A(int&& n)
+        {
+            std::cout << "rvalue overload, n=" << n << "\n";
+        }
+
+        A(int& n)
+        {
+            std::cout << "lvalue overload, n=" << n << "\n";
+        }
+    };
+
+    class B
+    {
+    public:
+        template <class T1, class T2, class T3>
+        B(T1&& t1, T2&& t2, T3&& t3) :
+            m_A1{std::forward<T1>(t1)},
+            m_A2{std::forward<T2>(t2)},
+            m_A3{std::forward<T3>(t3)}
+        {
+        }
+
+    private:
+        A m_A1, m_A2, m_A3;
+    };
+
+    template <class T, class U>
+    std::unique_ptr<T> MakeUnique1(U&& u)
+    {
+        return std::unique_ptr<T>(new T(std::forward<U>(u)));
+    }
+
+    template <class T, class... U>
+    std::unique_ptr<T> MakeUnique2(U&&... u)
+    {
+        return std::unique_ptr<T>(new T(std::forward<U>(u)...));
+    }
+
+    void MainForward1()
+    {
+        std::cout << "A\n";
+        auto p1 = MakeUnique1<A>(2); // rvalue
+        int i = 1;
+        auto p2 = MakeUnique1<A>(i); // lvalue
+
+        std::cout << "B\n";
+        auto t = MakeUnique2<B>(2, i, 3);
+    }
+
+    void Main()
+    {
+        // MainMove1();
+        MainForward1();
 
         // getchar();
     }
