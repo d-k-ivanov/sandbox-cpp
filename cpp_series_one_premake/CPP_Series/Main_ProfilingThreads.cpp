@@ -55,6 +55,7 @@ namespace MainProfilingThreads
                 m_OutputStream << ",";
 
             std::string name = result.Name;
+            // std::replace(name.begin(), name.end(), '"', '\'');
             std::ranges::replace(name, '"', '\'');
 
             m_OutputStream << "{";
@@ -107,20 +108,15 @@ namespace MainProfilingThreads
         void Stop()
         {
             const auto endTimepoint = std::chrono::high_resolution_clock::now();
-
             const long long start =
                 std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-
             const long long end =
                 std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
-
             #pragma warning(push)
             #pragma warning(disable : 4267) // ignore the possible data loss
             const uint32_t threadId = std::hash<std::thread::id>{}(std::this_thread::get_id());  // NOLINT(clang-diagnostic-shorten-64-to-32)
             #pragma warning(pop)
-
             Instrumentor::Get().WriteProfile({m_Name, start, end, threadId});
-
             m_Stopped = true;
         }
 
