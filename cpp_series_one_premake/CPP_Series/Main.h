@@ -103,4 +103,9 @@ namespace Math
 {
     void Main();
 }
+
+namespace MainTypeTraits
+{
+    void Main();
+}
 #endif //MAIN_H
