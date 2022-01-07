@@ -168,7 +168,7 @@ namespace MainProfilingThreads
         // PROFILE_SCOPE("PrintFunction");
         PROFILE_FUNCTION();
         for (int i = 0; i < 1000; i++)
-            std::cout << "Float World #" << sqrt((f + i)) << std::endl;
+            std::cout << "Float World #" << sqrt((f + static_cast<float>(i))) << std::endl;
     }
 
     void RunBenchMarks1()
