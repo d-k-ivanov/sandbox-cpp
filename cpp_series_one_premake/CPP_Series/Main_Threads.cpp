@@ -1,8 +1,10 @@
 #include "TimerBasic.h"
 
+#include <atomic>
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <vector>
 
 
 namespace MainThreads
@@ -26,12 +28,11 @@ namespace MainThreads
         for (int i = 0; i < 1000; i++)
             // std::cout << "Hello" << std::endl;
             // std::cout << "Hello\n";
-            std::cout << i <<" ";
+            std::cout << i << " ";
         std::cout << "\n";
     }
 
-
-    void Main()
+    void ThreadTiming()
     {
         using namespace std::literals::chrono_literals;
         const auto start = std::chrono::high_resolution_clock::now();
@@ -57,5 +58,52 @@ namespace MainThreads
         std::cout << "------------------------------------------------------------" << std::endl;
 
         Function();
+    }
+
+    class ThreadSafeCounter
+    {
+    public:
+        ThreadSafeCounter() : m_Counter(0)
+        {
+        }
+
+        void Increment() { m_Counter.fetch_add(1); }
+        int GetCount() const { return m_Counter; }
+
+    private:
+        std::atomic_int32_t m_Counter;
+    };
+
+    void ThreadCounter()
+    {
+        ThreadSafeCounter counter;
+        const int n = 100;
+        std::vector<std::thread> threads;
+
+        // Spawn `n` threads that all share a single counter.
+        threads.reserve(n);
+        for (int i = 0; i < n; i++)
+        {
+            threads.push_back(std::thread([&counter]
+            {
+                // Unsynchronized call of a non-const method.
+                // Only safe because the type is thread-safe.
+                counter.Increment();
+            }));
+        }
+
+        for (auto& thread : threads)
+        {
+            thread.join();
+        }
+
+        // This will ultimately print `n`.
+        std::cout << counter.GetCount() << "\n";
+    }
+
+    void Main()
+    {
+        // ThreadTiming();
+        ThreadCounter();
     }
 }
