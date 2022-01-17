@@ -6,7 +6,8 @@ namespace MainBytes
     template <class Dst, class Src>
     Dst bitCast(const Src& source)
     {
-        static_assert(sizeof(Dst) == sizeof(Src));
+        static_assert(sizeof(Dst) == sizeof(Src),
+            "Types have different data sizes. The byte cast is possible only for the types of the same size");
         Dst dest{};
         memcpy(&dest, &source, sizeof(dest));
         return dest;
@@ -24,5 +25,10 @@ namespace MainBytes
         const float value2 = 1.0f;
         const auto result2 = bitCast<uint32_t>(value2);
         std::cout << result2 << std::endl;
+
+        // // ReSharper disable once CppVariableCanBeMadeConstexpr
+        // const double value3 = 1.0;
+        // const auto result3 = bitCast<uint32_t>(value3);
+        // std::cout << result3 << std::endl;
     }
 }
