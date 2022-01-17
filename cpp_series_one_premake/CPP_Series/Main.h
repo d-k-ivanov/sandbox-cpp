@@ -108,4 +108,9 @@ namespace MainTypeTraits
 {
     void Main();
 }
+
+namespace MainBytes
+{
+    void Main();
+}
 #endif //MAIN_H
