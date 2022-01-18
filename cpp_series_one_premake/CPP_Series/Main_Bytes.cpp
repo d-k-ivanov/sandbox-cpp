@@ -14,7 +14,7 @@ namespace MainBytes
     // }
 
     template <class Target, class Source>
-    static Target bitCast(const Source& source)
+    static constexpr Target bitCast(const Source& source)
     {
         static_assert(sizeof(Target) == sizeof(Source),
             "bitCast requires source and destination to be the same size");
