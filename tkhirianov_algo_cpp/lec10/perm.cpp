@@ -11,11 +11,11 @@ void permutations(int16_t number, int16_t current, int16_t buffer[], bool used[]
         std::cout << '\n';
     }
     else
-    { // recursive case
+    {
         for (int16_t variant = 0; variant < number; variant++)
         {
             if (not used[variant])
-            { // cutting the recursive tree
+            {
                 buffer[current] = variant;
                 used[variant] = true;
                 permutations(number, current + 1, buffer, used);
